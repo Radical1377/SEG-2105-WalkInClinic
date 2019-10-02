@@ -7,6 +7,7 @@ public class User {
     protected String password; // encrypted using SHA-256 encryption
     protected String first_name, last_name; // real first and last name
     protected String email; // email address
+    protected int role; // 0 = admin, 1 = employee, 2 = patient
 
     //class constructors
 
@@ -17,12 +18,13 @@ public class User {
         this.email = email;
     }
 
-    public User(String username, String password, String first_name, String last_name, String email){
+    public User(String username, String password, String first_name, String last_name, String email, int role){
 
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+        this.role = role;
 
         //exception handling
         try {
@@ -49,7 +51,7 @@ public class User {
         }
     }
 
-    public void setFull_name(String first_name, String last_name){
+    public void setFullName(String first_name, String last_name){
         this.first_name = first_name;
         this.last_name = last_name;
     }
@@ -79,12 +81,35 @@ public class User {
         return this.email;
     }
 
+    public int getRole() { return this.role; }
+
     //info printer method
     public void printInfo(){
+
         System.out.println("User: " + this.username);
         System.out.println("Password: " + this.password);
         System.out.println("Full Name: " + this.first_name + " " + this.last_name);
         System.out.println("Email: " + this.email);
+
+        switch(this.role){
+            case 0:{
+                System.out.println("Role: Admin");
+                break;
+            }
+            case 1:{
+                System.out.println("Role: Employee");
+                break;
+            }
+            case 2:{
+                System.out.println("Role: Patient");
+                break;
+            }
+            default:{
+                System.out.println("Role: Unknown");
+                break;
+            }
+        }
+
     }
 
 }
