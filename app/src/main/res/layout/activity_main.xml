@@ -16,10 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="150"
+            android:layout_marginTop="125"
             android:text="Walk-in Clinic"
             android:textColor="#2E7DBB"
-            android:textSize="60sp"
+            android:textSize="45sp"
             android:textStyle="italic"
             app:fontFamily="monospace" />
 
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="200"
+            android:layout_marginTop="150"
             android:layout_marginBottom="20"
             android:width="200"
             android:text="Register"
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="240"
+            android:layout_marginTop="150"
             android:text="Salomé Dionne-Laforest, Arman Kompany Zare, Alexandra Sklokin, Matthew Tran"
             android:textSize="15sp" />
     </LinearLayout>
