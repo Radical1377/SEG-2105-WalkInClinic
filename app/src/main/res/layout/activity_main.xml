@@ -6,53 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="125"
-            android:text="Walk-in Clinic"
-            android:textColor="#2E7DBB"
-            android:textSize="45sp"
-            android:textStyle="italic"
-            app:fontFamily="monospace" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/regButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="150"
-            android:layout_marginBottom="20"
-            android:width="200"
-            android:onClick="goToRegister"
-            android:text="Register"
-            android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="75dp"
+                    android:text="Walk-in Clinic"
+                    android:textColor="#2E7DBB"
+                    android:textSize="45sp"
+                    app:fontFamily="monospace" />
 
-        <Button
-            android:id="@+id/logButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:width="200"
-            android:onClick="goToLogin"
-            android:text="Log In"
-            android:textSize="20sp" />
+                <Button
+                    android:id="@+id/regButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginBottom="20dp"
+                    android:width="200dp"
+                    android:onClick="onClick"
+                    android:text="Register"
+                    android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/names"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="150"
-            android:text="Salomé Dionne-Laforest, Arman Kompany Zare, Alexandra Sklokin, Matthew Tran"
-            android:textSize="15sp" />
-    </LinearLayout>
+                <Button
+                    android:id="@+id/logButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:width="200dp"
+                    android:onClick="onClick"
+                    android:text="Log In"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/names"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="100dp"
+                    android:text="Salomé Dionne-Laforest, Arman Kompany Zare, Alexandra Sklokin, Matthew Tran"
+                    android:textSize="15sp" />
+            </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

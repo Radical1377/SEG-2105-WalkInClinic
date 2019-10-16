@@ -6,111 +6,116 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:text="Registration"
-            android:textColor="#2E7DBB"
-            android:textSize="70dp" />
-
-        <EditText
-            android:id="@+id/first_name"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:hint="Enter your first name"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/last_name"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:hint="Enter your last name"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="Enter your email address"
-            android:inputType="textEmailAddress" />
-
-        <EditText
-            android:id="@+id/username"
-            android:layout_height="wrap_content"
-            android:layout_width="200dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:hint="Enter your username"
-            android:inputType="text"/>
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="Enter your password"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/password2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:ems="10"
-            android:hint="Re-enter your password"
-            android:inputType="textPassword" />
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/status"
-                android:layout_width="match_parent"
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select your status" />
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="Registration"
+                android:textColor="#2E7DBB"
+                android:textSize="70dp" />
 
-            <RadioButton
-                android:id="@+id/patient"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/first_name"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="Patient" />
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:hint="Enter your first name"
+                android:inputType="text" />
 
-            <RadioButton
-                android:id="@+id/employee"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/last_name"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="Employee" />
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:hint="Enter your last name"
+                android:inputType="text" />
 
-        </RadioGroup>
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:ems="10"
+                android:hint="Enter your email address"
+                android:inputType="textEmailAddress" />
 
-        <Button
-            android:id="@+id/register"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:text="Submit" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/username"
+                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:hint="Enter your username"
+                android:inputType="text"/>
 
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:ems="10"
+                android:hint="Enter your password"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/password2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:ems="10"
+                android:hint="Re-enter your password"
+                android:inputType="textPassword" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select your status" />
+
+                <RadioButton
+                    android:id="@+id/patient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Patient" />
+
+                <RadioButton
+                    android:id="@+id/employee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Employee" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="100dp"
+                android:text="Submit" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

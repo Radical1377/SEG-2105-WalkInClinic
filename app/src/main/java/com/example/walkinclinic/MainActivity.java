@@ -15,12 +15,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToRegister(View v){
-        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-        startActivityForResult(intent, 0);
+        Intent intent1 = new Intent(getApplicationContext(), RegisterActivity.class);
+        startActivityForResult(intent1, 0);
     }
 
     public void goToLogin(View v){
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivityForResult(intent, 0);
+        Intent intent2 = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivityForResult(intent2, 0);
+    }
+
+    public void onClick(View view) {
+        Intent intent1 = new Intent(getApplicationContext(), RegisterActivity.class);
+        Intent intent2 = new Intent(getApplicationContext(), LoginActivity.class);
+        switch(view.getId()) {
+            case R.id.regButton:
+                startActivity(intent1);
+                break;
+            case R.id.logButton:
+                startActivity(intent2);
+                break;
+        }
     }
 }
