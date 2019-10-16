@@ -31,6 +31,7 @@
             android:layout_marginTop="150"
             android:layout_marginBottom="20"
             android:width="200"
+            android:onClick="goToRegister"
             android:text="Register"
             android:textSize="20sp" />
 
@@ -40,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:width="200"
+            android:onClick="goToLogin"
             android:text="Log In"
             android:textSize="20sp" />
 

@@ -91,7 +91,7 @@
                 android:text="Select your status" />
 
             <RadioButton
-                android:id="@+id/employee"
+                android:id="@+id/patient"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Patient" />
