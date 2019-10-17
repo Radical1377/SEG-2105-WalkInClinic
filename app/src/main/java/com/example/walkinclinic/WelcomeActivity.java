@@ -14,10 +14,7 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        //To do: Display Welcome text
+        //To do: Change Welcome text
     }
 
-    public void logOutBtn(View view){
-        finish();
-    }
 }

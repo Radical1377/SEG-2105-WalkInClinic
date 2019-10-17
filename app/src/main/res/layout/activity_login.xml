@@ -48,7 +48,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
+                android:onClick="submitBtn"
                 android:text="Submit" />
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="305dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:onClick="backBtn"
+                android:text="Back" />
         </LinearLayout>
     </ScrollView>
 

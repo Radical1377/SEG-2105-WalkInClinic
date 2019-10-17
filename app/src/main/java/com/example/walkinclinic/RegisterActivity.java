@@ -16,10 +16,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void submitBtn(View view){
-
+        //To do: Add user to Database.
+        finish();
     }
 
     public void backBtn(View view){
-        finish(); //redirect to the login page
+        finish(); //redirect to the Main page
     }
 }

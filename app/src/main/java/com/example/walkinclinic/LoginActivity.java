@@ -16,15 +16,18 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
-    public void logInBtn(View view){
+    public void submitBtn(View view){
 
-        //To do: User Authentication
-        Intent intent = new Intent(this, LoginActivity.class);
+        EditText eUser = (EditText)findViewById(R.id.username);
+        EditText ePassword = (EditText)findViewById(R.id.password);
+
+        //To do: User Authentication from the Database
+
+        Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
     }
 
-    public void registerBtn(View view){
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+    public void backBtn(View view){
+        finish(); //redirect to the login page
     }
 }

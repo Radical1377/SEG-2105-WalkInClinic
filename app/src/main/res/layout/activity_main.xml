@@ -34,7 +34,7 @@
                     android:layout_marginTop="100dp"
                     android:layout_marginBottom="20dp"
                     android:width="200dp"
-                    android:onClick="onClick"
+                    android:onClick="registerBtn"
                     android:text="Register"
                     android:textSize="20sp" />
 
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:width="200dp"
-                    android:onClick="onClick"
+                    android:onClick="loginBtn"
                     android:text="Log In"
                     android:textSize="20sp" />
 
