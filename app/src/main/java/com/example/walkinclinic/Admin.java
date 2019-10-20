@@ -1,3 +1,5 @@
+package com.example.walkinclinic;
+
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
