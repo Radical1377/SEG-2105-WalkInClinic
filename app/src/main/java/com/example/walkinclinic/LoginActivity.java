@@ -1,12 +1,12 @@
 package com.example.walkinclinic;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -21,11 +21,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        //check whether admin is added or not
-        if(!db.existsUser("admin")){ //if not, add it to the user database
-            db.addUser(new User("admin", "5T5ptQ", "John", "Doe", "jdoe@protonmail.com", 0));
-        }
     }
 
     public void submitBtn(View view) throws NoSuchAlgorithmException, UnsupportedEncodingException {

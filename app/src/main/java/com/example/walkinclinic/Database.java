@@ -1,17 +1,13 @@
 package com.example.walkinclinic;
 
-import android.provider.ContactsContract;
 import android.util.Log;
-import android.view.View;
-import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import android.os.Bundle;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Database implements DBFunc {
@@ -29,12 +25,8 @@ public class Database implements DBFunc {
 
 
     public void addUser(User newUser) { //Database functionality for adding a user to the database
-        databaseUser = FirebaseDatabase.getInstance().getReference("users");
-        //get unique id with push method
-        //create unique id and use as Primary Key for product
-        String id = databaseUser.push().getKey();
-        //save product
-        databaseUser.child(id).setValue(newUser);
+        databaseUser = FirebaseDatabase.getInstance().getReference();
+        databaseUser.child("users").child(newUser.getUsername()).setValue(newUser);
     }
 
     public User getUser(final String username){ //Database functionality for obtaining a user from the database
@@ -76,7 +68,7 @@ public class Database implements DBFunc {
         //TO_DO Matthew
         userExists=false;
 
-        databaseUser=FirebaseDatabase.getInstance().getReference();
+        databaseUser=FirebaseDatabase.getInstance().getReference("https://seg2105-walkinclinic.firebaseio.com/users");
         databaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

@@ -1,13 +1,12 @@
 package com.example.walkinclinic;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -35,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         boolean valid = true;
 
         //First/Last Name field check
-        if( eFirstName.getText().toString() == "" || eLastName.getText().toString() == ""){
+        if( eFirstName.getText().toString().equals("") || eLastName.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "Please fill out your First and/or Last Name.", Toast.LENGTH_SHORT).show();
             valid = false;
         }
@@ -45,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         //Email field check
-        if(eEmail.getText().toString() == ""){
+        if(eEmail.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "Please fill out your Email address.", Toast.LENGTH_SHORT).show();
             valid = false;
         }
@@ -59,8 +58,9 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
 
+        /*
         //Username field check
-        if(eUsername.getText().toString() == ""){
+        if(eUsername.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "Please fill out your Username.", Toast.LENGTH_SHORT).show();
             valid = false;
         }
@@ -73,15 +73,17 @@ public class RegisterActivity extends AppCompatActivity {
                 iUsername = eUsername.getText().toString();
             }
         }
+        */
+        iUsername = eUsername.getText().toString();
 
         //Password field check
-        if(ePassword.getText().toString() == ""){
+        if(ePassword.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "Please fill out your Password.", Toast.LENGTH_SHORT).show();
             valid = false;
         }
 
         //Password validation check
-        if(ePassConfirm.getText().toString() == ""){
+        if(ePassConfirm.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "Please fill out your Password validation.", Toast.LENGTH_SHORT).show();
             valid = false;
         }

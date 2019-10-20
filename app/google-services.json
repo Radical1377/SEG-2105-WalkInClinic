@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "648561896931-m3h14eatni7nrglab736g66mqdbk72ha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.walkinclinic",
+            "certificate_hash": "ce2eb91710e270f95321d9fde876a33b142eba91"
+          }
+        },
+        {
           "client_id": "648561896931-pf28bbt2rhk637gmgpid7hsfogll430r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -28,7 +28,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.0' //Firebase SDK
     implementation 'com.google.firebase:firebase-auth:19.1.0' //Firebase Authentication
-    implementation 'com.google.firebase:firebase-database:16.0.4' //Firebase Database
+    implementation 'com.google.firebase:firebase-database:17.0.0' //Firebase Database
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
