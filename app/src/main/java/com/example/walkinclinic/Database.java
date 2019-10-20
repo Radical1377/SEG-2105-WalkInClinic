@@ -72,14 +72,15 @@ public class Database implements DBFunc {
         //TO_DO Matthew
     }
 
-    public boolean existsUser(String username){ //Database functionality for checking whether a certain user exists in the database or not
+    public boolean existsUser(final String input){ //Database functionality for checking whether a certain user exists in the database or not
         //TO_DO Matthew
         userExists=false;
+
         databaseUser=FirebaseDatabase.getInstance().getReference();
         databaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(username).exists() ){
+                if (dataSnapshot.child(input).exists() ){
                     //check if child in database (username) exists or not
                     userExists=true;
                     return;
