@@ -1,3 +1,5 @@
+package com.example.walkinclinic;
+
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
@@ -86,22 +88,22 @@ public class User {
     //info printer method
     public void printInfo(){
 
-        System.out.println("User: " + this.username);
+        System.out.println("com.example.walkinclinic.User: " + this.username);
         System.out.println("Password: " + this.password);
         System.out.println("Full Name: " + this.first_name + " " + this.last_name);
         System.out.println("Email: " + this.email);
 
         switch(this.role){
             case 0:{
-                System.out.println("Role: Admin");
+                System.out.println("Role: com.example.walkinclinic.Admin");
                 break;
             }
             case 1:{
-                System.out.println("Role: Employee");
+                System.out.println("Role: com.example.walkinclinic.Employee");
                 break;
             }
             case 2:{
-                System.out.println("Role: Patient");
+                System.out.println("Role: com.example.walkinclinic.Patient");
                 break;
             }
             default:{

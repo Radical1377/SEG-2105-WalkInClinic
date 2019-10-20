@@ -1,3 +1,5 @@
+package com.example.walkinclinic;
+
 public class Patient extends User {
 
     //class constructor
