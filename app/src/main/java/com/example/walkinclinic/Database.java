@@ -11,10 +11,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import android.os.Bundle;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database implements DBFunc {
     //log
     private static final String TAG = "Database";
+    //list to hold users
+    List<User> userList;
+    //global user variable
+    private User globalUser;
+    private boolean userExists;
 
     //private FirebaseAuth mAuth;
 
@@ -32,7 +39,8 @@ public class Database implements DBFunc {
 
     public User getUser(final String username){ //Database functionality for obtaining a user from the database
         //the input is a string which will be the username only
-        User currentUser=new User();
+        //global user variable
+        globalUser = null;
         databaseUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -40,11 +48,11 @@ public class Database implements DBFunc {
                 for (DataSnapshot postSnap: dataSnapshot.getChildren()) {
                     User user = postSnap.getValue(User.class);
                     if (user.getUsername()==username) {
-                        //Do something to retrieve the data
+                        globalUser=user;
+                        return;
                     }
 
                 }
-
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -53,7 +61,7 @@ public class Database implements DBFunc {
                 throw databaseError.toException();
             }
         });
-        return null;
+        return globalUser;
     }
     //TO_DO Matthew
     public void deleteUser(String input){ //Database functionality for deleting a user from the database
@@ -64,16 +72,17 @@ public class Database implements DBFunc {
         //TO_DO Matthew
     }
 
-    public boolean existsUser(String input){ //Database functionality for checking whether a certain user exists in the database or not
+    public boolean existsUser(String username){ //Database functionality for checking whether a certain user exists in the database or not
         //TO_DO Matthew
-        databaseUser.addValueEventListener(new ValueEventListener() {
+        userExists=false;
+        databaseUser=FirebaseDatabase.getInstance().getReference();
+        databaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists() ){
-                    //do_something
-                }
-                else {
-                    //do something else (false)
+                if (dataSnapshot.child(username).exists() ){
+                    //check if child in database (username) exists or not
+                    userExists=true;
+                    return;
                 }
 
             }
@@ -84,7 +93,7 @@ public class Database implements DBFunc {
                 throw databaseError.toException();
             }
         });
-        return true;
+        return userExists;
     }
 
 }
