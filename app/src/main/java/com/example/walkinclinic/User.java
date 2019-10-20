@@ -12,7 +12,11 @@ public class User {
     protected int role; // 0 = admin, 1 = employee, 2 = patient
 
     //class constructors
-
+    public User() {
+        this.first_name=null;
+        this.last_name=null;
+        this.email=null;
+    }
     public User(String first_name, String last_name, String email){
 
         this.first_name = first_name;
