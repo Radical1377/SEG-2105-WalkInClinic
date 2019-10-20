@@ -1,37 +1,61 @@
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import static android.R.id.message;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import android.os.Bundle;
 
 public class Database implements DBFunc {
     //log
     private static final String TAG = "Database";
 
-    private FirebaseAuth mAuth;
+    //private FirebaseAuth mAuth;
+
+    DatabaseReference databaseUser;
 
 
-    public boolean addUser(User input) { //Database functionality for adding a user to the database
-        String email = input.getUsername();
-        String password = input.getPassword();
-        if (!email.equals("") && !password.equals("")){
-            //call to mAuth firebase method using text inputs
-            mAuth.createUserWithEmailAndPassword(email, password);
-            return true;
-        } else {
-            return false;
-        }
+    public void addUser(User newUser, Bundle SavedInstanceState) { //Database functionality for adding a user to the database
+        databaseUser = FirebaseDatabase.getInstance().getReference("users");
+        //get unique id with push method
+        //create unique id and use as Primary Key for product
+        String id = databaseUser.push().getKey();
+
+
+        //save product
+        databaseUser.child(id).setValue(newUser);
     }
 
-    public User getUser(String input){ //Database functionality for obtaining a user from the database
+    public User getUser(final String username){ //Database functionality for obtaining a user from the database
         //the input is a string which will be the username only
+        User currentUser=new User();
+        databaseUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot postSnap: dataSnapshot.getChildren()) {
+                    User user = postSnap.getValue(User.class);
+                    if (user.getUsername()==username) {
+                        //Do something to retrieve the data
+                    }
+
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                throw databaseError.toException();
+            }
+        });
         return null;
     }
     //TO_DO Matthew
@@ -45,7 +69,24 @@ public class Database implements DBFunc {
 
     public boolean existsUser(String input){ //Database functionality for checking whether a certain user exists in the database or not
         //TO_DO Matthew
+        databaseUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists() ){
+                    //do_something
+                }
+                else {
+                    //do something else (false)
+                }
 
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                throw databaseError.toException();
+            }
+        });
         return true;
     }
 
