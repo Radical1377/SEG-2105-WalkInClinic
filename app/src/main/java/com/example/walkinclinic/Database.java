@@ -32,19 +32,28 @@ public class Database implements DBFunc {
     public User getUser(final String username){ //Database functionality for obtaining a user from the database
         //the input is a string which will be the username only
         //global user variable
-        globalUser = null;
+        //globalUser = null;
+        //get specified user reference
+        databaseUser= FirebaseDatabase.getInstance().getReference().child("users");
+
         databaseUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                //attempt at another way?
+                globalUser=(User)dataSnapshot.child(username).getValue();
+                return;
+                /*
                 for (DataSnapshot postSnap: dataSnapshot.getChildren()) {
                     User user = postSnap.getValue(User.class);
                     if (user.getUsername()==username) {
+                        Log.w(TAG, "GOT USER SUCCESSFUL");
                         globalUser=user;
                         return;
                     }
 
                 }
+
+                 */
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -66,18 +75,20 @@ public class Database implements DBFunc {
 
     public boolean existsUser(final String input){ //Database functionality for checking whether a certain user exists in the database or not
         //TO_DO Matthew
-        userExists=false;
+        //userExists=null;
 
-        databaseUser=FirebaseDatabase.getInstance().getReference("https://seg2105-walkinclinic.firebaseio.com/users");
-        databaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseUser=FirebaseDatabase.getInstance().getReferenceFromUrl("https://seg2105-walkinclinic.firebaseio.com/users");
+
+        databaseUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(input).exists() ){
                     //check if child in database (username) exists or not
+                    Log.w(TAG, "USER FOUND");
                     userExists=true;
                     return;
                 }
-
+                else {userExists=false;}
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

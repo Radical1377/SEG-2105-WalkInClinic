@@ -21,6 +21,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        String getTest=db.getUser("mtran014").getFirst_name();
+        Toast.makeText(getApplicationContext(), getTest, Toast.LENGTH_SHORT).show();
+        /*
+        Test existsUser
+
+        if(db.existsUser("mtran014")){
+            Toast.makeText(getApplicationContext(), "User does not exist in the database.", Toast.LENGTH_SHORT).show();
+        }
+        */
     }
 
     public void submitBtn(View view) throws NoSuchAlgorithmException, UnsupportedEncodingException {
@@ -28,6 +37,11 @@ public class LoginActivity extends AppCompatActivity {
         EditText eUser = (EditText)findViewById(R.id.username);
         EditText ePassword = (EditText)findViewById(R.id.password);
         User targetUser;
+        /*
+        //test getUser
+        targetUser = db.getUser(eUser.getText().toString());
+        Toast.makeText(getApplicationContext(), targetUser.getUsername(), Toast.LENGTH_SHORT).show();
+        */
 
         //check if user exists in database
         if(!db.existsUser(eUser.getText().toString())){
@@ -35,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         else{
             targetUser = db.getUser(eUser.getText().toString());
+            //Toast.makeText(getApplicationContext(), targetUser.getUsername(), Toast.LENGTH_SHORT).show();
 
             //check if password is correct
             if(!Sha256.encrypt(ePassword.getText().toString()).equals(targetUser.getPassword())){
