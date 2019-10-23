@@ -9,6 +9,7 @@ public class User {
     protected String password; // encrypted using SHA-256 encryption
     protected String first_name, last_name; // real first and last name
     protected String email; // email address
+    protected boolean needEncrypt = false;
     protected int role; // 0 = admin, 1 = employee, 2 = patient
 
     //class constructors
@@ -24,7 +25,7 @@ public class User {
         this.email = email;
     }
 
-    public User(String username, String password, String first_name, String last_name, String email, int role){
+    public User(String username, String password, String first_name, String last_name, String email, int role, boolean needEncrypt){
 
         this.username = username;
         this.first_name = first_name;
@@ -34,12 +35,16 @@ public class User {
 
         //exception handling
         try {
-            this.password = Sha256.encrypt(password); //encrypts given plain password
+            if(needEncrypt)
+                this.password = Sha256.encrypt(password); //encrypts given plain password
+            else
+                this.password = password;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        this.needEncrypt = false;
     }
 
     //setter methods
@@ -47,9 +52,12 @@ public class User {
         this.username = username;
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password, boolean encrypt){
         try {
-            this.password = Sha256.encrypt(password); //encrypts given plain password
+            if(encrypt)
+                this.password = Sha256.encrypt(password); //encrypts given plain password
+            else
+                this.password = password;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -92,22 +100,22 @@ public class User {
     //info printer method
     public void printInfo(){
 
-        System.out.println("com.example.walkinclinic.User: " + this.username);
+        System.out.println("User: " + this.username);
         System.out.println("Password: " + this.password);
         System.out.println("Full Name: " + this.first_name + " " + this.last_name);
         System.out.println("Email: " + this.email);
 
         switch(this.role){
             case 0:{
-                System.out.println("Role: com.example.walkinclinic.Admin");
+                System.out.println("Role: Admin");
                 break;
             }
             case 1:{
-                System.out.println("Role: com.example.walkinclinic.Employee");
+                System.out.println("Role: Employee");
                 break;
             }
             case 2:{
-                System.out.println("Role: com.example.walkinclinic.Patient");
+                System.out.println("Role: Patient");
                 break;
             }
             default:{

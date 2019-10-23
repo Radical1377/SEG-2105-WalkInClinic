@@ -8,6 +8,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private Database db = new Database();
@@ -18,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
     }
 
-    public void submitBtn(View view){
+    public void submitBtn(View view) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         //To do: Add user to Database.
 
         EditText eFirstName = (EditText)findViewById(R.id.first_name);
@@ -58,23 +61,25 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
 
-        /*
+
         //Username field check
         if(eUsername.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "Please fill out your Username.", Toast.LENGTH_SHORT).show();
             valid = false;
         }
         else{
+            /*
             if(db.existsUser(eUsername.getText().toString())){
                 Toast.makeText(getApplicationContext(), "User already exists in Database.", Toast.LENGTH_SHORT).show();
                 valid = false;
             }
             else{
                 iUsername = eUsername.getText().toString();
-            }
+            }*/
+            iUsername = eUsername.getText().toString();
         }
-        */
-        iUsername = eUsername.getText().toString();
+
+
 
         //Password field check
         if(ePassword.getText().toString().equals("")){
@@ -109,10 +114,13 @@ public class RegisterActivity extends AppCompatActivity {
                 iRole = 1;
         }
 
+        System.out.println(iPassword);
+        System.out.println(Sha256.encrypt(iPassword));
+
         //if everything checks out
         if(valid){
             Toast.makeText(getApplicationContext(), "Registeration successful.", Toast.LENGTH_SHORT).show();
-            db.addUser(new User(iUsername, iPassword, iFirstName, iLastName, iEmail, iRole));
+            db.addUser(new User(iUsername, iPassword, iFirstName, iLastName, iEmail, iRole, true));
             finish(); //go back to main page
         }
 

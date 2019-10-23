@@ -8,20 +8,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
+public class Database {
 
-public class Database implements DBFunc {
-    //log
     private static final String TAG = "Database";
-    //list to hold users
-    List<User> userList;
-    //global user variable
-    private User globalUser;
-    private boolean userExists;
-
-    //private FirebaseAuth mAuth;
-
-    DatabaseReference databaseUser;
+    private static User globalUser;
+    private static boolean userExists;
+    private static DatabaseReference databaseUser;
 
 
     public void addUser(User newUser) { //Database functionality for adding a user to the database
@@ -29,31 +21,23 @@ public class Database implements DBFunc {
         databaseUser.child("users").child(newUser.getUsername()).setValue(newUser);
     }
 
-    public User getUser(final String username){ //Database functionality for obtaining a user from the database
-        //the input is a string which will be the username only
-        //global user variable
-        //globalUser = null;
-        //get specified user reference
+
+    public static void setUser(final String username){ //Database functionality for obtaining a user from the database
+
         databaseUser= FirebaseDatabase.getInstance().getReference().child("users");
 
         databaseUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //attempt at another way?
-                globalUser=(User)dataSnapshot.child(username).getValue();
-                return;
-                /*
+
                 for (DataSnapshot postSnap: dataSnapshot.getChildren()) {
                     User user = postSnap.getValue(User.class);
-                    if (user.getUsername()==username) {
+                    if (user.getUsername().equals(username)) {
                         Log.w(TAG, "GOT USER SUCCESSFUL");
                         globalUser=user;
-                        return;
+                        break;
                     }
-
                 }
-
-                 */
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -62,7 +46,6 @@ public class Database implements DBFunc {
                 throw databaseError.toException();
             }
         });
-        return globalUser;
     }
     //TO_DO Matthew
     public void deleteUser(String input){ //Database functionality for deleting a user from the database
@@ -73,9 +56,7 @@ public class Database implements DBFunc {
         //TO_DO Matthew
     }
 
-    public boolean existsUser(final String input){ //Database functionality for checking whether a certain user exists in the database or not
-        //TO_DO Matthew
-        //userExists=null;
+    public void setExists(final String input){ //Database functionality for checking whether a certain user exists in the database or not
 
         databaseUser=FirebaseDatabase.getInstance().getReferenceFromUrl("https://seg2105-walkinclinic.firebaseio.com/users");
 
@@ -97,6 +78,13 @@ public class Database implements DBFunc {
                 throw databaseError.toException();
             }
         });
+    }
+
+    public User getUser(){
+        return globalUser;
+    }
+
+    public boolean getExists(){
         return userExists;
     }
 
