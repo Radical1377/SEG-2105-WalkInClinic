@@ -17,6 +17,7 @@ public class User {
         this.first_name=null;
         this.last_name=null;
         this.email=null;
+        this.needEncrypt = false;
     }
     public User(String first_name, String last_name, String email){
 
