@@ -1,7 +1,9 @@
 package com.example.walkinclinic;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.RenderScript;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.UnsupportedEncodingException;
@@ -27,6 +30,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private static User loggedInUser = null;
     private static Database db = new Database();
+    private static String username;
+    private static String encpassword;
+    private static Intent intent = null;
 
     DatabaseReference databaseUser = FirebaseDatabase.getInstance().getReference("users");;
 
@@ -35,33 +41,43 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        databaseUser.keepSynced(true);
 
+        loggedInUser = null;
+        intent = null;
+        username= null;
+        encpassword = null;
     }
 
     public void submitBtn(View view) throws Exception {
 
-        databaseUser.keepSynced(true);
-
         EditText eUser = (EditText)findViewById(R.id.username);
         EditText ePassword = (EditText)findViewById(R.id.password);
-        String username = eUser.getText().toString();
-        final String encpassword = Sha256.encrypt(ePassword.getText().toString());
+        username = eUser.getText().toString();
+        encpassword = Sha256.encrypt(ePassword.getText().toString());
 
-
+        final Context thisContext = this;
 
         databaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()){
-                    User targetUser = postSnap.getValue(User.class);
 
-                    if (targetUser!=null && encpassword.equals(targetUser.getPassword())) {
-                        loggedInUser = targetUser;
+                    loggedInUser = postSnap.getValue(User.class);
+                    //Toast.makeText(getApplicationContext(), loggedInUser.stringInfo(), Toast.LENGTH_SHORT).show();
+
+                    if (loggedInUser!=null && username.equals(loggedInUser.getUsername()) && encpassword.equals(loggedInUser.getPassword())) {
+                        intent = new Intent(thisContext, WelcomeActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    else {
+                        intent = null;
                     }
 
 
+                }
+                if (intent==null) {
+                    Toast.makeText(getApplicationContext(),"Incorrect username/password.", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -70,24 +86,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         );
-
-        if  (loggedInUser != null) {
-            Intent intent = new Intent(this, WelcomeActivity.class);
-            startActivity(intent);
-        }
-        else {
-            Toast.makeText(getApplicationContext(), "Incorrect Username/Password.", Toast.LENGTH_SHORT).show();
-        }
-
-        /*if(targetUser != null && Sha256.encrypt(ePassword.getText().toString()).equals(targetUser.getPassword())){
-            setLoggedInUser(targetUser);
-            Intent intent = new Intent(this, WelcomeActivity.class);
-            startActivity(intent);
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "Incorrect Username/Password.", Toast.LENGTH_SHORT).show();
-        }*/
-
 
     }
 
