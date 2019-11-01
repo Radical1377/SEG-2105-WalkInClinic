@@ -11,7 +11,7 @@ public class Admin extends User {
         super(first_name,last_name,email);
 
         this._username = "admin";
-        this._role = 0;
+        this.role = 0;
 
         try {
             this.password = Sha256.encrypt("5T5ptQ");

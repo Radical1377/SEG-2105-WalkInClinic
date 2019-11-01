@@ -63,9 +63,10 @@ public class LoginActivity extends AppCompatActivity {
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()){
 
                     loggedInUser = postSnap.getValue(User.class);
-                    Toast.makeText(getApplicationContext(), loggedInUser.stringInfo(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), loggedInUser.stringInfo(), Toast.LENGTH_SHORT).show();
 
                     if (loggedInUser!=null && username.equals(loggedInUser.getUsername()) && encpassword.equals(loggedInUser.getPassword())) {
+                        //Toast.makeText(getApplicationContext(), loggedInUser.stringInfo(), Toast.LENGTH_SHORT).show();
                         intent = new Intent(thisContext, WelcomeActivity.class);
                         startActivity(intent);
                         break;

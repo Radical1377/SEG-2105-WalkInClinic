@@ -10,7 +10,7 @@ public class User {
     protected String first_name, last_name; // real first and last name
     protected String _email; // email address
     protected boolean _needEncrypt = false;
-    protected int _role; // 0 = admin, 1 = employee, 2 = patient
+    protected int role; // 0 = admin, 1 = employee, 2 = patient
 
     //class constructors
     public User() {
@@ -31,7 +31,7 @@ public class User {
         this.first_name = first_name;
         this.last_name = last_name;
         this._email = email;
-        this._role = role;
+        this.role = role;
 
         //exception handling
         try {
@@ -87,7 +87,7 @@ public class User {
     public String getEmail(){
         return this._email;
     }
-    public int getRole() { return this._role; }
+    public int getRole() { return this.role; }
 
     //info printer method
     public void printInfo(){
@@ -97,7 +97,7 @@ public class User {
         System.out.println("Full Name: " + this.first_name + " " + this.last_name);
         System.out.println("Email: " + this._email);
 
-        switch(this._role){
+        switch(this.role){
             case 0:{
                 System.out.println("Role: Admin");
                 break;
@@ -119,7 +119,7 @@ public class User {
     }
 
     public String stringInfo() {
-        return _username+" "+password+" "+first_name+" "+last_name+" "+_email;
+        return _username+" "+password+" "+first_name+" "+last_name+" "+_email+" "+role;
     }
 
 }
