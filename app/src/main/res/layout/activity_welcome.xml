@@ -15,8 +15,52 @@
             android:id="@+id/welcomeMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:fontFamily="monospace"
             android:gravity="center"
-            android:text="WELCOME" />
+            android:text="WELCOME"
+            android:textColor="#2E7DBB"
+            android:textSize="25dp" />
+
+        <Button
+            android:id="@+id/servicesAdmin"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:onClick="servicesAdminButton"
+            android:text="View Services"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/usersAdmin"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:onClick="userAdminButton"
+            android:text="View Users"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/clinicsAdmin"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:onClick="clinicsAdminButton"
+            android:text="View Clinics"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/logoff"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:onClick="logoffButton"
+            android:text="Log Off" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

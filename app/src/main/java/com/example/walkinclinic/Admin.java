@@ -10,11 +10,11 @@ public class Admin extends User {
 
         super(first_name,last_name,email);
 
-        this.username = "admin";
-        this.role = 0;
+        this._username = "admin";
+        this._role = 0;
 
         try {
-            this.password = Sha256.encrypt("5T5ptQ");
+            this._password = Sha256.encrypt("5T5ptQ");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {

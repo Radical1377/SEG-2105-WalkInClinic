@@ -18,7 +18,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="50dp"
                 android:text="Log In"
                 android:textColor="#2E7DBB"
                 android:textSize="70dp" />
@@ -56,7 +56,6 @@
                 android:layout_width="305dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="50dp"
                 android:onClick="backBtn"
                 android:text="Back" />
         </LinearLayout>

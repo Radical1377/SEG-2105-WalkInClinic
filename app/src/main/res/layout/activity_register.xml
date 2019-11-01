@@ -21,9 +21,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
+                android:fontFamily="monospace"
                 android:text="Registration"
                 android:textColor="#2E7DBB"
-                android:textSize="70dp" />
+                android:textSize="55dp" />
 
             <EditText
                 android:id="@+id/first_name"
