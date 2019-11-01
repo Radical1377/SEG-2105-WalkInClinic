@@ -14,7 +14,7 @@ public class Admin extends User {
         this._role = 0;
 
         try {
-            this._password = Sha256.encrypt("5T5ptQ");
+            this.password = Sha256.encrypt("5T5ptQ");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
