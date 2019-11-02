@@ -21,13 +21,13 @@
             android:id="@+id/addOpeningHour"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Opening Hour" />
+            android:hint="Enter Opening Hour (0 to 24)" />
 
         <EditText
             android:id="@+id/addClosingHour"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Closing Hour" />
+            android:hint="Enter Closing Hour (0 to 24)" />
 
         <EditText
             android:id="@+id/addAddress"

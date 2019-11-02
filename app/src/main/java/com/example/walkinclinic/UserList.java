@@ -22,7 +22,7 @@ public class UserList extends ArrayAdapter<User>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.layout_clinic_list, null, true);
+        View listViewItem = inflater.inflate(R.layout.layout_user_list, null, true);
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewUsername);
         TextView textViewAll = (TextView) listViewItem.findViewById(R.id.textViewAll);

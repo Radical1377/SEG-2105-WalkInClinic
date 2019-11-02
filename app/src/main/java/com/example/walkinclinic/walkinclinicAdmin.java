@@ -55,6 +55,7 @@ public class walkinclinicAdmin extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 WalkInClinic clinic = clinics.get(i);
+                //Toast.makeText(getApplicationContext(), clinic.stringInfo(), Toast.LENGTH_LONG).show();
                 showUpdateDeleteDialog(clinic.getId(), clinic.getName());
                 return true;
             }
@@ -141,13 +142,19 @@ public class walkinclinicAdmin extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = addName.getText().toString().trim();
-                String address = addAddress.getText().toString().trim();
-                int oh = Integer.parseInt(addOpeningHour.getText().toString());
-                int ch = Integer.parseInt(addClosingHour.getText().toString());
-                WalkInClinic clinic = new WalkInClinic(name, address, oh, ch);
-                databaseClinics.child(clinic.getName()).setValue(clinic);
-                b.dismiss();
+                // VALIDATE IF DATA IN IT
+                if (addName.getText().toString().equals("") || addOpeningHour.getText().toString().equals("") || addClosingHour.getText().toString().equals("") || addAddress.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
+                } else {
+                    String id = databaseClinics.push().getKey();
+                    String name = addName.getText().toString().trim();
+                    String address = addAddress.getText().toString().trim();
+                    int oh = Integer.parseInt(addOpeningHour.getText().toString());
+                    int ch = Integer.parseInt(addClosingHour.getText().toString());
+                    WalkInClinic clinic = new WalkInClinic(id, name, address, oh, ch);
+                    databaseClinics.child(clinic.getId()).setValue(clinic);
+                    b.dismiss();
+                }
             }
         });
 
@@ -176,6 +183,26 @@ public class walkinclinicAdmin extends AppCompatActivity {
         final EditText editAddress = (EditText) dialogView.findViewById(R.id.editClinic);
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateClinic);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteClinic);
+        final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancel);
+
+
+        // TRY TO FILL ALL THE STUFF ALREADY SO THEY JUST HAVE TO MODIFY
+//        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("walkinclinic").child(clinicId);
+//        dR.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public WalkInClinic onDataChange(DataSnapshot dataSnapshot) {
+//                WalkInClinic clinic = dataSnapshot.getValue(WalkInClinic.class);
+//                return clinic;
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
+//        Toast.makeText(getApplicationContext(), clinic.stringInfo(), Toast.LENGTH_LONG).show();
+
+
+
 
         dialogBuilder.setTitle(clinicName);
         final AlertDialog b = dialogBuilder.create();
@@ -185,25 +212,15 @@ public class walkinclinicAdmin extends AppCompatActivity {
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = editName.getText().toString().trim();
-//                if (!name.equals("")){
-//                    dR.child("name").setValue(name);
-//                }
-//                if (!address.equals(null)){
-//                    dR.child("address").setValue(address);
-//                }
-//                if (open != 0){
-//                    dR.child("openingHour").setValue(open);
-//                }
-//                if (close != 0){
-//                    dR.child("closingHour").setValue(close);
-//                }
 
-
-                String address = editAddress.getText().toString().trim();
-                int oh = Integer.parseInt(editOpeningHour.getText().toString());
-                int ch = Integer.parseInt(editClosingHour.getText().toString());
-                if (!TextUtils.isEmpty(name)) {
+                // VALIDATE IF DATA IN IT
+                if (editName.getText().toString().equals("") || editOpeningHour.getText().toString().equals("") || editClosingHour.getText().toString().equals("") || editAddress.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
+                } else {
+                    String name = editName.getText().toString().trim();
+                    String address = editAddress.getText().toString().trim();
+                    int oh = Integer.parseInt(editOpeningHour.getText().toString());
+                    int ch = Integer.parseInt(editClosingHour.getText().toString());
                     updateClinic(clinicId, name, address, oh, ch);
                     b.dismiss();
                 }
@@ -218,35 +235,34 @@ public class walkinclinicAdmin extends AppCompatActivity {
                 b.dismiss();
             }
         });
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b.dismiss();
+            }
+        });
     }
 
-    // UPDATING DOESN'T WORK
     private void updateClinic(String id, String name, String address, int open, int close) {
         DatabaseReference dR = databaseClinics.child(id);
+        //Toast.makeText(getApplicationContext(), "Clinic Updated", Toast.LENGTH_LONG).show();
+
+        dR.child("name").setValue(name);
+        dR.child("address").setValue(address);
+        dR.child("openingHour").setValue(open);
+        dR.child("closingHour").setValue(close);
+
+//        WalkInClinic clinic = new WalkInClinic(id, name, address, open, close);
+//        dR.setValue(clinic);
+
         Toast.makeText(getApplicationContext(), "Clinic Updated", Toast.LENGTH_LONG).show();
 
-
-//        if (!name.equals("")){
-//            dR.child("name").setValue(name);
-//        }
-//        if (!address.equals("")){
-//            dR.child("address").setValue(address);
-//        }
-//        if (open != 0){
-//            dR.child("openingHour").setValue(open);
-//        }
-//        if (close != 0){
-//            dR.child("closingHour").setValue(close);
-//        }
-//
-////        WalkInClinic clinic = new WalkInClinic(id, name, address, open, close);
-////        dR.setValue(clinic);
-//
-//        Toast.makeText(getApplicationContext(), "Clinic Updated", Toast.LENGTH_LONG).show();
     }
 
-    // DELETING DOESN'T WORK
     private boolean deleteClinic(String id) {
+        //Toast.makeText(getApplicationContext(), id, Toast.LENGTH_LONG).show();
+
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("walkinclinic").child(id);
 
         dR.removeValue();

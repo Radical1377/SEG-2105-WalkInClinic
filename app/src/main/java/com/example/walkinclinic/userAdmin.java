@@ -27,7 +27,7 @@ public class userAdmin extends AppCompatActivity {
 
     DatabaseReference databaseUsers;
     ListView listViewUsers;
-    List<User> users;
+    List<User> users = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class userAdmin extends AppCompatActivity {
 
         databaseUsers = FirebaseDatabase.getInstance().getReference("users");
 
-        users = new ArrayList<>();
+        //users = new ArrayList<>();
 
         listViewUsers.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -62,13 +62,17 @@ public class userAdmin extends AppCompatActivity {
 
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()){
                     User user = postSnap.getValue(User.class);
+                    //Toast.makeText(getApplicationContext(), product.stringInfo(), Toast.LENGTH_SHORT).show();
 
-                    users.add(user);
+                    if (user.getRole() != 0){
+                        users.add(user);
+                    }
                 }
 
-                UserList productsAdapter = new UserList(userAdmin.this, users);
 
-                listViewUsers.setAdapter(productsAdapter);
+                UserList usersAdapter = new UserList(userAdmin.this, users);
+
+                listViewUsers.setAdapter(usersAdapter);
             }
 
             @Override
@@ -117,7 +121,6 @@ public class userAdmin extends AppCompatActivity {
         });
     }
 
-    // DELETING DOESN'T WORK
     private boolean deleteUser(String id) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("users").child(id);
 

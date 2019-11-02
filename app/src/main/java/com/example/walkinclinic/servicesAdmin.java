@@ -54,6 +54,7 @@ public class servicesAdmin extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Service service = services.get(i);
+                //Toast.makeText(getApplicationContext(), service.stringInfo(), Toast.LENGTH_LONG).show();
                 showUpdateDeleteDialog(service.getId(), service.getName());
                 return true;
             }
@@ -93,7 +94,6 @@ public class servicesAdmin extends AppCompatActivity {
         finish(); //redirect to the welcome page
     }
 
-    // ADDING WORKS
     public void addService(){
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -103,7 +103,7 @@ public class servicesAdmin extends AppCompatActivity {
 
         final EditText addName = (EditText) dialogView.findViewById(R.id.addName);
         final EditText addStaff  = (EditText) dialogView.findViewById(R.id.addStaff);
-        final Button buttonAdd = (Button) dialogView.findViewById(R.id.buttonAddClinic);
+        final Button buttonAdd = (Button) dialogView.findViewById(R.id.buttonAddService);
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancel);
 
         final AlertDialog b = dialogBuilder.create();
@@ -112,11 +112,23 @@ public class servicesAdmin extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = addName.getText().toString().trim();
-                int staff = Integer.parseInt(addStaff.getText().toString());
-                Service service = new Service(name, staff);
-                databaseServices.child(service.getName()).setValue(service);
-                b.dismiss();
+                // VALIDATE IF DATA IN IT
+                if (addName.getText().toString().equals("") || addStaff.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
+                } else {
+                    String id = databaseServices.push().getKey();
+                    String name = addName.getText().toString().trim();
+                    int staff = Integer.parseInt(addStaff.getText().toString());
+
+                    // VALIDATE STAFF NUMBER
+                    if (staff==0 || staff==1 || staff==2){
+                        Service service = new Service(id, name, staff);
+                        databaseServices.child(service.getId()).setValue(service);
+                        b.dismiss();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please enter a valid staff number\n(0=Doctor, 1=Nurse, 2=Other)", Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
 
@@ -126,8 +138,6 @@ public class servicesAdmin extends AppCompatActivity {
                 b.dismiss();
             }
         });
-
-        //Toast.makeText(this, "Clinic added", Toast.LENGTH_LONG).show();
 
     }
 
@@ -140,8 +150,8 @@ public class servicesAdmin extends AppCompatActivity {
 
         final EditText editName = (EditText) dialogView.findViewById(R.id.editName);
         final EditText editStaff  = (EditText) dialogView.findViewById(R.id.editStaff);
-        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateClinic);
-        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteClinic);
+        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateService);
+        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteService);
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancel);
 
 
@@ -153,12 +163,22 @@ public class servicesAdmin extends AppCompatActivity {
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = editName.getText().toString().trim();
 
-                int staff = Integer.parseInt(editStaff.getText().toString());
-                if (!TextUtils.isEmpty(name)) {
-                    updateService(serviceId, name, staff);
-                    b.dismiss();
+                // VALIDATE IF DATA IN IT
+                if (editName.getText().toString().equals("") || editStaff.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
+                } else {
+                    String name = editName.getText().toString().trim();
+                    int staff = Integer.parseInt(editStaff.getText().toString());
+
+                    // VALIDATE STAFF NUMBER
+                    if (staff==0 || staff==1 || staff==2){
+                        updateService(serviceId, name, staff);
+                        b.dismiss();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Please enter a valid staff number\n(0=Doctor, 1=Nurse, 2=Other)", Toast.LENGTH_LONG).show();
+                    }
+
                 }
 
             }
@@ -180,7 +200,6 @@ public class servicesAdmin extends AppCompatActivity {
         });
     }
 
-    // UPDATING DOESN'T WORK
     private void updateService(String id, String name, int staff) {
         DatabaseReference dR = databaseServices.child(id);
 
@@ -190,7 +209,6 @@ public class servicesAdmin extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Service Updated", Toast.LENGTH_LONG).show();
     }
 
-    // DELETING DOESN'T WORK
     private boolean deleteService(String id) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("services").child(id);
 
@@ -198,4 +216,12 @@ public class servicesAdmin extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Service Deleted", Toast.LENGTH_LONG).show();
         return true;
     }
+
+//    private boolean validateFields(String name, int staff){
+//        if (!TextUtils.isEmpty(name) && (staff==0 || staff==1 || staff==2)){
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 }

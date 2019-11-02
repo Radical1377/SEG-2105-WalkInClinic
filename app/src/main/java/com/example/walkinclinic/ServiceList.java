@@ -29,18 +29,17 @@ public class ServiceList extends ArrayAdapter<Service>{
 
         Service service = services.get(position);
         int staff = service.getAppropriateStaff();
-        String clinic = String.valueOf(service.getId());
         String aStaff;
 
         if (staff == 0){
-            aStaff = "doctor";
+            aStaff = "Doctor";
         } else if (staff == 1){
-            aStaff = "nurse";
+            aStaff = "Nurse";
         } else {
-            aStaff = "staff";
+            aStaff = "Other";
         }
 
-        String all = "Clinic: "+clinic + ", Staff: "+aStaff;
+        String all = "Staff: "+aStaff;
 
         textViewName.setText(service.getName());
         textViewAll.setText(all);

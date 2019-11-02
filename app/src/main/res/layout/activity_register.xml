@@ -24,7 +24,7 @@
                 android:fontFamily="monospace"
                 android:text="Registration"
                 android:textColor="#2E7DBB"
-                android:textSize="55dp" />
+                android:textSize="40dp" />
 
             <EditText
                 android:id="@+id/first_name"

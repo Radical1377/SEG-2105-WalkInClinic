@@ -1,24 +1,22 @@
 package com.example.walkinclinic;
 
 public class Service {
-    private String _id;
+    private String id;
     private String _name;
     private int _appropriateStaff; // 0 = doctor, 1 = nurse, 2 = staff
 
-    //private static int ID_GENERATOR=1;
 
 
     public Service(){
     }
+
     public Service(String name, int staff){
-        //this.id = ID_GENERATOR;
         this._name = name;
         this._appropriateStaff = staff;
 
-        //ID_GENERATOR++;
     }
     public Service(String id, String name, int staff){
-        this._id = id;
+        this.id = id;
         this._name = name;
         this._appropriateStaff = staff;
 
@@ -26,7 +24,7 @@ public class Service {
 
     // getters
     public String getId() {
-        return _id;
+        return id;
     }
     public String getName() {
         return _name;
@@ -41,5 +39,9 @@ public class Service {
     }
     public void setAppropriateStaff(int appropriateStaff) {
         this._appropriateStaff = appropriateStaff;
+    }
+
+    public String stringInfo() {
+        return id+" "+_name+" "+_appropriateStaff;
     }
 }

@@ -23,7 +23,7 @@
                     android:layout_marginTop="50dp"
                     android:text="Walk-in Clinic"
                     android:textColor="#2E7DBB"
-                    android:textSize="45sp"
+                    android:textSize="40sp"
                     app:fontFamily="monospace" />
 
                 <Button
@@ -50,11 +50,11 @@
 
                 <TextView
                     android:id="@+id/names"
-                    android:layout_width="wrap_content"
+                    android:layout_width="290dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="100dp"
-                    android:text="Salomé Dionne-Laforest, Arman Kompany Zare, Alexandra Sklokin, Matthew Tran"
+                    android:text="Alexandra Sklokin, Arman Kompany Zare, Matthew Tran and Salomé Dionne-Laforest"
                     android:textSize="15sp" />
             </LinearLayout>
     </ScrollView>

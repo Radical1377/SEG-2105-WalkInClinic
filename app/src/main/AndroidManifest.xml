@@ -9,14 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".deleteUser"></activity>
         <activity android:name=".userAdmin" />
         <activity android:name=".ClinicList" />
-        <activity android:name=".updateDeleteService" />
-        <activity android:name=".updateDeleteClinic" />
-        <activity android:name=".AddClinic" />
         <activity android:name=".walkinclinicAdmin" />
-        <activity android:name=".AddServices" />
         <activity android:name=".servicesAdmin" />
         <activity android:name=".MainActivity">
             <intent-filter>
