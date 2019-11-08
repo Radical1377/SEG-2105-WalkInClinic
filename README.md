@@ -10,6 +10,6 @@ Group 2
 
 https://github.com/Radical1377/SEG-2105-WalkInClinic
 
-Build Status[![BuildStatus](https://circleci.com/gh/SEG2105F18/ProductCatalog.png?branch=master)](https://circleci.com/gh/SEG2105F18/ProductCatalog)
+Build Status[![BuildStatus](https://circleci.com/gh/Radical1377/SEG-2105-WalkInClinic.png?branch=master)](https://circleci.com/gh/Radical1377/SEG-2105-WalkInClinic)
 
 ![UML Diagram](https://github.com/Radical1377/SEG-2105-WalkInClinic/raw/master/UMLDeliv2.JPG)
