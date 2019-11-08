@@ -10,4 +10,4 @@ Group 2
 
 https://github.com/Radical1377/SEG-2105-WalkInClinic
 
-#Starts Here Build Status[![BuildStatus](https://circleci.com/gh/SEG2105F18/ProductCatalog.png?branch=master)](https://circleci.com/gh/SEG2105F18/ProductCatalog)#Ends Here
+Build Status[![BuildStatus](https://circleci.com/gh/SEG2105F18/ProductCatalog.png?branch=master)](https://circleci.com/gh/SEG2105F18/ProductCatalog)
