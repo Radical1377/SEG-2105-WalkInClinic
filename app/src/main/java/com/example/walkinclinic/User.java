@@ -117,9 +117,6 @@ public class User {
         }
 
     }
-    public String stringInfo() {
-        return username+" "+password+" "+first_name+" "+last_name+" "+email;
-    }
 
     public String stringInfo() {
         return _username+" "+password+" "+first_name+" "+last_name+" "+_email+" "+role;
