@@ -66,6 +66,10 @@ public class LoginActivity extends AppCompatActivity {
                     //Toast.makeText(getApplicationContext(), loggedInUser.stringInfo(), Toast.LENGTH_SHORT).show();
 
                     if (loggedInUser!=null && username.equals(loggedInUser.getUsername()) && encpassword.equals(loggedInUser.getPassword())) {
+<<<<<<< HEAD
+=======
+                        //Toast.makeText(getApplicationContext(), loggedInUser.stringInfo(), Toast.LENGTH_SHORT).show();
+>>>>>>> UI
                         intent = new Intent(thisContext, WelcomeActivity.class);
                         startActivity(intent);
                         break;

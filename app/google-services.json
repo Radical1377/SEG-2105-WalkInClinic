@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "648561896931-idk0ebelje9nmocf02np1a7uruukk9ka.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.walkinclinic",
+            "certificate_hash": "e5df5f256699591ac9ebde0c22608304220490f6"
+          }
+        },
+        {
+          "client_id": "648561896931-sgkh070a71mipq7r76biul8qv2j2rp9i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.walkinclinic",
+            "certificate_hash": "1fe3422fa547928267df8bc67fbbfb13bcb61e78"
+          }
+        },
+        {
           "client_id": "648561896931-m3h14eatni7nrglab736g66mqdbk72ha.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

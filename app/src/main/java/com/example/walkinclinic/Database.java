@@ -13,7 +13,7 @@ public class Database {
     private static final String TAG = "Database";
     private static User globalUser;
     private static boolean userExists;
-    private static DatabaseReference databaseUser;
+    private static DatabaseReference databaseUser ;
 
 
     public void addUser(User newUser) { //Database functionality for adding a user to the database
@@ -22,7 +22,7 @@ public class Database {
     }
 
 
-    public static void setUser(final String username){ //Database functionality for obtaining a user from the database
+    public static void setUser(final String sentusername){ //Database functionality for obtaining a user from the database
 
         databaseUser= FirebaseDatabase.getInstance().getReference().child("users");
 
@@ -32,7 +32,9 @@ public class Database {
 
                 for (DataSnapshot postSnap: dataSnapshot.getChildren()) {
                     User user = postSnap.getValue(User.class);
-                    if (user.getUsername().equals(username)) {
+
+
+                    if (user.getUsername().equals(sentusername)) {
                         Log.w(TAG, "GOT USER SUCCESSFUL");
                         globalUser=user;
                         break;
@@ -46,6 +48,7 @@ public class Database {
                 throw databaseError.toException();
             }
         });
+
     }
     //TO_DO Matthew
     public void deleteUser(String input){ //Database functionality for deleting a user from the database
@@ -88,4 +91,6 @@ public class Database {
         return userExists;
     }
 
+
 }
+

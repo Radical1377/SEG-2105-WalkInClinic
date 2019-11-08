@@ -10,7 +10,7 @@ public class Admin extends User {
 
         super(first_name,last_name,email);
 
-        this.username = "admin";
+        this._username = "admin";
         this.role = 0;
 
         try {

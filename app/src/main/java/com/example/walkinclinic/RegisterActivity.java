@@ -119,7 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         //if everything checks out
         if(valid){
-            Toast.makeText(getApplicationContext(), "Registeration successful.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Registration successful.", Toast.LENGTH_SHORT).show();
             db.addUser(new User(iUsername, iPassword, iFirstName, iLastName, iEmail, iRole, true));
             finish(); //go back to main page
         }
