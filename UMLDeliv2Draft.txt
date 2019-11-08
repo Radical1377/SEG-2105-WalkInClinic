@@ -1,0 +1,114 @@
+interface DBFunc {
+  void addUser(User input);
+  User getUser(User input);
+  void deleteUser(User input);
+  void editUser(User input);
+}
+
+class Database {
+  isA DBFunc;
+    1 -- * User;
+  1 -- * RegisterActivity;
+  1 -- * LoginActivity IfExists;
+  * -- * Service;
+  * -- * WalkInClinic;
+void addUser(User input);
+  User getUser(User input);
+  void deleteUser(User input);
+  void editUser(User input);
+}
+
+class User {
+  String username;
+  String password;
+  String first_name;
+  String last_name; 
+  String email;
+  int role;
+  * -- 1 UserList;
+}
+
+class Admin {
+  isA User;
+  username="admin";
+  role=0;
+  * -- * AdminWelcomeActivity;
+}
+class Employee {
+  isA User;
+}
+class Patient {
+  isA User;
+}
+class Sha256 {
+   1 -- * User encryption;
+//hash encryption
+  String encrypt(String input);
+}
+
+class MainActivity {
+  1->* User;
+    1 -- * RegisterActivity IfUserNotExists;
+void registerBtn();
+  void loginBtn();
+}
+class LoginActivity {  * -- 1 MainActivity;
+                     1 -- 1 AdminWelcomeActivity IfUserIsAdmin;
+  }
+class RegisterActivity {}
+//new classes as of deliverable 2
+class AdminWelcomeActivity {
+      
+  void adminUserBtn();
+    void adminClinicBtn();
+    void adminServiceBtn(); 
+}
+class servicesAdmin{
+    isA AdminWelcomeActivity;
+1 --1 ServicesList; 
+      void addServiceBtn();
+}
+class walkinClinicAdmin {
+    isA AdminWelcomeActivity;
+1--1 ClinicList;
+    void addClinicBtn(); 
+}
+class userAdmin{
+    isA AdminWelcomeActivity;
+1--1 UserList displayOnly 
+}
+
+class ClinicList{
+  
+  1 -- * WalkInClinic;
+}
+class UserList{
+  String fname;
+  String lname:
+  String email; 
+  int role; 
+  1 -- 1 userAdmin;
+}
+
+class ServicesList{
+  Service service
+    
+}
+class Service{
+  * -- 1 ServicesList;
+   int staffType;
+    String staff;
+} 
+class WalkInClinic {
+  String address;
+  String openHours;
+  String closeHours;
+  String rating;
+}
+/*
+//within data 
+class LoginDataSource{} //authenticates user and retrieves user info
+class LoginRepository{} //requests authentication, in memory cache 
+class Result{} //if successful will be returned 
+*/
+                   
