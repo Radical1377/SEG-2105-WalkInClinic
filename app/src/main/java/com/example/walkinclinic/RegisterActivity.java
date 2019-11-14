@@ -1,5 +1,6 @@
 package com.example.walkinclinic;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -8,15 +9,28 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private Database db = new Database();
+    DatabaseReference databaseUser = FirebaseDatabase.getInstance().getReference("users");;
+    private static User loggedInUser = null;
+    private static boolean valid = true;
+    private static String iUsername = null, iPassword = null, iFirstName = null, iLastName = null, iEmail = null;
+    private static int iRole = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        loggedInUser = null;
+        valid = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
     }
@@ -32,9 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText ePassConfirm = (EditText)findViewById(R.id.password2);
         RadioButton rPatient = (RadioButton)findViewById(R.id.patient);
         RadioButton rEmployee = (RadioButton)findViewById(R.id.employee);
-        String iUsername = null, iPassword = null, iFirstName = null, iLastName = null, iEmail = null;
-        int iRole = -1;
-        boolean valid = true;
+        valid = true;
 
         //First/Last Name field check
         if( eFirstName.getText().toString().equals("") || eLastName.getText().toString().equals("")){
@@ -68,14 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
             valid = false;
         }
         else{
-            /*
-            if(db.existsUser(eUsername.getText().toString())){
-                Toast.makeText(getApplicationContext(), "User already exists in Database.", Toast.LENGTH_SHORT).show();
-                valid = false;
-            }
-            else{
-                iUsername = eUsername.getText().toString();
-            }*/
+
             iUsername = eUsername.getText().toString();
         }
 
@@ -117,12 +122,31 @@ public class RegisterActivity extends AppCompatActivity {
         System.out.println(iPassword);
         System.out.println(Sha256.encrypt(iPassword));
 
-        //if everything checks out
-        if(valid){
-            Toast.makeText(getApplicationContext(), "Registeration successful.", Toast.LENGTH_SHORT).show();
-            db.addUser(new User(iUsername, iPassword, iFirstName, iLastName, iEmail, iRole, true));
-            finish(); //go back to main page
-        }
+        final String username = eUsername.getText().toString();
+
+        databaseUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnap : dataSnapshot.getChildren()){
+                    loggedInUser = postSnap.getValue(User.class);
+                    //Toast.makeText(getApplicationContext(), loggedInUser.getUsername(), Toast.LENGTH_SHORT).show();
+                    if (username.equals(loggedInUser.getUsername())) {
+                        Toast.makeText(getApplicationContext(), "Username already taken.", Toast.LENGTH_SHORT).show();
+                        valid = false;
+                    }
+
+                }
+
+                if(valid){
+                    Toast.makeText(getApplicationContext(), "Registration successful.", Toast.LENGTH_SHORT).show();
+                    db.addUser(new User(iUsername, iPassword, iFirstName, iLastName, iEmail, iRole, true));
+                    finish(); //go back to main page
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        } );
+
 
 
     }
