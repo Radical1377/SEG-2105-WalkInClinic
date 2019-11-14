@@ -117,6 +117,9 @@ public class User {
         }
 
     }
+    public boolean getEncrypt() {
+        return _needEncrypt;
+    }
 
     public String stringInfo() {
         return _username+" "+password+" "+first_name+" "+last_name+" "+_email+" "+role;

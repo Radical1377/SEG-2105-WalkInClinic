@@ -37,7 +37,8 @@
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="Name"
-                android:textSize="18dp" />
+                android:textSize="12dp" />
+
             <TextView
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
@@ -48,7 +49,8 @@
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="Email"
-                android:textSize="18dp" />
+                android:textSize="12dp" />
+
             <TextView
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
@@ -59,7 +61,8 @@
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="Username"
-                android:textSize="18dp" />
+                android:textSize="12dp" />
+
             <TextView
                 android:id="@+id/password"
                 android:layout_width="wrap_content"
@@ -70,54 +73,10 @@
                 android:fontFamily="monospace"
                 android:gravity="center"
                 android:text="Password"
-                android:textSize="18dp" />
-            <TextView
-                android:id="@+id/address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="65dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="65dp"
-                android:fontFamily="monospace"
-                android:gravity="center"
-                android:text="Address"
-                android:textSize="18dp" />
-            <TextView
-                android:id="@+id/phoneNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="65dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="65dp"
-                android:fontFamily="monospace"
-                android:gravity="center"
-                android:text="Phone Number"
-                android:textSize="18dp" />
-            <TextView
-                android:id="@+id/clinic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="65dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="65dp"
-                android:fontFamily="monospace"
-                android:gravity="center"
-                android:text="Clinic"
-                android:textSize="18dp" />
-            <TextView
-                android:id="@+id/insurance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="65dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="65dp"
-                android:fontFamily="monospace"
-                android:gravity="center"
-                android:text="Insurance"
-                android:textSize="18dp" />
+                android:textSize="12dp" />
 
             <TextView
-                android:id="@+id/paymentMethod"
+                android:id="@+id/clinicDisplay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="65dp"
@@ -125,17 +84,24 @@
                 android:layout_marginRight="65dp"
                 android:fontFamily="monospace"
                 android:gravity="center"
-                android:text="Payment Method"
-                android:textSize="18dp" />
+                android:text="Clinic : "
+                android:textSize="12dp" />
 
             <Button
-                android:id="@+id/editProfile"
+                android:id="@+id/clinicSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:onClick="selectClinic"
+                android:text="Select a Clinic" />
+
+            <Button
+                android:id="@+id/submit"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:onClick="modifyButton"
-                android:text="Edit Profile" />
+                android:text="Submit" />
 
             <Button
                 android:id="@+id/back"
