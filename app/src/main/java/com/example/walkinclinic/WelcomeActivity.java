@@ -22,9 +22,16 @@ public class WelcomeActivity extends AppCompatActivity {
 
         TextView eWelcome = (TextView) findViewById(R.id.welcomeMessage);
 
+        // admin buttons
         Button viewUsers=(Button)findViewById(R.id.usersAdmin);
         Button viewServices = (Button)findViewById(R.id.servicesAdmin);
         Button viewClinics = (Button)findViewById(R.id.clinicsAdmin);
+
+        // employee buttons
+        Button profileEmp =(Button)findViewById(R.id.profileEmployee);
+        Button clinicEmp = (Button)findViewById(R.id.clinicEmployee);
+        Button hoursEmp = (Button)findViewById(R.id.employeeHours);
+
 
 
         //manipulating welcome text
@@ -40,6 +47,9 @@ public class WelcomeActivity extends AppCompatActivity {
             }
             case 1:{
                 welcomeMsg += "a employee.";
+                profileEmp.setVisibility(View.VISIBLE);
+                clinicEmp.setVisibility(View.VISIBLE);
+                hoursEmp.setVisibility(View.VISIBLE);
                 break;
             }
             case 2:{
@@ -77,5 +87,20 @@ public class WelcomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    public void profileEmployee(View view){
+        Intent intent = new Intent(this, ProfileEmployee.class);
+        startActivity(intent);
+    }
+    public void clinicEmployee(View view){
+//        Intent intent = new Intent(this, userAdmin.class);
+//        startActivity(intent);
+    }
+    public void employeeHours(View view){
+        Intent intent = new Intent(this, ListOfHoursEmp.class);
+        startActivity(intent);
+    }
+
+
 
 }

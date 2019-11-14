@@ -9,6 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".EditClinicHoursEmployee"></activity>
+        <activity android:name=".ServicesEmployee" />
+        <activity android:name=".ClinicEmployee" />
+        <activity android:name=".EditProfileEmployee" />
+        <activity android:name=".ListOfHoursEmp" />
+        <activity android:name=".ProfileEmployee" />
         <activity android:name=".userAdmin" />
         <activity android:name=".ClinicList" />
         <activity android:name=".walkinclinicAdmin" />

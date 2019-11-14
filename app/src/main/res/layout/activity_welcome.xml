@@ -34,13 +34,29 @@
             android:visibility="invisible" />
 
         <Button
+            android:id="@+id/profileEmployee"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="profileEmployee"
+            android:text="Profile"
+            android:visibility="invisible" />
+
+        <Button
             android:id="@+id/usersAdmin"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
             android:onClick="userAdminButton"
             android:text="View Users"
+            android:visibility="invisible" />
+        <Button
+            android:id="@+id/clinicEmployee"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="clinicEmployee"
+            android:text="Clinic"
             android:visibility="invisible" />
 
         <Button
@@ -48,9 +64,16 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
             android:onClick="clinicsAdminButton"
             android:text="View Clinics"
+            android:visibility="invisible" />
+        <Button
+            android:id="@+id/employeeHours"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="employeeHours"
+            android:text="My Hours"
             android:visibility="invisible" />
 
         <Button
