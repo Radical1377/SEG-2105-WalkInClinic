@@ -7,6 +7,9 @@ import android.view.View;
 
 public class ClinicEmployee extends AppCompatActivity {
 
+    private static WelcomeEmployee la = new WelcomeEmployee();
+    private static User loggedInUser = la.getLoggedInUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

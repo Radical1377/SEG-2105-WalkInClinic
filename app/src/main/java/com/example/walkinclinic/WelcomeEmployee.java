@@ -9,13 +9,14 @@ import android.widget.TextView;
 
 public class WelcomeEmployee extends AppCompatActivity {
 
+    private static LoginActivity la = new LoginActivity();
+    private static User loggedInUser = la.getLoggedInUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_employee);
 
-        LoginActivity la = new LoginActivity();
-        User loggedInUser = la.getLoggedInUser();
         String welcomeMsg;
 
         TextView eWelcome = (TextView) findViewById(R.id.welcomeMessage);
@@ -45,4 +46,9 @@ public class WelcomeEmployee extends AppCompatActivity {
         Intent intent = new Intent(this, ListOfHoursEmp.class);
         startActivity(intent);
     }
+
+    public User getLoggedInUser(){
+        return this.loggedInUser;
+    }
+
 }

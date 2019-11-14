@@ -9,18 +9,19 @@ import android.widget.TextView;
 
 public class WelcomePatient extends AppCompatActivity {
 
+    private static LoginActivity la = new LoginActivity();
+    private static User loggedInUser = la.getLoggedInUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_patient);
 
-        LoginActivity la = new LoginActivity();
-        User loggedInUser = la.getLoggedInUser();
         String welcomeMsg;
 
         TextView eWelcome = (TextView) findViewById(R.id.welcomeMessage);
         //manipulating welcome text
-        welcomeMsg = "Welcome " + loggedInUser.getFirst_name() + "!\n You're logged in as a patient.";
+        welcomeMsg = "Welcome " + loggedInUser.getFirst_name() + "!\n You're logged in as an patient.";
 
 
         eWelcome.setText(welcomeMsg);
@@ -32,4 +33,9 @@ public class WelcomePatient extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    public User getLoggedInUser(){
+        return this.loggedInUser;
+    }
+
 }
