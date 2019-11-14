@@ -21,46 +21,9 @@ public class WelcomeActivity extends AppCompatActivity {
         String welcomeMsg;
 
         TextView eWelcome = (TextView) findViewById(R.id.welcomeMessage);
-
-        // admin buttons
-        Button viewUsers=(Button)findViewById(R.id.usersAdmin);
-        Button viewServices = (Button)findViewById(R.id.servicesAdmin);
-        Button viewClinics = (Button)findViewById(R.id.clinicsAdmin);
-
-        // employee buttons
-        Button profileEmp =(Button)findViewById(R.id.profileEmployee);
-        Button clinicEmp = (Button)findViewById(R.id.clinicEmployee);
-        Button hoursEmp = (Button)findViewById(R.id.employeeHours);
-
-
-
         //manipulating welcome text
-        welcomeMsg = "Welcome " + loggedInUser.getFirst_name() + "!\n You're logged in as ";
+        welcomeMsg = "Welcome " + loggedInUser.getFirst_name() + "!\n You're logged in as an admin.";
 
-        switch(loggedInUser.getRole()){
-            case 0:{
-                welcomeMsg += "an admin.";
-                viewUsers.setVisibility(View.VISIBLE);
-                viewServices.setVisibility(View.VISIBLE);
-                viewClinics.setVisibility(View.VISIBLE);
-                break;
-            }
-            case 1:{
-                welcomeMsg += "a employee.";
-                profileEmp.setVisibility(View.VISIBLE);
-                clinicEmp.setVisibility(View.VISIBLE);
-                hoursEmp.setVisibility(View.VISIBLE);
-                break;
-            }
-            case 2:{
-                welcomeMsg += "a patient.";
-                break;
-            }
-            default:{
-                welcomeMsg += "a user.";
-                break;
-            }
-        }
 
         eWelcome.setText(welcomeMsg);
     }

@@ -56,9 +56,21 @@ public class LoginActivity extends AppCompatActivity {
                     //Toast.makeText(getApplicationContext(), loggedInUser.stringInfo(), Toast.LENGTH_SHORT).show();
 
                     if (loggedInUser!=null && username.equals(loggedInUser.getUsername()) && encpassword.equals(loggedInUser.getPassword())) {
-                        intent = new Intent(thisContext, WelcomeActivity.class);
-                        startActivity(intent);
-                        break;
+                        if (loggedInUser.getRole() == 0 ) {
+                            intent = new Intent(thisContext, WelcomeActivity.class);
+                            startActivity(intent);
+                            break;
+                        }
+                        else if (loggedInUser.getRole() == 1) {
+                            intent = new Intent(thisContext, WelcomeEmployee.class);
+                            startActivity(intent);
+                            break;
+                        }
+                        else if (loggedInUser.getRole() == 2) {
+                            intent = new Intent(thisContext, WelcomePatient.class);
+                            startActivity(intent);
+                            break;
+                        }
                     }
                     else {
                         intent = null;
