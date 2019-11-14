@@ -88,18 +88,6 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void profileEmployee(View view){
-        Intent intent = new Intent(this, ProfileEmployee.class);
-        startActivity(intent);
-    }
-    public void clinicEmployee(View view){
-//        Intent intent = new Intent(this, userAdmin.class);
-//        startActivity(intent);
-    }
-    public void employeeHours(View view){
-        Intent intent = new Intent(this, ListOfHoursEmp.class);
-        startActivity(intent);
-    }
 
 
 

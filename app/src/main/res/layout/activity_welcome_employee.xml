@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WelcomeActivity">
-
+    tools:context=".WelcomeEmployee">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,29 +23,28 @@
             android:textSize="25dp" />
 
         <Button
-            android:id="@+id/servicesAdmin"
+            android:id="@+id/profileEmployee"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:onClick="servicesAdminButton"
-            android:text="View Services" />
+            android:onClick="profileEmployee"
+            android:text="Profile" />
 
         <Button
-            android:id="@+id/usersAdmin"
+            android:id="@+id/clinicEmployee"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:onClick="userAdminButton"
-            android:text="View Users" />
+            android:onClick="clinicEmployee"
+            android:text="Clinic" />
 
         <Button
-            android:id="@+id/clinicsAdmin"
+            android:id="@+id/employeeHours"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:onClick="clinicsAdminButton"
-            android:text="View Clinics" />
+            android:onClick="employeeHours"
+            android:text="My Hours" />
 
         <Button
             android:id="@+id/logoff"
