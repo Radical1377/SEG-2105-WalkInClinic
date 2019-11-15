@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.TextView;
+import android.content.Intent;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,36 +34,49 @@ public class EmployeeSelectClinic extends AppCompatActivity {
     ListView listViewClinics;
     List<WalkInClinic> clinics;
 
-    private static ProfileEmployee la = new ProfileEmployee();
-    private static Employee loggedInEmployee = la.getLoggedInEmployee();
+
+    private static Employee loggedInEmployee = null;
+    private static User loggedInUser = null;
+
+    private Context thisContext = this;
+    private static Intent thisIntent = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_select_clinic);
+
+        loggedInEmployee = LoginActivity.getLoggedInEmployee();
+        loggedInUser = LoginActivity.getLoggedInUser();
 
         listViewClinics = (ListView) findViewById(R.id.listClinics);
 
         clinics = new ArrayList<>();
 
+        //adding an onclicklistener to button
         listViewClinics.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 WalkInClinic clinic = clinics.get(i);
-                //Toast.makeText(getApplicationContext(), clinic.stringInfo(), Toast.LENGTH_LONG).show();
 
-                loggedInEmployee.setClinic(clinic.getId());
                 loggedInEmployee.setCompleted(true);
-
-                Toast.makeText(getApplicationContext(), loggedInEmployee.stringInfo(), Toast.LENGTH_LONG).show();
+                loggedInEmployee.setClinic(clinic.getId());
+                //Toast.makeText(getApplicationContext(), loggedInEmployee.stringInfo(), Toast.LENGTH_LONG).show();
 
                 databaseEmployees.child(loggedInEmployee.getUsername()).setValue(loggedInEmployee);
 
-                finish();
+                LoginActivity.setLoggedInEmployee(loggedInEmployee);
+                LoginActivity.setLoggedInUser(loggedInUser);
+
+                thisIntent = new Intent(thisContext, WelcomeEmployee.class);
+                startActivity(thisIntent);
 
                 return true;
             }
-        } );
+        });
+
+
     }
 
     @Override
@@ -86,6 +102,8 @@ public class EmployeeSelectClinic extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
     }
+
+
 
 
 }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
@@ -18,13 +19,16 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static User loggedInUser = null;
     private static Database db = new Database();
     private static String username;
     private static String encpassword;
     private static Intent intent = null;
 
-    DatabaseReference databaseUser = FirebaseDatabase.getInstance().getReference("users");;
+    private static User loggedInUser = null;
+    private static Employee loggedInEmployee = null;
+
+    DatabaseReference databaseUser = FirebaseDatabase.getInstance().getReference("users");
+    DatabaseReference databaseEmployees  = FirebaseDatabase.getInstance().getReference("employees");
 
 
     @Override
@@ -33,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         loggedInUser = null;
+        loggedInEmployee = null;
         intent = null;
         username= null;
         encpassword = null;
@@ -62,6 +67,8 @@ public class LoginActivity extends AppCompatActivity {
                             break;
                         }
                         else if (loggedInUser.getRole() == 1) {
+                            loggedInEmployee = new Employee(loggedInUser.getUsername(),null);
+
                             intent = new Intent(thisContext, WelcomeEmployee.class);
                             startActivity(intent);
                             break;
@@ -94,9 +101,22 @@ public class LoginActivity extends AppCompatActivity {
     public void backBtn(View view){
         finish(); //redirect to the login page
     }
-
-    public User getLoggedInUser(){
-        return this.loggedInUser;
+    public static Employee getLoggedInEmployee() {
+        return loggedInEmployee;
     }
+    public static User getLoggedInUser(){
+        return loggedInUser;
+    }
+
+    public static void setLoggedInEmployee(Employee emp) {
+
+        loggedInEmployee = emp;
+    }
+
+    public static void setLoggedInUser(User use) {
+
+        loggedInUser = use;
+    }
+
 
 }

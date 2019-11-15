@@ -2,35 +2,23 @@ package com.example.walkinclinic;
 
 public class Employee{
 
-    private String clinic = null;
-    private String username;
+    private String clinic;
     private boolean completed;
+    private String username;
 
+    public Employee(String clinic, boolean complete, String username){
+        this.username = username;
+        this.completed = complete;
+        this.clinic = clinic;
+    }
     public Employee(String username, String clinic) {
         this.username = username;
         this.clinic = clinic;
         if (clinic!=null) {
-
             completed = true;
         } else {
-
             completed = false;
         }
-    }
-    public Employee(User user, String clinic){
-        username = user.getUsername();
-        this.clinic = clinic;
-        if (clinic!=null) {
-
-            completed = true;
-        } else {
-
-            completed = false;
-        }
-    }
-    public Employee(User user){
-        username = user.getUsername();
-        this.completed = false;
     }
 
     public boolean isCompleted() {
@@ -51,9 +39,15 @@ public class Employee{
         this.completed = completed;
     }
     public String stringInfo() {
-        if (clinic==null) {
+        if (clinic==null && completed) {
             return username+" ; none";
+        }else if (clinic==null && !completed) {
+            return username+" ; not-completed ; none";
         }
-        return username+" "+clinic;
+        if (completed) {
+            return username+" "+clinic;
+        }else {
+            return username+" ; not-completed ; "+clinic;
+        }
     }
 }

@@ -22,14 +22,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     private Database db = new Database();
     DatabaseReference databaseUser = FirebaseDatabase.getInstance().getReference("users");;
-    private static User loggedInUser = null;
+    private static User loggedInUser ;
     private static boolean valid = true;
     private static String iUsername = null, iPassword = null, iFirstName = null, iLastName = null, iEmail = null;
     private static int iRole = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        loggedInUser = null;
+
         valid = true;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);

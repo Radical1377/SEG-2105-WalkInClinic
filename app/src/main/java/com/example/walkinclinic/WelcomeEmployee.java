@@ -1,5 +1,6 @@
 package com.example.walkinclinic;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -19,11 +20,9 @@ import java.util.ArrayList;
 
 public class WelcomeEmployee extends AppCompatActivity {
 
-    private static LoginActivity la = new LoginActivity();
-    private static User loggedInUser = la.getLoggedInUser();
-    private static Employee loggedInEmployee = new Employee(loggedInUser.getUsername(),null);
+    private static User loggedInUser = null;
+    private static Employee loggedInEmployee = null;
 
-    private static Employee tempEmployee;
 
     DatabaseReference databaseEmployees = FirebaseDatabase.getInstance().getReference("employees");
 
@@ -31,6 +30,9 @@ public class WelcomeEmployee extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_employee);
+
+        loggedInUser = LoginActivity.getLoggedInUser();
+        loggedInEmployee = LoginActivity.getLoggedInEmployee();
 
         String welcomeMsg;
 
@@ -42,9 +44,43 @@ public class WelcomeEmployee extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+        databaseEmployees.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot postSnap : dataSnapshot.getChildren()){
+                    Employee product = postSnap.getValue(Employee.class);
+
+                    Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_LONG).show();
+
+                   // if (loggedInUser.getUsername().equals(product.getUsername())) {
+                   //     loggedInEmployee.setClinic(product.getClinic());
+                   //     loggedInEmployee.setCompleted(true);
+                   //     LoginActivity.setLoggedInEmployee(loggedInEmployee);
+                   // }
+                }
+
+                //Toast.makeText(getApplicationContext(), loggedInUser.stringInfo(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), loggedInEmployee.stringInfo(), Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+
+    }
+
     public void logoffButton(View view){
         // HAVE TO CLEAR THE USERNAME AND PASSWORD
         //finish();
+
+        LoginActivity.setLoggedInEmployee(null);
+        LoginActivity.setLoggedInUser(null);
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -56,7 +92,7 @@ public class WelcomeEmployee extends AppCompatActivity {
 
     }
     public void clinicEmployee(View view){
-        if (loggedInEmployee.isCompleted()) {
+        if (LoginActivity.getLoggedInEmployee().isCompleted()) {
             Intent intent = new Intent(this, ClinicEmployee.class);
             startActivity(intent);
         }else {
@@ -64,7 +100,7 @@ public class WelcomeEmployee extends AppCompatActivity {
         }
     }
     public void employeeHours(View view){
-        if (loggedInEmployee.isCompleted()) {
+        if (LoginActivity.getLoggedInEmployee().isCompleted()) {
             Intent intent = new Intent(this, ListOfHoursEmp.class);
             startActivity(intent);
         }else {
@@ -72,12 +108,16 @@ public class WelcomeEmployee extends AppCompatActivity {
         }
     }
 
-    public User getLoggedInUser(){
-        return this.loggedInUser;
+    public static User getLoggedInUser(){
+        return loggedInUser;
     }
 
-    public Employee getLoggedInEmployee(){
-        return this.loggedInEmployee;
+    public static Employee getLoggedInEmployee(){
+        return loggedInEmployee;
+    }
+
+    public void setLoggedInEmployee(Employee emp) {
+        loggedInEmployee = emp;
     }
 
 }
