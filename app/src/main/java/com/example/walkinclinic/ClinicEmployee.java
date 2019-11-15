@@ -31,23 +31,23 @@ public class ClinicEmployee extends AppCompatActivity {
 
         //clinicId = "-LscT7pYL7z2IYKEGj_u";
 
-        TextView nameText = (TextView) findViewById(R.id.clinicName);
-        String name = "Name : ADD NAME";
-        nameText.setText(name);
-
-        TextView hoursText = (TextView) findViewById(R.id.clinicHours);
-        String hours = "Clinic Hours : ADD CLINIC HOURS";
-        hoursText.setText(hours);
-
-        databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
-
-        //adding an onclicklistener to button
-        buttonModifyHours.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editClinicHours();
-            }
-        });
+//        TextView nameText = (TextView) findViewById(R.id.clinicName);
+//        String name = "Name : ADD NAME";
+//        nameText.setText(name);
+//
+//        TextView hoursText = (TextView) findViewById(R.id.clinicHours);
+//        String hours = "Clinic Hours : ADD CLINIC HOURS";
+//        hoursText.setText(hours);
+//
+//        databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
+//
+//        //adding an onclicklistener to button
+//        buttonModifyHours.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                editClinicHours();
+//            }
+//        });
 
 
 
