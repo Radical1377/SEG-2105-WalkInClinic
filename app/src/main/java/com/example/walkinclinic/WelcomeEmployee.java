@@ -54,7 +54,7 @@ public class WelcomeEmployee extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()){
-                    Employee product = postSnap.getValue(Employee.class);
+                    //Employee product = postSnap.getValue(Employee.class);
 
                     Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_LONG).show();
 
