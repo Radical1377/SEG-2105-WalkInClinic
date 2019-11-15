@@ -122,7 +122,7 @@ public class ServicesEmployee extends AppCompatActivity {
 
     public void addService(){
 
-        // TO CHANGE
+        // TO CHANGE WITH CLINIC ID
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
