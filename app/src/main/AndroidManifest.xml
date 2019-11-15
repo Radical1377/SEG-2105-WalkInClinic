@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomePatient"></activity>
+        <activity android:name=".AddServiceClinic"></activity>
+        <activity android:name=".DeleteServiceClinic" />
+        <activity android:name=".WelcomePatient" />
         <activity android:name=".WelcomeEmployee" />
         <activity android:name=".EditClinicHoursEmployee" />
         <activity android:name=".ServicesEmployee" />

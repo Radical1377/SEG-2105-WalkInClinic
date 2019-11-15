@@ -62,7 +62,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:onClick="editClinicHours"
             android:text="Edit Clinic Hours" />
 
         <Button
@@ -70,7 +69,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:onClick="backBtn"
             android:text="Back" />
     </LinearLayout>

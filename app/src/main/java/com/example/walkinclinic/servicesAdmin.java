@@ -216,12 +216,4 @@ public class servicesAdmin extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Service Deleted", Toast.LENGTH_LONG).show();
         return true;
     }
-
-//    private boolean validateFields(String name, int staff){
-//        if (!TextUtils.isEmpty(name) && (staff==0 || staff==1 || staff==2)){
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
 }
