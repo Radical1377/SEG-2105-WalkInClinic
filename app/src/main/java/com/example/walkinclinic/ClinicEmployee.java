@@ -17,9 +17,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ClinicEmployee extends AppCompatActivity {
 
-    private static WelcomeEmployee la = new WelcomeEmployee();
-    private static User loggedInUser = la.getLoggedInUser(); // MODIFY FOR EMPLOYEE
-    private static String clinicId;
+    private static User loggedInUser = LoginActivity.getLoggedInUser(); // MODIFY FOR EMPLOYEE
+    private static Employee loggedInEmployee = LoginActivity.getLoggedInEmployee();
+
+    private static String clinicId = loggedInEmployee.getClinic();
 
     DatabaseReference databaseClinics;
     Button buttonModifyHours;
@@ -29,7 +30,7 @@ public class ClinicEmployee extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clinic_employee);
 
-        //clinicId = "-LscT7pYL7z2IYKEGj_u";
+        //Toast.makeText(getApplicationContext(), clinicId, Toast.LENGTH_LONG).show();
 
         TextView nameText = (TextView) findViewById(R.id.clinicName);
         String name = "Name : ADD NAME";
@@ -40,6 +41,8 @@ public class ClinicEmployee extends AppCompatActivity {
         hoursText.setText(hours);
 
         databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
+
+        buttonModifyHours = (Button) findViewById(R.id.editClinicHours);
 
         //adding an onclicklistener to button
         buttonModifyHours.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +89,9 @@ public class ClinicEmployee extends AppCompatActivity {
                     dR.child("openingHour").setValue(oh);
                     dR.child("closingHour").setValue(ch);
                     b.dismiss();
+                    startActivity(getIntent());
                 }
+
             }
         });
 
