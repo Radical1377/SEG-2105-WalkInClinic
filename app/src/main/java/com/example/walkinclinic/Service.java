@@ -5,8 +5,6 @@ public class Service {
     private String _name;
     private int _appropriateStaff; // 0 = doctor, 1 = nurse, 2 = staff
 
-
-
     public Service(){
     }
 
