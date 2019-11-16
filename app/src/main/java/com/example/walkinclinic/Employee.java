@@ -2,52 +2,58 @@ package com.example.walkinclinic;
 
 public class Employee{
 
-    private String clinic;
-    private boolean completed;
-    private String username;
+    private String _clinic;
+    private boolean _completed;
+    private String _username;
+
+    public Employee(){
+        this._username = null;
+        this._completed = false;
+        this._clinic = null;
+    }
 
     public Employee(String clinic, boolean complete, String username){
-        this.username = username;
-        this.completed = complete;
-        this.clinic = clinic;
+        this._username = username;
+        this._completed = complete;
+        this._clinic = clinic;
     }
     public Employee(String username, String clinic) {
-        this.username = username;
-        this.clinic = clinic;
+        this._username = username;
+        this._clinic = clinic;
         if (clinic!=null) {
-            completed = true;
+            _completed = true;
         } else {
-            completed = false;
+            _completed = false;
         }
     }
 
     public boolean isCompleted() {
-        return completed;
+        return _completed;
     }
 
     public String getClinic() {
-        return clinic;
+        return _clinic;
     }
     public String getUsername() {
-        return username;
+        return _username;
     }
 
     public void setClinic(String clinic) {
-        this.clinic = clinic;
+        this._clinic = clinic;
     }
     public void setCompleted(boolean completed) {
-        this.completed = completed;
+        this._completed = completed;
     }
     public String stringInfo() {
-        if (clinic==null && completed) {
-            return username+" ; none";
-        }else if (clinic==null && !completed) {
-            return username+" ; not-completed ; none";
+        if (_clinic==null && _completed) {
+            return _username+" ; none";
+        }else if (_clinic==null && !_completed) {
+            return _username+" ; not-completed ; none";
         }
-        if (completed) {
-            return username+" "+clinic;
+        if (_completed) {
+            return _username+" "+_clinic;
         }else {
-            return username+" ; not-completed ; "+clinic;
+            return _username+" ; not-completed ; "+_clinic;
         }
     }
 }

@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,9 +30,15 @@ public class ServicesEmployee extends AppCompatActivity {
     DatabaseReference databaseServicesClinic;
     Button buttonAddService;
     ListView listViewServices;
-    List<Service> services;
+    List<Service> servicesAdmin;
+    //List<Service> services;
     List<ServicesClinic> servicesClinics;
-    String clinicId;
+
+    private static User loggedInUser = LoginActivity.getLoggedInUser();
+    private static Employee loggedInEmployee = LoginActivity.getLoggedInEmployee();
+
+    private static String clinicId = loggedInEmployee.getClinic();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +49,16 @@ public class ServicesEmployee extends AppCompatActivity {
         buttonAddService = (Button) findViewById(R.id.addService);
 
         // all the services from all clinics
-        databaseServices = FirebaseDatabase.getInstance().getReference("servicesClinic");
-        // all the services from specific clinic
-        databaseServicesClinic = FirebaseDatabase.getInstance().getReference("servicesClinic").child(clinicId);
+        databaseServicesClinic = FirebaseDatabase.getInstance().getReference("servicesClinic");
+        // all services availables
+        databaseServices = FirebaseDatabase.getInstance().getReference("services");
 
-        services = new ArrayList<>();
         servicesClinics = new ArrayList<>();
+        //services = new ArrayList<>();
+        servicesAdmin = new ArrayList<>();
+
+        //Toast.makeText(getApplicationContext(), clinicId, Toast.LENGTH_LONG).show();
+
 
         //adding an onclicklistener to button
         buttonAddService.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +74,7 @@ public class ServicesEmployee extends AppCompatActivity {
                 // HERE SHOULD BE SERVICES CLINIC
                 ServicesClinic service = servicesClinics.get(i);
                 //Toast.makeText(getApplicationContext(), service.stringInfo(), Toast.LENGTH_LONG).show();
-                showDeleteDialog(service.getId(), service.getService().getName());
+                showUpdateDeleteDialog(service.getId(), service.getService().getName());
                 return true;
             }
         });
@@ -77,12 +89,21 @@ public class ServicesEmployee extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 servicesClinics.clear();
+                //services.clear();
 
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()){
-                    ServicesClinic service = postSnap.getValue(ServicesClinic.class);
+                    ServicesClinic serviceC = postSnap.getValue(ServicesClinic.class);
+                    if (serviceC.getClinicId().equals(clinicId)){
+                        //Service service = serviceC.getService();
 
-                    servicesClinics.add(service);
+                        servicesClinics.add(serviceC);
+                        //services.add(service);
+                    }
                 }
+
+                ServicesClinicList productsAdapter = new ServicesClinicList(ServicesEmployee.this, servicesClinics);
+                listViewServices.setAdapter(productsAdapter);
+
             }
 
             @Override
@@ -91,21 +112,19 @@ public class ServicesEmployee extends AppCompatActivity {
             }
         });
 
-        databaseServicesClinic.addValueEventListener(new ValueEventListener() {
+        //Toast.makeText(getApplicationContext(), clinicId, Toast.LENGTH_LONG).show();
+
+        databaseServices.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                services.clear();
+                servicesAdmin.clear();
 
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()){
-                    Service service = postSnap.getValue(ServicesClinic.class).getService();
+                    Service service = postSnap.getValue(Service.class);
 
-                    services.add(service);
+                    servicesAdmin.add(service);
                 }
-
-                ServiceList productsAdapter = new ServiceList(ServicesEmployee.this, services);
-
-                listViewServices.setAdapter(productsAdapter);
             }
 
             @Override
@@ -122,41 +141,29 @@ public class ServicesEmployee extends AppCompatActivity {
 
     public void addService(){
 
-        // TO CHANGE WITH CLINIC ID
-
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.activity_add_service_clinic, null);
         dialogBuilder.setView(dialogView);
 
-        //final EditText addName = (EditText) dialogView.findViewById(R.id.addName);
-        //final EditText addStaff  = (EditText) dialogView.findViewById(R.id.addStaff);
-        final Button buttonAdd = (Button) dialogView.findViewById(R.id.addService);
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancel);
+        final ListView listServices = (ListView) dialogView.findViewById(R.id.listServicesClinic);
+
+        ServiceList productsAdapter = new ServiceList(ServicesEmployee.this, servicesAdmin);
+
+        listServices.setAdapter(productsAdapter);
 
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
+        listServices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                // VALIDATE IF DATA IN IT
-//                if (addName.getText().toString().equals("") || addStaff.getText().toString().equals("")) {
-//                    Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
-//                } else {
-                    //String id = databaseServices.push().getKey();
-                    //String name = addName.getText().toString().trim();
-                    //int staff = Integer.parseInt(addStaff.getText().toString());
-
-                    // VALIDATE STAFF NUMBER
-                    //if (staff==0 || staff==1 || staff==2){
-                        //Service service = new Service(id, name, staff);
-                       // databaseServices.child(service.getId()).setValue(service);
-                       // b.dismiss();
-                    //} else {
-                        //Toast.makeText(getApplicationContext(), "Please enter a valid staff number\n(0=Doctor, 1=Nurse, 2=Other)", Toast.LENGTH_LONG).show();
-                   // }
-                //}
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Service service = servicesAdmin.get(position);
+                String serviceId = databaseServicesClinic.push().getKey();
+                ServicesClinic serviceClinic = new ServicesClinic(serviceId, clinicId, service, 0);
+                databaseServicesClinic.child(serviceId).setValue(serviceClinic);
+                b.dismiss();
             }
         });
 
@@ -169,21 +176,47 @@ public class ServicesEmployee extends AppCompatActivity {
 
     }
 
-    private void showDeleteDialog(final String serviceId, String serviceName) {
+    private void showUpdateDeleteDialog(final String serviceId, String serviceName) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.activity_delete_service_clinic, null);
         dialogBuilder.setView(dialogView);
 
+        final Button submitButton = (Button) dialogView.findViewById(R.id.submit);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.deleteService);
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancel);
+        final EditText addRate = (EditText) dialogView.findViewById(R.id.addRate);
+
 
 
         dialogBuilder.setTitle(serviceName);
         final AlertDialog b = dialogBuilder.create();
 
         b.show();
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // VALIDATE IF DATA IN IT
+                if (addRate.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please fill a rate", Toast.LENGTH_LONG).show();
+                } else {
+                    try {
+                        int rate = Integer.parseInt(addRate.getText().toString());
+                        if (rate > 5 || rate <1){
+                            Toast.makeText(getApplicationContext(), "Please enter a number from 1 to 5", Toast.LENGTH_LONG).show();
+                        } else {
+                            updateRate(serviceId, rate);
+                            b.dismiss();
+                        }
+                    } catch (Exception e){
+                        Toast.makeText(getApplicationContext(), "Please enter a number from 1 to 5", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            }
+        });
 
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,6 +232,27 @@ public class ServicesEmployee extends AppCompatActivity {
                 b.dismiss();
             }
         });
+    }
+
+    private void updateRate(String id, int rate) {
+        DatabaseReference dR = databaseServicesClinic.child(id);
+
+        dR.child("rate").setValue(rate);
+
+
+        Toast.makeText(getApplicationContext(), "Service Updated", Toast.LENGTH_LONG).show();
+
+//        DatabaseReference dR = databaseClinics.child(id);
+//        //Toast.makeText(getApplicationContext(), "Clinic Updated", Toast.LENGTH_LONG).show();
+//
+//        dR.child("name").setValue(name);
+//        dR.child("address").setValue(address);
+//        dR.child("openingHour").setValue(open);
+//        dR.child("closingHour").setValue(close);
+//
+////        WalkInClinic clinic = new WalkInClinic(id, name, address, open, close);
+////        dR.setValue(clinic);
+
     }
 
     private boolean deleteService(String id) {

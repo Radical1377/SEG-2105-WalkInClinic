@@ -55,10 +55,11 @@ public class EmployeeSelectClinic extends AppCompatActivity {
         clinics = new ArrayList<>();
 
         //adding an onclicklistener to button
-        listViewClinics.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+        listViewClinics.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                WalkInClinic clinic = clinics.get(i);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                WalkInClinic clinic = clinics.get(position);
 
                 loggedInEmployee.setCompleted(true);
                 loggedInEmployee.setClinic(clinic.getId());
@@ -69,13 +70,11 @@ public class EmployeeSelectClinic extends AppCompatActivity {
                 LoginActivity.setLoggedInEmployee(loggedInEmployee);
                 LoginActivity.setLoggedInUser(loggedInUser);
 
-                thisIntent = new Intent(thisContext, WelcomeEmployee.class);
-                startActivity(thisIntent);
-
-                return true;
+                //startActivity(getIntent());
+                thisIntent = new Intent(thisContext, ProfileEmployee.class);
+                 startActivity(thisIntent);
             }
         });
-
 
     }
 
@@ -102,6 +101,11 @@ public class EmployeeSelectClinic extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
     }
+
+    public void backBtn(View view){
+        finish(); //redirect to the welcome page
+    }
+
 
 
 

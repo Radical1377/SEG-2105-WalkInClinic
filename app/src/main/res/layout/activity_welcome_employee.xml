@@ -27,6 +27,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="50dp"
             android:onClick="profileEmployee"
             android:text="Profile" />
 
@@ -35,6 +36,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="25dp"
             android:onClick="clinicEmployee"
             android:text="Clinic" />
 
@@ -43,6 +45,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="25dp"
             android:onClick="employeeHours"
             android:text="My Hours" />
 

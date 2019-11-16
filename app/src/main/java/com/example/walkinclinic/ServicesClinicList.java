@@ -9,12 +9,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ServiceList extends ArrayAdapter<Service>{
-    private Activity context;
-    List<Service> services;
+public class ServicesClinicList extends ArrayAdapter<ServicesClinic> {
 
-    public ServiceList(Activity context, List<Service> services) {
-        super(context, R.layout.layout_service_list, services);
+    private Activity context;
+    List<ServicesClinic> services;
+
+    public ServicesClinicList(Activity context, List<ServicesClinic> services) {
+        super(context, R.layout.layout_clinic_list, services);
         this.context = context;
         this.services = services;
     }
@@ -22,13 +23,15 @@ public class ServiceList extends ArrayAdapter<Service>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.layout_service_list, null, true);
+        View listViewItem = inflater.inflate(R.layout.layout_services_clinic_list, null, true);
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
         TextView textViewAll = (TextView) listViewItem.findViewById(R.id.textViewAll);
 
-        Service service = services.get(position);
-        int staff = service.getAppropriateStaff();
+        ServicesClinic service = services.get(position);
+
+        int staff = service.getService().getAppropriateStaff();
+        int rate = service.getRate();
         String aStaff;
 
         if (staff == 0){
@@ -39,9 +42,9 @@ public class ServiceList extends ArrayAdapter<Service>{
             aStaff = "Other";
         }
 
-        String all = "Staff: "+aStaff;
+        String all = "Staff: "+aStaff+", Rate: "+rate;
 
-        textViewName.setText(service.getName());
+        textViewName.setText(service.getService().getName());
         textViewAll.setText(all);
 
         return listViewItem;

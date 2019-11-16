@@ -4,8 +4,7 @@ public class ServicesClinic {
     private String id;
     private String clinicId;
     private Service service;
-    //private String _name;
-    //private int _appropriateStaff; // 0 = doctor, 1 = nurse, 2 = staff
+    private int rate;
 
     public ServicesClinic(){
     }
@@ -20,6 +19,12 @@ public class ServicesClinic {
         this.clinicId = clinic;
         this.service = service;
     }
+    public ServicesClinic(String id, String clinic, Service service, int rate){
+        this.id = id;
+        this.clinicId = clinic;
+        this.service = service;
+        this.rate = rate;
+    }
 
     // getters
     public String getId() {
@@ -31,6 +36,9 @@ public class ServicesClinic {
     public String getClinicId() {
         return clinicId;
     }
+    public int getRate() {
+        return rate;
+    }
 
     // setters
     public void setClinicId(String clinicId) {
@@ -38,6 +46,9 @@ public class ServicesClinic {
     }
     public void setService(Service service) {
         this.service = service;
+    }
+    public void setRate(int rate) {
+        this.rate = rate;
     }
 
     public String stringInfo() {

@@ -24,7 +24,7 @@ public class WelcomeEmployee extends AppCompatActivity {
     private static Employee loggedInEmployee = null;
 
 
-    DatabaseReference databaseEmployees = FirebaseDatabase.getInstance().getReference("employees");
+    DatabaseReference databaseEmployees;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,8 @@ public class WelcomeEmployee extends AppCompatActivity {
 
         loggedInUser = LoginActivity.getLoggedInUser();
         loggedInEmployee = LoginActivity.getLoggedInEmployee();
+
+        databaseEmployees = FirebaseDatabase.getInstance().getReference("employees");
 
         String welcomeMsg;
 
@@ -48,29 +50,41 @@ public class WelcomeEmployee extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+            databaseEmployees.addValueEventListener(new ValueEventListener() {
 
-        databaseEmployees.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot postSnap : dataSnapshot.getChildren()){
-                    //Employee product = postSnap.getValue(Employee.class);
+                    for (DataSnapshot postSnap : dataSnapshot.getChildren()) {
+//                        try {
+                            if (postSnap.getValue().toString().contains(loggedInUser.getUsername())){
+                                //Toast.makeText(getApplicationContext(),"GOT IT", Toast.LENGTH_SHORT).show();
+                                loggedInEmployee.setCompleted(true);
+                                String clinic = postSnap.getValue().toString().substring(8,28);
+                                loggedInEmployee.setClinic(clinic);
+                                //Toast.makeText(getApplicationContext(),clinic, Toast.LENGTH_SHORT).show();
+                                break;
+                                //loggedInEmployee.set
+                            }
+                            //Employee emp = new Employee();
+                            //emp.setClinic(postSnap.getValue().toString());
+//                            Employee product = postSnap.getValue(Employee.class);
+//                            Toast.makeText(getApplicationContext(),product.toString(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(),postSnap.getValue().toString(), Toast.LENGTH_SHORT).show();
+//                    } catch (Exception e){
+//                        Toast.makeText(getApplicationContext(),postSnap.getValue().toString(), Toast.LENGTH_SHORT).show();
+//                    }
 
-                    Toast.makeText(getApplicationContext(), "Hello", Toast.LENGTH_LONG).show();
+                    }
 
-                   // if (loggedInUser.getUsername().equals(product.getUsername())) {
-                   //     loggedInEmployee.setClinic(product.getClinic());
-                   //     loggedInEmployee.setCompleted(true);
-                   //     LoginActivity.setLoggedInEmployee(loggedInEmployee);
-                   // }
                 }
 
-                //Toast.makeText(getApplicationContext(), loggedInUser.stringInfo(), Toast.LENGTH_LONG).show();
-                //Toast.makeText(getApplicationContext(), loggedInEmployee.stringInfo(), Toast.LENGTH_LONG).show();
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
-        });
+            );
 
     }
 

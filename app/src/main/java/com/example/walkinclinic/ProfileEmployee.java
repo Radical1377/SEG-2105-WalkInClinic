@@ -43,10 +43,10 @@ public class ProfileEmployee extends AppCompatActivity {
         eEmail.setText("Email: "+ loggedInUser.getEmail());
 
         TextView eUsername = (TextView) findViewById(R.id.username);
-        eUsername.setText("Email: "+ loggedInEmployee.getUsername());
+        eUsername.setText("Username: "+ loggedInEmployee.getUsername());
 
         TextView ePassword = (TextView) findViewById(R.id.password);
-        ePassword.setText("Password: **********");
+        ePassword.setText("Password: *****");
 
         final TextView eClinic = (TextView) findViewById(R.id.clinicDisplay);
 
@@ -62,7 +62,7 @@ public class ProfileEmployee extends AppCompatActivity {
                         WalkInClinic product = postSnap.getValue(WalkInClinic.class);
 
                         if (product.getId().equals(loggedInEmployee.getClinic())) {
-                            eClinic.setText("Clinic: "+product.getName());
+                            eClinic.setText("Clinic: "+product.get_name());
                         }
                     }
                 }
@@ -88,7 +88,9 @@ public class ProfileEmployee extends AppCompatActivity {
     }
 
     public void backBtn(View view){
-        finish(); //redirect to the welcome page
+        Intent intent = new Intent(this, WelcomeEmployee.class);
+        startActivity(intent);
+         //redirect to the welcome page
     }
 
 }

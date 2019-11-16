@@ -14,24 +14,42 @@
             android:id="@+id/addName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
             android:hint="Enter Name" />
 
         <EditText
-            android:id="@+id/addOpeningHour"
+            android:id="@+id/addOpeningHourWD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Opening Hour (0 to 24)" />
+            android:textSize="15dp"
+            android:hint="Opening Hour (Monday to Friday) (from 0 to 24)" />
 
         <EditText
-            android:id="@+id/addClosingHour"
+            android:id="@+id/addClosingHourWD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Closing Hour (0 to 24)" />
+            android:textSize="15dp"
+            android:hint="Closing Hour (Monday to Friday) (from 0 to 24)" />
+
+        <EditText
+            android:id="@+id/addOpeningHourWE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:hint="Opening Hour (Saturday/Sunday) (from 0 to 24)" />
+
+        <EditText
+            android:id="@+id/addClosingHourWE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:hint="Closing Hour (Saturday/Sunday) (from 0 to 24)" />
 
         <EditText
             android:id="@+id/addAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
             android:hint="Enter Address" />
 
         <LinearLayout

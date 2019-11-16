@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".updateDeleteClinic">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,24 +14,42 @@
             android:id="@+id/editName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
             android:hint="Enter Name" />
 
         <EditText
-            android:id="@+id/editStaff"
+            android:id="@+id/editOpeningHourWD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Opening Hour (0 to 24)" />
+            android:textSize="15dp"
+            android:hint="Opening Hour (Monday to Friday) (from 0 to 24)" />
 
         <EditText
-            android:id="@+id/editClosingHour"
+            android:id="@+id/editClosingHourWD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Closing Hour (0 to 24)" />
+            android:textSize="15dp"
+            android:hint="Closing Hour (Monday to Friday) (from 0 to 24)" />
+
+        <EditText
+            android:id="@+id/editOpeningHourWE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:hint="Opening Hour (Saturday/Sunday) (from 0 to 24)" />
+
+        <EditText
+            android:id="@+id/editClosingHourWE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:hint="Closing Hour (Saturday/Sunday) (from 0 to 24)" />
 
         <EditText
             android:id="@+id/editClinic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
             android:hint="Enter Address" />
 
         <LinearLayout
