@@ -65,8 +65,10 @@ public class MainActivityTest2 { //Espresso UI Test
         onView(withId(R.id.clinicsAdmin)).perform(click());
         onView(withId(R.id.addClinic)).perform(click());
         onView(withId(R.id.addName)).perform(typeText("Test Clinic" + num), closeSoftKeyboard());
-        onView(withId(R.id.addOpeningHour)).perform(typeText("10"), closeSoftKeyboard());
-        onView(withId(R.id.addClosingHour)).perform(typeText("12"), closeSoftKeyboard());
+        onView(withId(R.id.addOpeningHourWD)).perform(typeText("10"), closeSoftKeyboard());
+        onView(withId(R.id.addClosingHourWD)).perform(typeText("12"), closeSoftKeyboard());
+        onView(withId(R.id.addOpeningHourWE)).perform(typeText("10"), closeSoftKeyboard());
+        onView(withId(R.id.addClosingHourWE)).perform(typeText("12"), closeSoftKeyboard());
         onView(withId(R.id.addAddress)).perform(typeText("21 Jump Street"), closeSoftKeyboard());
         onView(withId(R.id.buttonAddClinic)).perform(click());
 
