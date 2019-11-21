@@ -115,7 +115,7 @@ public class WelcomeEmployee extends AppCompatActivity {
     }
     public void employeeHours(View view){
         if (LoginActivity.getLoggedInEmployee().isCompleted()) {
-            Intent intent = new Intent(this, ListOfHoursEmp.class);
+            Intent intent = new Intent(this, HoursEmployee.class);
             startActivity(intent);
         }else {
             Toast.makeText(getApplicationContext(),"Need to complete profile.", Toast.LENGTH_SHORT).show();

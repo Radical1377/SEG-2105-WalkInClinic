@@ -16,7 +16,7 @@
         <activity android:name=".WelcomeEmployee" />
         <activity android:name=".ServicesEmployee" />
         <activity android:name=".ClinicEmployee" />
-        <activity android:name=".ListOfHoursEmp" />
+        <activity android:name=".HoursEmployee" />
         <activity android:name=".ProfileEmployee" />
         <activity android:name=".userAdmin" />
         <activity android:name=".ClinicList" />
