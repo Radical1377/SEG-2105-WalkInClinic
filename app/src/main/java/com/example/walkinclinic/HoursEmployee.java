@@ -35,6 +35,7 @@ public class HoursEmployee extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_list_of_hours_emp);
         //listViewHours=(ListView) findViewById(R.id.listViewHours);
 
@@ -50,24 +51,7 @@ public class HoursEmployee extends AppCompatActivity {
 
         workHours = new ArrayList<>(); //just like in Product Catalog
         //CoPIED STUFF
-        //all the hour displays for day in the week
 
-        TextView _hoursMonday = (TextView) findViewById(R.id.hoursMonday);
-        TextView _hoursTuesday = (TextView) findViewById(R.id.hoursTuesday);
-        TextView _hoursWednesday = (TextView) findViewById(R.id.hoursWednesday);
-        TextView _hoursThursday = (TextView) findViewById(R.id.hoursThursday);
-        TextView _hoursFriday = (TextView) findViewById(R.id.hoursFriday);
-        TextView _hoursSat = (TextView) findViewById(R.id.hoursSaturday);
-        TextView _hoursSun = (TextView) findViewById(R.id.hoursSunday);
-
-        //setting the text
-        _hoursMonday.setText(loggedInEmployee.getDayHours("Monday").displayHours());
-        _hoursTuesday.setText(loggedInEmployee.getDayHours("Tuesday").displayHours());
-        _hoursWednesday.setText(loggedInEmployee.getDayHours("Wednesday").displayHours());
-        _hoursThursday.setText(loggedInEmployee.getDayHours("Thursday").displayHours());
-        _hoursFriday.setText(loggedInEmployee.getDayHours("Friday").displayHours());
-        _hoursSat.setText(loggedInEmployee.getDayHours("Saturday").displayHours());
-        _hoursSun.setText(loggedInEmployee.getDayHours("Sunday").displayHours());
 
         //Edit hours for days of the week (opening)
         final EditText _openHoursMonday = (EditText) findViewById(R.id.openMondayHours);
@@ -186,23 +170,23 @@ public class HoursEmployee extends AppCompatActivity {
         databaseEmployees.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //clear previous list (of workHours)
-                workHours.clear();
+                /*clear previous list (of workHours)
+                //workHours.clear();
                 //Iterate Nodes
                 for (DataSnapshot postSnap: dataSnapshot.getChildren() ) {
                     //get hours for each day
                     WorkHours Hours=postSnap.getValue(WorkHours.class);
                     //add workHours to list
-                    workHours.add(Hours);
-                    /*
+                    //workHours.add(Hours);
+
                     //create adapter for listView
                     EmployeeHoursList hoursAdapter = new EmployeeHoursList(HoursEmployee.this, workHours);
                     //attach adapterto listView in this class
                     listViewHours.setAdapter(hoursAdapter);
 
 
-                     */
-                }
+
+                }*/
                 //get the clinic
                 for (DataSnapshot postSnap: dataSnapshot.getChildren()) {
                     //access the employees clinic
@@ -214,7 +198,24 @@ public class HoursEmployee extends AppCompatActivity {
                 //TO_DO update the stuff
                 loggedInEmployee = LoginActivity.getLoggedInEmployee();
 
+                //all the hour displays for day in the week
 
+                TextView _hoursMonday = (TextView) findViewById(R.id.hoursMonday);
+                TextView _hoursTuesday = (TextView) findViewById(R.id.hoursTuesday);
+                TextView _hoursWednesday = (TextView) findViewById(R.id.hoursWednesday);
+                TextView _hoursThursday = (TextView) findViewById(R.id.hoursThursday);
+                TextView _hoursFriday = (TextView) findViewById(R.id.hoursFriday);
+                TextView _hoursSat = (TextView) findViewById(R.id.hoursSaturday);
+                TextView _hoursSun = (TextView) findViewById(R.id.hoursSunday);
+
+                //setting the text
+                _hoursMonday.setText(loggedInEmployee.getDayHours("Monday").displayHours());
+                _hoursTuesday.setText(loggedInEmployee.getDayHours("Tuesday").displayHours());
+                _hoursWednesday.setText(loggedInEmployee.getDayHours("Wednesday").displayHours());
+                _hoursThursday.setText(loggedInEmployee.getDayHours("Thursday").displayHours());
+                _hoursFriday.setText(loggedInEmployee.getDayHours("Friday").displayHours());
+                _hoursSat.setText(loggedInEmployee.getDayHours("Saturday").displayHours());
+                _hoursSun.setText(loggedInEmployee.getDayHours("Sunday").displayHours());
             }
 
             @Override
