@@ -6,4 +6,126 @@
     android:layout_height="match_parent"
     tools:context=".PatientClinicProfile">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/clinicDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:text="Clinic"
+            android:textColor="#2E7DBB"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/clinicName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:text="Name :"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/clinicHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:text="Clinic hours :"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:text="Address :"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/phoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:text="Phone number :"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/waitTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="25dp"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:text="Approximate Wait Time :"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:text="Payment methods accepted :"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/insurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="25dp"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:text="Insurance Accepted :"
+            android:textSize="15dp" />
+
+
+        <Button
+            android:id="@+id/ratingBtn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Rate this Clinic" />
+
+
+        <Button
+            android:id="@+id/bookingBtn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Book an Appointement" />
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:onClick="backBtn"
+            android:text="Back" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,6 +24,31 @@
             android:textSize="25dp" />
 
 
+        <Button
+            android:id="@+id/myProfileButton"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="My Profile" />
+
+        <Button
+            android:id="@+id/searchbtn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:onClick="searchButton"
+            android:text="Search for a Clinic" />
+
+        <Button
+            android:id="@+id/allclinicsbtn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:onClick="allClinicsButton"
+            android:text="View all Clinics" />
 
         <Button
             android:id="@+id/logoff"

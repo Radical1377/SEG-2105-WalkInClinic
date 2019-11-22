@@ -28,8 +28,6 @@ public class LoginActivity extends AppCompatActivity {
     private static Employee loggedInEmployee = null;
 
     DatabaseReference databaseUser = FirebaseDatabase.getInstance().getReference("users");
-    DatabaseReference databaseEmployees  = FirebaseDatabase.getInstance().getReference("employees");
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
