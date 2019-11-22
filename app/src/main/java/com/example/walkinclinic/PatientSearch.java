@@ -14,6 +14,7 @@ public class PatientSearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_search);
+        //ok
 
         Button service = (Button) findViewById(R.id.selectService);
         //service.setText("Rainbow");
