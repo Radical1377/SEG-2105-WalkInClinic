@@ -62,10 +62,10 @@ public class WelcomeEmployee extends AppCompatActivity {
 //                        try {
                             if (postSnap.getValue().toString().contains(loggedInUser.getUsername())){
                                 //Toast.makeText(getApplicationContext(),"GOT IT", Toast.LENGTH_SHORT).show();
-                                loggedInEmployee.setCompleted(true);
+                                //loggedInEmployee.setCompleted(true);
                                 Employee product = postSnap.getValue(Employee.class);
 
-                                Toast.makeText(getApplicationContext(),product.getClinic(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(),product.getClinic(), Toast.LENGTH_SHORT).show();
                                 //Pattern p = Pattern.compile("\\clinic= .*?\\,");
                                // Matcher m = p.matcher(postSnap.getValue().toString());
                                 //if (m.find())
@@ -74,10 +74,10 @@ public class WelcomeEmployee extends AppCompatActivity {
                                 //Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
                                 //String clinic = postSnap.getValue().toString().substring(8,28);
                                 //s = StringUtils.substringBetween(s, "(", ")");
-                                loggedInEmployee.setClinic(product.getClinic());
+                                //loggedInEmployee.setClinic(product.getClinic());
                                 //loggedInEmployee.setWorkHours(product.getWorkHours());
-
-                                LoginActivity.setLoggedInEmployee(loggedInEmployee);
+                                loggedInEmployee = product;
+                                LoginActivity.setLoggedInEmployee(product);
                                 //Toast.makeText(getApplicationContext(),clinic, Toast.LENGTH_SHORT).show();
 
                                 //WorkHours[] hours = product.getWorkHours();
@@ -137,7 +137,7 @@ public class WelcomeEmployee extends AppCompatActivity {
     }
     public void employeeHours(View view){
         if (LoginActivity.getLoggedInEmployee().isCompleted()) {
-            Intent intent = new Intent(this, HoursEmployee.class);
+            Intent intent = new Intent(this, EmployeeListHours.class);
             startActivity(intent);
         }else {
             Toast.makeText(getApplicationContext(),"Need to complete profile.", Toast.LENGTH_SHORT).show();

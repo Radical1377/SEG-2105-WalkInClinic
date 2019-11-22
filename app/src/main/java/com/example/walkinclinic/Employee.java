@@ -19,13 +19,13 @@ public class Employee{
         this._username = null;
         this._completed = false;
         this._clinic = null;
-        this.mon = null;
-        this.tues = null;
-        this.wed = null;
-        this.thurs = null;
-        this.fri = null;
-        this.sat = null;
-        this.sun = null;
+        this.mon = new WorkHours("Monday",0,0);
+        this.tues = new WorkHours("Tuesday",0,0);
+        this.wed = new WorkHours("Wednesday",0,0);
+        this.thurs = new WorkHours("Thursday",0,0);
+        this.fri = new WorkHours("Friday",0,0);
+        this.sat = new WorkHours("Saturday",0,0);
+        this.sun = new WorkHours("Sunday",0,0);
 //        this._workHours=new WorkHours[7]; //7 days a week, so 7 sets of workHours
 //        //have to initialise it (not always created by user when registering
 //        for (int i=0; i<7; i++) {
@@ -41,6 +41,13 @@ public class Employee{
         this._username = username;
         this._completed = complete;
         this._clinic = clinic;
+        this.mon = new WorkHours("Monday",0,0);
+        this.tues = new WorkHours("Tuesday",0,0);
+        this.wed = new WorkHours("Wednesday",0,0);
+        this.thurs = new WorkHours("Thursday",0,0);
+        this.fri = new WorkHours("Friday",0,0);
+        this.sat = new WorkHours("Saturday",0,0);
+        this.sun = new WorkHours("Sunday",0,0);
 //        this._workHours=new WorkHours[7];
 //        //have to initialise it (not always created by user when registering
 //        for (int i=0; i<7; i++) {
@@ -64,6 +71,13 @@ public class Employee{
         } else {
             _completed = false;
         }
+        this.mon = new WorkHours("Monday",0,0);
+        this.tues = new WorkHours("Tuesday",0,0);
+        this.wed = new WorkHours("Wednesday",0,0);
+        this.thurs = new WorkHours("Thursday",0,0);
+        this.fri = new WorkHours("Friday",0,0);
+        this.sat = new WorkHours("Saturday",0,0);
+        this.sun = new WorkHours("Sunday",0,0);
         //have to initialise it (not always created by user when registering
 //        this._workHours=new WorkHours[7];
 //        for (int i=0; i<7; i++) {
