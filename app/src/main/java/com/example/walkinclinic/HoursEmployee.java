@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.walkinclinic.data.WorkHours;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,11 +44,15 @@ public class HoursEmployee extends AppCompatActivity {
         databaseEmployees = FirebaseDatabase.getInstance().getReference("employees");
         //listViewHours = (ListView) findViewById(R.id.listViewHours);
 
+//        WorkHours[] hours = loggedInEmployee.getWorkHours();
+//        for (int i=0;i<7;i++) {
+//            Toast.makeText(getApplicationContext(), hours[i].displayHours(), Toast.LENGTH_SHORT).show();
+//        }
+
 
         clinicId =loggedInEmployee.getClinic();
         databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
 
-        workHours = new ArrayList<>(); //just like in Product Catalog
         //CoPIED STUFF
 
 
@@ -190,10 +193,15 @@ public class HoursEmployee extends AppCompatActivity {
                 //get the clinic
                 for (DataSnapshot postSnap: dataSnapshot.getChildren()) {
                     //access the employees clinic
-                    WalkInClinic product = postSnap.getValue(WalkInClinic.class);
-                    if (clinicId.equals(product.getId())){
-                        clinic=product; //assign the value to clinic so we can use to check hours
-                    }
+//                    Toast.makeText(getApplicationContext(), postSnap.toString(), Toast.LENGTH_LONG).show();
+//                    Employee product = postSnap.getValue(Employee.class);
+//                    Toast.makeText(getApplicationContext(), product.stringInfo(), Toast.LENGTH_LONG).show();
+
+
+//                    if (clinicId.equals(product.getId())){
+//                        clinic=product; //assign the value to clinic so we can use to check hours
+//                        //Toast.makeText(getApplicationContext(), "HERE", Toast.LENGTH_LONG).show();
+//                    }
                 }
                 //TO_DO update the stuff
                 loggedInEmployee = LoginActivity.getLoggedInEmployee();
@@ -209,13 +217,13 @@ public class HoursEmployee extends AppCompatActivity {
                 TextView _hoursSun = (TextView) findViewById(R.id.hoursSunday);
 
                 //setting the text
-                _hoursMonday.setText(loggedInEmployee.getDayHours("Monday").displayHours());
-                _hoursTuesday.setText(loggedInEmployee.getDayHours("Tuesday").displayHours());
-                _hoursWednesday.setText(loggedInEmployee.getDayHours("Wednesday").displayHours());
-                _hoursThursday.setText(loggedInEmployee.getDayHours("Thursday").displayHours());
-                _hoursFriday.setText(loggedInEmployee.getDayHours("Friday").displayHours());
-                _hoursSat.setText(loggedInEmployee.getDayHours("Saturday").displayHours());
-                _hoursSun.setText(loggedInEmployee.getDayHours("Sunday").displayHours());
+//                _hoursMonday.setText(loggedInEmployee.getDayHours("Monday").displayHours());
+//                _hoursTuesday.setText(loggedInEmployee.getDayHours("Tuesday").displayHours());
+//                _hoursWednesday.setText(loggedInEmployee.getDayHours("Wednesday").displayHours());
+//                _hoursThursday.setText(loggedInEmployee.getDayHours("Thursday").displayHours());
+//                _hoursFriday.setText(loggedInEmployee.getDayHours("Friday").displayHours());
+//                _hoursSat.setText(loggedInEmployee.getDayHours("Saturday").displayHours());
+//                _hoursSun.setText(loggedInEmployee.getDayHours("Sunday").displayHours());
             }
 
             @Override
@@ -227,37 +235,47 @@ public class HoursEmployee extends AppCompatActivity {
 
     public void changeHours(String day, double open, double close, Employee employee){
         if (open<close) {
-            if (day=="Saturday"|| day=="Sunday") {
-                //weekend
-                if (open >= clinic.get_openingHourWeekEnd()&& close<=clinic.get_closingHourWeekEnd()) {
-                    //check for within clinic hours
-                    WorkHours workHours = new WorkHours(day, open, close);
-                    //employee.set_dayHours(day, workHours);
+            if (close >24) {
+                if (open<0) {
+                    //if (day == "Saturday" || day == "Sunday") {
+                        //weekend
+                        //if (open >= clinic.get_openingHourWeekEnd() && close <= clinic.get_closingHourWeekEnd()) {
+                            //check for within clinic hours
+                            WorkHours workHours = new WorkHours(day, open, close);
+                            //employee.set_dayHours(day, workHours);
 
-                    //save to firebase
-                    String username = loggedInEmployee.getUsername(); //get the specific employee in database
-                    DatabaseReference dH = databaseEmployees.child(username); //reference to specific employee
-                    dH.child("hours").child(day).setValue(workHours); //update day in hours tab
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Not within clinic weekend hours", Toast.LENGTH_LONG).show();
+                            //save to firebase
+                            String username = loggedInEmployee.getUsername(); //get the specific employee in database
+                            DatabaseReference dH = databaseEmployees.child(username); //reference to specific employee
+                            dH.child("hours").child(day).setValue(workHours); //update day in hours tab
+                        //} else {
+                        //    Toast.makeText(getApplicationContext(), "Not within clinic weekend hours", Toast.LENGTH_LONG).show();
 
+                        //}
+                    //} else {
+                        //Toast.makeText(getApplicationContext(), clinic.stringInfo(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), clinic.get_closingHourWeekDay(), Toast.LENGTH_LONG).show();
+                        //weekdays, check those opening hours
+//                if (open >= clinic.get_openingHourWeekDay() && close<=clinic.get_closingHourWeekDay()) {
+                        //check for within clinic hours
+//                        WorkHours workHours = new WorkHours(day, open, close);
+//                        employee.set_dayHours(day, workHours);
+//
+//                        //save to firebase
+//                        String username = loggedInEmployee.getUsername(); //get the specific employee in database
+//                        Toast.makeText(getApplicationContext(), username, Toast.LENGTH_LONG).show();
+//                        DatabaseReference dH = databaseEmployees.child(username); //reference to specific employee
+//                        dH.child("hours").child(day).setValue(workHours); //update day in hours tab
+//                }
+//                else {
+//                    Toast.makeText(getApplicationContext(), "Not within clinic weekday hours", Toast.LENGTH_LONG).show();
+//                }
+                    //}
+                } else {
+                    Toast.makeText(getApplicationContext(), "Begin time must be bigger or equal to 0", Toast.LENGTH_LONG).show();
                 }
             } else {
-                //weekdays, check those opening hours
-                if (open >= clinic.get_openingHourWeekDay()&& close<=clinic.get_closingHourWeekDay()) {
-                    //check for within clinic hours
-                    WorkHours workHours = new WorkHours(day, open, close);
-                    //employee.set_dayHours(day, workHours);
-
-                    //save to firebase
-                    String username = loggedInEmployee.getUsername(); //get the specific employee in database
-                    DatabaseReference dH = databaseEmployees.child(username); //reference to specific employee
-                    dH.child("hours").child(day).setValue(workHours); //update day in hours tab
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Not within clinic weekday hours", Toast.LENGTH_LONG).show();
-                }
+                Toast.makeText(getApplicationContext(), "End time must be less or equal to 24", Toast.LENGTH_LONG).show();
             }
         }
         else {

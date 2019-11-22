@@ -165,7 +165,7 @@ public class ClinicEmployee extends AppCompatActivity {
         final Button buttonSubmit = (Button) dialogView.findViewById(R.id.editClinicHours);
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancel);
 
-
+        dialogBuilder.setTitle(clinic.get_name());
         final AlertDialog b = dialogBuilder.create();
         b.show();
 

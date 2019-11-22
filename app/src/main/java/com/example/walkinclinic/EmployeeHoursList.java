@@ -1,20 +1,5 @@
 package com.example.walkinclinic;
 
-import android.app.Activity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import com.example.walkinclinic.R;
-import com.example.walkinclinic.WalkInClinic;
-import com.example.walkinclinic.data.WorkHours;
-import com.google.firebase.database.DatabaseReference;
-
-import java.util.List;
 //***************
 //class to define what will be displayed in every ListView element
 //in HoursActivity activity and XML layout

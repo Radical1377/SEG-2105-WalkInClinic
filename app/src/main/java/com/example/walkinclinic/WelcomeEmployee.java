@@ -15,8 +15,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+//import org.apache.commons.lang3;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WelcomeEmployee extends AppCompatActivity {
 
@@ -60,9 +63,28 @@ public class WelcomeEmployee extends AppCompatActivity {
                             if (postSnap.getValue().toString().contains(loggedInUser.getUsername())){
                                 //Toast.makeText(getApplicationContext(),"GOT IT", Toast.LENGTH_SHORT).show();
                                 loggedInEmployee.setCompleted(true);
-                                String clinic = postSnap.getValue().toString().substring(8,28);
-                                loggedInEmployee.setClinic(clinic);
+                                Employee product = postSnap.getValue(Employee.class);
+
+                                Toast.makeText(getApplicationContext(),product.getClinic(), Toast.LENGTH_SHORT).show();
+                                //Pattern p = Pattern.compile("\\clinic= .*?\\,");
+                               // Matcher m = p.matcher(postSnap.getValue().toString());
+                                //if (m.find())
+                                //    Toast.makeText(getApplicationContext(), m.toString(), Toast.LENGTH_SHORT).show();
+                                //int s = postSnap.getValue().toString().lastIndexOf("clinic= ");
+                                //Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
+                                //String clinic = postSnap.getValue().toString().substring(8,28);
+                                //s = StringUtils.substringBetween(s, "(", ")");
+                                loggedInEmployee.setClinic(product.getClinic());
+                                //loggedInEmployee.setWorkHours(product.getWorkHours());
+
+                                LoginActivity.setLoggedInEmployee(loggedInEmployee);
                                 //Toast.makeText(getApplicationContext(),clinic, Toast.LENGTH_SHORT).show();
+
+                                //WorkHours[] hours = product.getWorkHours();
+//                                for (int i=0;i<7;i++) {
+//                                    Toast.makeText(getApplicationContext(), hours[i].getHours(), Toast.LENGTH_SHORT).show();
+//                                }
+
                                 break;
                                 //loggedInEmployee.set
                             }

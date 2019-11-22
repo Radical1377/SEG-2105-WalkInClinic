@@ -153,6 +153,6 @@ public class WalkInClinic {
     }
 
     public String stringInfo() {
-        return _name+" "+id+" "+_address+" "+_openingHourWeekDay+" "+_closingHourWeekDay+" "+_rate+" "+_waitingTime;
+        return _name+" "+id+" "+_address+" "+_openingHourWeekDay+" "+_closingHourWeekDay+" "+_openingHourWeekEnd+" "+_closingHourWeekEnd+" "+_rate+" "+_waitingTime;
     }
 }
