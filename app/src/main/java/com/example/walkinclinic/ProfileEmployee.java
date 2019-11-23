@@ -24,7 +24,7 @@ import java.util.List;
 public class ProfileEmployee extends AppCompatActivity {
 
     private static User loggedInUser = null;
-    private static Employee loggedInEmployee = null;
+    private static Employee loggedInEmployee =null;
 
     DatabaseReference databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
 

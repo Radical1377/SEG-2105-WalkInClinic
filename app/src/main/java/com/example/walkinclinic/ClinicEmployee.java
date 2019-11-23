@@ -40,7 +40,7 @@ public class ClinicEmployee extends AppCompatActivity {
 
         loggedInEmployee = LoginActivity.getLoggedInEmployee();
         clinicId = loggedInEmployee.getClinic();
-
+        //want to access walkinclinic tab in database
         databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
 
         buttonModifyProfile = (Button) findViewById(R.id.editClinicProfile);
@@ -66,6 +66,7 @@ public class ClinicEmployee extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()) {
                     WalkInClinic product = postSnap.getValue(WalkInClinic.class);
+                    assert product != null;
                     if (clinicId.equals(product.getId())) {
                         clinic = product;
                     }
