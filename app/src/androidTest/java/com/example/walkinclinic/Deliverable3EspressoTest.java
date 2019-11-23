@@ -73,7 +73,7 @@ public class Deliverable3EspressoTest { //Espresso UI Test regarding deliverable
         onView(withId(R.id.addRate)).perform(typeText(String.valueOf(rand.nextInt( (5-1) + 1 ) + 1)), closeSoftKeyboard());
         onView(withId(R.id.submit)).perform(click());
     }
-
+//
 
 
     @Test
