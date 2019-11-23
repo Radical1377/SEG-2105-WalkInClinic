@@ -165,7 +165,7 @@ public class ClinicEmployee extends AppCompatActivity {
         final Button buttonSubmit = (Button) dialogView.findViewById(R.id.editClinicHours);
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancel);
 
-
+        dialogBuilder.setTitle(clinic.get_name());
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
@@ -173,10 +173,10 @@ public class ClinicEmployee extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // VALIDATE IF DATA IN IT
-                if (editName.getText().toString().equals("") || editOpeningHourWD.getText().toString().equals("") ||
-                        editClosingHourWD.getText().toString().equals("") || editOpeningHourWE.getText().toString().equals("") ||
-                        editClosingHourWE.getText().toString().equals("") || editAddress.getText().toString().equals("") ||
-                        editPhone.getText().toString().equals("") || (!publicInsurance.isChecked() && !privateInsurance.isChecked()) ||
+                if (editName.getText().toString().replaceAll(" ","").equals("") || editOpeningHourWD.getText().toString().replaceAll(" ","").equals("") ||
+                        editClosingHourWD.getText().toString().replaceAll(" ","").equals("") || editOpeningHourWE.getText().toString().replaceAll(" ","").equals("") ||
+                        editClosingHourWE.getText().toString().replaceAll(" ","").equals("") || editAddress.getText().toString().replaceAll(" ","").equals("") ||
+                        editPhone.getText().toString().replaceAll(" ","").equals("") || (!publicInsurance.isChecked() && !privateInsurance.isChecked()) ||
                         (!debitBox.isChecked() && !creditBox.isChecked() && !paypalBox.isChecked() && !cashBox.isChecked() &&
                                 !eTransferBox.isChecked() && !checksBox.isChecked())) {
                     Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
@@ -237,7 +237,7 @@ public class ClinicEmployee extends AppCompatActivity {
                             //finish();
                         }
                     } catch (Exception e){
-                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
 
                         Toast.makeText(getApplicationContext(), "Please enter numbers from 0 to 24 for all Opening and Closing hours", Toast.LENGTH_LONG).show();
                     }

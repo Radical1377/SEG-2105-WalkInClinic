@@ -113,21 +113,27 @@ public class servicesAdmin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // VALIDATE IF DATA IN IT
-                if (addName.getText().toString().equals("") || addStaff.getText().toString().equals("")) {
+                if (addName.getText().toString().replaceAll(" ","").equals("") || addStaff.getText().toString().replaceAll(" ","").equals("")) {
                     Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
                 } else {
-                    String id = databaseServices.push().getKey();
-                    String name = addName.getText().toString().trim();
-                    int staff = Integer.parseInt(addStaff.getText().toString());
+                    try {
+                        String id = databaseServices.push().getKey();
+                        String name = addName.getText().toString().trim();
+                        int staff = Integer.parseInt(addStaff.getText().toString());
 
-                    // VALIDATE STAFF NUMBER
-                    if (staff==0 || staff==1 || staff==2){
-                        Service service = new Service(id, name, staff);
-                        databaseServices.child(service.getId()).setValue(service);
-                        b.dismiss();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Please enter a valid staff number\n(0=Doctor, 1=Nurse, 2=Other)", Toast.LENGTH_LONG).show();
+                        // VALIDATE STAFF NUMBER
+                        if (staff==0 || staff==1 || staff==2){
+
+                            Service service = new Service(id, name, staff);
+                            databaseServices.child(service.getId()).setValue(service);
+                            b.dismiss();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please enter a valid staff number\n(0=Doctor, 1=Nurse, 2=Other)", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e){
+                        Toast.makeText(getApplicationContext(), "Please enter a number for staff\n(0=Doctor, 1=Nurse, 2=Other)", Toast.LENGTH_LONG).show();
                     }
+
                 }
             }
         });
@@ -165,20 +171,22 @@ public class servicesAdmin extends AppCompatActivity {
             public void onClick(View view) {
 
                 // VALIDATE IF DATA IN IT
-                if (editName.getText().toString().equals("") || editStaff.getText().toString().equals("")) {
+                if (editName.getText().toString().replaceAll(" ","").equals("") || editStaff.getText().toString().replaceAll(" ","").equals("")) {
                     Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
                 } else {
-                    String name = editName.getText().toString().trim();
-                    int staff = Integer.parseInt(editStaff.getText().toString());
-
-                    // VALIDATE STAFF NUMBER
-                    if (staff==0 || staff==1 || staff==2){
-                        updateService(serviceId, name, staff);
-                        b.dismiss();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Please enter a valid staff number\n(0=Doctor, 1=Nurse, 2=Other)", Toast.LENGTH_LONG).show();
+                    try {
+                        String name = editName.getText().toString().trim();
+                        int staff = Integer.parseInt(editStaff.getText().toString());
+                        // VALIDATE STAFF NUMBER
+                        if (staff==0 || staff==1 || staff==2){
+                            updateService(serviceId, name, staff);
+                            b.dismiss();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please enter a valid staff number\n(0=Doctor, 1=Nurse, 2=Other)", Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e){
+                        Toast.makeText(getApplicationContext(), "Please enter a number for staff\n(0=Doctor, 1=Nurse, 2=Other)", Toast.LENGTH_LONG).show();
                     }
-
                 }
 
             }

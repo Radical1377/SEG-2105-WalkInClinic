@@ -1,6 +1,7 @@
 package com.example.walkinclinic;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class WalkInClinic {
     private String id;
@@ -15,6 +16,7 @@ public class WalkInClinic {
     private String phoneNumber;
     private ArrayList<String> insuranceType = new ArrayList<String>();;
     private ArrayList<String> paymentMethod = new ArrayList<String>();;
+    Random r = new Random();
 
 
     public WalkInClinic(){
@@ -31,7 +33,7 @@ public class WalkInClinic {
         this.insuranceType = new ArrayList<String>();
         this.paymentMethod = new ArrayList<String>();
         this._rate = 0;
-        this._waitingTime = 0;
+        this._waitingTime = (r.nextInt((12 - 1) + 1) + 1)*15;
     }
     public WalkInClinic (String id, String name, String address, int ohD, int chD, int ohE, int chE){
         this._name = name;
@@ -44,7 +46,7 @@ public class WalkInClinic {
         this.insuranceType = new ArrayList<String>();
         this.paymentMethod = new ArrayList<String>();
         this._rate = 0;
-        this._waitingTime = 0;
+        this._waitingTime = (r.nextInt((12 - 1) + 1) + 1)*15;
     }
 
     public WalkInClinic (String id, String name, String address, int ohD, int chD, int ohE, int chE, ArrayList<String> insurance, ArrayList<String> payment){
@@ -58,7 +60,7 @@ public class WalkInClinic {
         this.insuranceType = insurance;
         this.paymentMethod = payment;
         this._rate = 0;
-        this._waitingTime = 0;
+        this._waitingTime = (r.nextInt((12 - 1) + 1) + 1)*15;
     }
 
     public WalkInClinic (String id, String name, String address, int ohD, int chD, int ohE, int chE, int rate, int wait, ArrayList<String> insurance, ArrayList<String> payment){
@@ -153,6 +155,6 @@ public class WalkInClinic {
     }
 
     public String stringInfo() {
-        return _name+" "+id+" "+_address+" "+_openingHourWeekDay+" "+_closingHourWeekDay+" "+_rate+" "+_waitingTime;
+        return _name+" "+id+" "+_address+" "+_openingHourWeekDay+" "+_closingHourWeekDay+" "+_openingHourWeekEnd+" "+_closingHourWeekEnd+" "+_rate+" "+_waitingTime;
     }
 }

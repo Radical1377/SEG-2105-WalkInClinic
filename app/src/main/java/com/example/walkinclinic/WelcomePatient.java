@@ -9,11 +9,13 @@ import android.widget.TextView;
 
 public class WelcomePatient extends AppCompatActivity {
 
-    private static LoginActivity la = new LoginActivity();
-    private static User loggedInUser = la.getLoggedInUser();
+    private static User loggedInPatient = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        loggedInPatient = LoginActivity.getLoggedInUser();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_patient);
 
@@ -21,10 +23,20 @@ public class WelcomePatient extends AppCompatActivity {
 
         TextView eWelcome = (TextView) findViewById(R.id.welcomeMessage);
         //manipulating welcome text
-        welcomeMsg = "Welcome " + loggedInUser.getFirst_name() + "!\n You're logged in as an patient.";
+        welcomeMsg = "Welcome " + loggedInPatient.getFirst_name() + "!\n You're logged in as an patient.";
 
 
         eWelcome.setText(welcomeMsg);
+    }
+
+    public void searchButton(View view) {
+        Intent intent = new Intent(this, PatientSearch.class);
+        startActivity(intent);
+    }
+
+    public void allClinicsButton(View view) {
+        Intent intent = new Intent(this, PatientAllClinics.class);
+        startActivity(intent);
     }
 
     public void logoffButton(View view){
@@ -32,10 +44,6 @@ public class WelcomePatient extends AppCompatActivity {
         //finish();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-    }
-
-    public User getLoggedInUser(){
-        return this.loggedInUser;
     }
 
 }

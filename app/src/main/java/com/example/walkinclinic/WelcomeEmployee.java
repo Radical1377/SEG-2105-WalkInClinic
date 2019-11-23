@@ -15,8 +15,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+//import org.apache.commons.lang3;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WelcomeEmployee extends AppCompatActivity {
 
@@ -33,6 +36,9 @@ public class WelcomeEmployee extends AppCompatActivity {
 
         loggedInUser = LoginActivity.getLoggedInUser();
         loggedInEmployee = LoginActivity.getLoggedInEmployee();
+
+        //Toast.makeText(getApplicationContext(), loggedInEmployee.getUsername(), Toast.LENGTH_SHORT).show();
+
 
         databaseEmployees = FirebaseDatabase.getInstance().getReference("employees");
 
@@ -59,22 +65,16 @@ public class WelcomeEmployee extends AppCompatActivity {
 //                        try {
                             if (postSnap.getValue().toString().contains(loggedInUser.getUsername())){
                                 //Toast.makeText(getApplicationContext(),"GOT IT", Toast.LENGTH_SHORT).show();
-                                loggedInEmployee.setCompleted(true);
-                                String clinic = postSnap.getValue().toString().substring(8,28);
-                                loggedInEmployee.setClinic(clinic);
-                                //Toast.makeText(getApplicationContext(),clinic, Toast.LENGTH_SHORT).show();
-                                break;
-                                //loggedInEmployee.set
-                            }
-                            //Employee emp = new Employee();
-                            //emp.setClinic(postSnap.getValue().toString());
-//                            Employee product = postSnap.getValue(Employee.class);
-//                            Toast.makeText(getApplicationContext(),product.toString(), Toast.LENGTH_SHORT).show();
-//                            Toast.makeText(getApplicationContext(),postSnap.getValue().toString(), Toast.LENGTH_SHORT).show();
-//                    } catch (Exception e){
-//                        Toast.makeText(getApplicationContext(),postSnap.getValue().toString(), Toast.LENGTH_SHORT).show();
-//                    }
+                                //loggedInEmployee.setCompleted(true);
+                                Employee product = postSnap.getValue(Employee.class);
 
+                                product.set_username(loggedInUser.getUsername());
+                                loggedInEmployee = product;
+                                LoginActivity.setLoggedInEmployee(product);
+                                //Toast.makeText(getApplicationContext(),product.getUsername(), Toast.LENGTH_SHORT).show();
+
+                                break;
+                            }
                     }
 
                 }
@@ -115,7 +115,7 @@ public class WelcomeEmployee extends AppCompatActivity {
     }
     public void employeeHours(View view){
         if (LoginActivity.getLoggedInEmployee().isCompleted()) {
-            Intent intent = new Intent(this, HoursEmployee.class);
+            Intent intent = new Intent(this, EmployeeHours.class);
             startActivity(intent);
         }else {
             Toast.makeText(getApplicationContext(),"Need to complete profile.", Toast.LENGTH_SHORT).show();
