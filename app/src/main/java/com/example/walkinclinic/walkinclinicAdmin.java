@@ -71,31 +71,7 @@ public class walkinclinicAdmin extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 clinics.clear();
-//                long numdata = dataSnapshot.getChildrenCount();
-//                WalkInClinic oldclinic = dataSnapshot.getValue(WalkInClinic.class);
-//                clinics.add(oldclinic);
-//                for (int i =1; i <= numdata; i++){
-//                    WalkInClinic clinic = dataSnapshot.child(String.valueOf(i)).getValue(WalkInClinic.class);
-//                    clinics.add(clinic);
-//                }
 
-
-//                WalkInClinic p = new WalkInClinic("lol", "lol", 8, 9);
-//                WalkInClinic p2 = new WalkInClinic("lol", "lol", 8, 9);
-//                WalkInClinic p3 = new WalkInClinic("lol", "lol", 8, 9);
-//                WalkInClinic p4 = new WalkInClinic("lol", "lol", 8, 9);
-//                WalkInClinic p5 = new WalkInClinic("lol", "lol", 8, 9);
-//
-//
-//                clinics.add(p);
-//                clinics.add(p2);
-//                clinics.add(p3);
-//                clinics.add(p4);
-//                clinics.add(p5);
-
-//                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-//                    WalkInClinic clinic = postSnapshot.getValue(WalkInClinic.class);
-//                }
 
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()){
                     WalkInClinic product = postSnap.getValue(WalkInClinic.class);
@@ -145,7 +121,9 @@ public class walkinclinicAdmin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // VALIDATE IF DATA IN IT
-                if (addName.getText().toString().equals("") || addOpeningHourWD.getText().toString().equals("") || addClosingHourWD.getText().toString().equals("") || addOpeningHourWE.getText().toString().equals("") || addClosingHourWE.getText().toString().equals("") || addAddress.getText().toString().equals("")) {
+                if (addName.getText().toString().replaceAll(" ","").equals("") || addOpeningHourWD.getText().toString().replaceAll(" ","").equals("")
+                        || addClosingHourWD.getText().toString().replaceAll(" ","").equals("") || addOpeningHourWE.getText().toString().replaceAll(" ","").equals("")
+                        || addClosingHourWE.getText().toString().replaceAll(" ","").equals("") || addAddress.getText().toString().replaceAll(" ","").equals("")) {
                     Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
                 } else {
                     try {
@@ -156,9 +134,22 @@ public class walkinclinicAdmin extends AppCompatActivity {
                         int chD = Integer.parseInt(addClosingHourWD.getText().toString());
                         int ohE = Integer.parseInt(addOpeningHourWE.getText().toString());
                         int chE = Integer.parseInt(addClosingHourWE.getText().toString());
-                        WalkInClinic clinic = new WalkInClinic(id, name, address, ohD, chD, ohE, chE);
-                        databaseClinics.child(clinic.getId()).setValue(clinic);
-                        b.dismiss();
+
+                        if (ohD<chD || ohE<chE) {
+                            if (chD <= 24 || chE <= 24) {
+                                if (ohD >= 0 || ohE >= 0) {
+                                    WalkInClinic clinic = new WalkInClinic(id, name, address, ohD, chD, ohE, chE);
+                                    databaseClinics.child(clinic.getId()).setValue(clinic);
+                                    b.dismiss();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Opening hours must be bigger or equal to 0", Toast.LENGTH_LONG).show();
+                                }
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Closing hours must be less or equal to 24", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Closing hours  must be after opening hours", Toast.LENGTH_LONG).show();
+                        }
                     } catch (Exception e){
                         Toast.makeText(getApplicationContext(), "Please enter numbers from 0 to 24 for Opening and Closing hours", Toast.LENGTH_LONG).show();
                     }
@@ -225,9 +216,9 @@ public class walkinclinicAdmin extends AppCompatActivity {
             public void onClick(View view) {
 
                 // VALIDATE IF DATA IN IT
-                if (editName.getText().toString().equals("") || editOpeningHourWD.getText().toString().equals("") ||
-                        editClosingHourWD.getText().toString().equals("") || editOpeningHourWE.getText().toString().equals("")
-                        || editClosingHourWE.getText().toString().equals("") || editAddress.getText().toString().equals("")) {
+                if (editName.getText().toString().replaceAll(" ","").equals("") || editOpeningHourWD.getText().toString().replaceAll(" ","").equals("") ||
+                        editClosingHourWD.getText().toString().replaceAll(" ","").equals("") || editOpeningHourWE.getText().toString().replaceAll(" ","").equals("")
+                        || editClosingHourWE.getText().toString().replaceAll(" ","").equals("") || editAddress.getText().toString().replaceAll(" ","").equals("")) {
                     Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
                 } else {
 
@@ -241,8 +232,12 @@ public class walkinclinicAdmin extends AppCompatActivity {
                         if (ohD > 24 || ohD <0 || chD > 24 || chD <0 || ohE > 24 || ohE <0 || chE > 24 || chE <0 ){
                             Toast.makeText(getApplicationContext(), "Please enter numbers from 0 to 24", Toast.LENGTH_LONG).show();
                         } else {
-                            updateClinic(clinicId, name, address, ohD, chD, ohE, chE);
-                            b.dismiss();
+                            if (ohD<chD && ohE<chE) {
+                                updateClinic(clinicId, name, address, ohD, chD, ohE, chE);
+                                b.dismiss();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Closing hours  must be after opening hours", Toast.LENGTH_LONG).show();
+                            }
                         }
 
                     } catch (Exception e){
@@ -270,20 +265,22 @@ public class walkinclinicAdmin extends AppCompatActivity {
     }
 
     private void updateClinic(String id, String name, String address, int openD, int closeD, int openE, int closeE) {
-        DatabaseReference dR = databaseClinics.child(id);
-        //Toast.makeText(getApplicationContext(), "Clinic Updated", Toast.LENGTH_LONG).show();
 
-        dR.child("name").setValue(name);
-        dR.child("address").setValue(address);
-        dR.child("openingHourWeekDay").setValue(openD);
-        dR.child("closingHourWeekDay").setValue(closeD);
-        dR.child("openingHourWeekEnd").setValue(openE);
-        dR.child("closingHourWeekEnd").setValue(closeE);
+                    DatabaseReference dR = databaseClinics.child(id);
+                    //Toast.makeText(getApplicationContext(), "Clinic Updated", Toast.LENGTH_LONG).show();
 
-//        WalkInClinic clinic = new WalkInClinic(id, name, address, open, close);
-//        dR.setValue(clinic);
+                    dR.child("name").setValue(name);
+                    dR.child("address").setValue(address);
+                    dR.child("openingHourWeekDay").setValue(openD);
+                    dR.child("closingHourWeekDay").setValue(closeD);
+                    dR.child("openingHourWeekEnd").setValue(openE);
+                    dR.child("closingHourWeekEnd").setValue(closeE);
 
-        Toast.makeText(getApplicationContext(), "Clinic Updated", Toast.LENGTH_LONG).show();
+            //        WalkInClinic clinic = new WalkInClinic(id, name, address, open, close);
+            //        dR.setValue(clinic);
+
+                    Toast.makeText(getApplicationContext(), "Clinic Updated", Toast.LENGTH_LONG).show();
+
 
     }
 
@@ -291,37 +288,6 @@ public class walkinclinicAdmin extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(), id, Toast.LENGTH_LONG).show();
 
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("walkinclinic").child(id);
-
-//        DatabaseReference drEmployee = FirebaseDatabase.getInstance().getReference("employees");
-//
-//        //.child("clinicId").child(id)
-//
-//        drEmployee.child("clinicId").equalTo(id).addListenerForSingleValueEvent(
-//                new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        drEmployee.child("clinicId").child(dataSnapshot.getKey()).setValue(null);
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//                    }
-//                });
-//        drEmployee.addValueEventListener(new ValueEventListener() {
-//
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                for (DataSnapshot postSnap : dataSnapshot.getChildren()){
-//                    postSnap.getRef().removeValue();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//             }
-//        }
-//        );
 
         dR.removeValue();
         Toast.makeText(getApplicationContext(), "Clinic Deleted", Toast.LENGTH_LONG).show();

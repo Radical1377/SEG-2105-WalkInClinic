@@ -6,4 +6,316 @@
     android:layout_height="match_parent"
     tools:context=".EmployeeHours">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/listOfHours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:text="My Hours"
+                android:textColor="#2E7DBB"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/hoursMonday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=" Monday Hours: none"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/openMondayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="0.00" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text=" - - "
+                    android:textSize="40dp" />
+
+                <EditText
+                    android:id="@+id/closeMondayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="24:00" />
+
+                <Button
+                    android:id="@+id/setMonday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/hoursTuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Tuesday Hours: none"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/openTuesdayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="0.00" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text=" - - "
+                    android:textSize="40dp" />
+
+                <EditText
+                    android:id="@+id/closeTuesdayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="24:00" />
+
+                <Button
+                    android:id="@+id/setTuesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/hoursWednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Wednesday Hours: none"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/openWednesdayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="0.00" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text=" - - "
+                    android:textSize="40dp" />
+
+                <EditText
+                    android:id="@+id/closeWednesdayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="24:00" />
+
+                <Button
+                    android:id="@+id/setWednesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/hoursThursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Thursday Hours: none"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/openThursdayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="0.00" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text=" - - "
+                    android:textSize="40dp" />
+
+                <EditText
+                    android:id="@+id/closeThursdayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="24:00" />
+
+                <Button
+                    android:id="@+id/setThursday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/hoursFriday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Friday Hours: none"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/openFridayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="0.00" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text=" - - "
+                    android:textSize="40dp" />
+
+                <EditText
+                    android:id="@+id/closeFridayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="24:00" />
+
+                <Button
+                    android:id="@+id/setFriday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/hoursSaturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Saturday Hours: none"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/openSaturdayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="0.00" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text=" - - "
+                    android:textSize="40dp" />
+
+                <EditText
+                    android:id="@+id/closeSaturdayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="24:00" />
+
+                <Button
+                    android:id="@+id/setSaturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/hoursSunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Sunday Hours: none"
+                android:textSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/openSundayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="0.00" />
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text=" - - "
+                    android:textSize="40dp" />
+
+                <EditText
+                    android:id="@+id/closeSundayHours"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="24:00" />
+
+                <Button
+                    android:id="@+id/setSunday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:onClick="backBtn"
+                android:text="Back" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

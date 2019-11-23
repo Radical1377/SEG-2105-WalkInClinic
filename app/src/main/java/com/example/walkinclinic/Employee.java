@@ -5,64 +5,42 @@ public class Employee{
     private String _clinic;
     private boolean _completed;
     private String _username;
-    //private WorkHours[] _workHours; //separate class for the workhours of the employee
-    private WorkHours mon;
-    private WorkHours tues;
-    private WorkHours wed;
-    private WorkHours thurs;
-    private WorkHours fri;
-    private WorkHours sat;
-    private WorkHours sun;
+    private WorkingHours mon;
+    private WorkingHours tues;
+    private WorkingHours wed;
+    private WorkingHours thurs;
+    private WorkingHours fri;
+    private WorkingHours sat;
+    private WorkingHours sun;
 
 
     public Employee(){
         this._username = null;
         this._completed = false;
         this._clinic = null;
-        this.mon = new WorkHours("Monday",0,0);
-        this.tues = new WorkHours("Tuesday",0,0);
-        this.wed = new WorkHours("Wednesday",0,0);
-        this.thurs = new WorkHours("Thursday",0,0);
-        this.fri = new WorkHours("Friday",0,0);
-        this.sat = new WorkHours("Saturday",0,0);
-        this.sun = new WorkHours("Sunday",0,0);
-//        this._workHours=new WorkHours[7]; //7 days a week, so 7 sets of workHours
-//        //have to initialise it (not always created by user when registering
-//        for (int i=0; i<7; i++) {
-//            WorkHours workHours=new WorkHours();
-//            String day=workHours.getDayArray(i); //what day initialise
-//            _workHours[i]=workHours;
-//            _workHours[i].setDay(day);
-//        }
+        this.mon = new WorkingHours(0,0);
+        this.tues = new WorkingHours(0,0);
+        this.wed = new WorkingHours(0,0);
+        this.thurs = new WorkingHours(0,0);
+        this.fri = new WorkingHours(0,0);
+        this.sat = new WorkingHours(0,0);
+        this.sun = new WorkingHours(0,0);
 
     }
 
-    public Employee(String clinic, boolean complete, String username){
+    public Employee(String clinic, boolean complete, String username) {
         this._username = username;
         this._completed = complete;
         this._clinic = clinic;
-        this.mon = new WorkHours("Monday",0,0);
-        this.tues = new WorkHours("Tuesday",0,0);
-        this.wed = new WorkHours("Wednesday",0,0);
-        this.thurs = new WorkHours("Thursday",0,0);
-        this.fri = new WorkHours("Friday",0,0);
-        this.sat = new WorkHours("Saturday",0,0);
-        this.sun = new WorkHours("Sunday",0,0);
-//        this._workHours=new WorkHours[7];
-//        //have to initialise it (not always created by user when registering
-//        for (int i=0; i<7; i++) {
-//            WorkHours workHours=new WorkHours();
-//            String day=workHours.getDayArray(i); //what day initialise
-//            _workHours[i]=workHours;
-//            _workHours[i].setDay(day);
-//        }
+        this.mon = new WorkingHours(0, 0);
+        this.tues = new WorkingHours(0, 0);
+        this.wed = new WorkingHours(0, 0);
+        this.thurs = new WorkingHours(0, 0);
+        this.fri = new WorkingHours(0, 0);
+        this.sat = new WorkingHours(0, 0);
+        this.sun = new WorkingHours(0, 0);
     }
-//    public Employee(String clinic, boolean complete, String username, WorkHours[] workhours){
-//        this._username = username;
-//        this._completed = complete;
-//        this._clinic = clinic;
-////        this._workHours=workhours;
-//    }
+
     public Employee(String username, String clinic) {
         this._username = username;
         this._clinic = clinic;
@@ -71,112 +49,84 @@ public class Employee{
         } else {
             _completed = false;
         }
-        this.mon = new WorkHours("Monday",0,0);
-        this.tues = new WorkHours("Tuesday",0,0);
-        this.wed = new WorkHours("Wednesday",0,0);
-        this.thurs = new WorkHours("Thursday",0,0);
-        this.fri = new WorkHours("Friday",0,0);
-        this.sat = new WorkHours("Saturday",0,0);
-        this.sun = new WorkHours("Sunday",0,0);
-        //have to initialise it (not always created by user when registering
-//        this._workHours=new WorkHours[7];
-//        for (int i=0; i<7; i++) {
-//            WorkHours workHours=new WorkHours();
-//            String day=workHours.getDayArray(i); //what day initialise
-//            this._workHours[i]=workHours;
-//            this._workHours[i].setDay(day);
-//        }
+        this.mon = new WorkingHours(0,0);
+        this.tues = new WorkingHours(0,0);
+        this.wed = new WorkingHours(0,0);
+        this.thurs = new WorkingHours(0,0);
+        this.fri = new WorkingHours(0,0);
+        this.sat = new WorkingHours(0,0);
+        this.sun = new WorkingHours(0,0);
     }
+
 
     public boolean isCompleted() {
         return _completed;
     }
-
     public String getClinic() {
         return _clinic;
     }
     public String getUsername() {
         return _username;
     }
-
-    public WorkHours getMon() {
+    public WorkingHours getMon() {
         return mon;
     }
-    public WorkHours getTues() {
+    public WorkingHours getTues() {
         return tues;
     }
-    public WorkHours getWed() {
+    public WorkingHours getWed() {
         return wed;
     }
-    public WorkHours getThurs() {
+    public WorkingHours getThurs() {
         return thurs;
     }
-    public WorkHours getFri() {
+    public WorkingHours getFri() {
         return fri;
     }
-    public WorkHours getSat() {
+    public WorkingHours getSat() {
         return sat;
     }
-    public WorkHours getSun() {
+    public WorkingHours getSun() {
         return sun;
     }
 
-    //    public WorkHours[] getWorkHours() {return  _workHours;}
-//    public WorkHours getDayHours(String day) { //working hours for specific day
-//        WorkHours result=null;
-//        for (int i=0; i<7; i++) {
-//            if (_workHours[i].getDay()==day) {result= _workHours[i];}
-//        }
-//        return result;
-//    }
 
+    public void set_username(String _username) {
+        this._username = _username;
+    }
     public void setClinic(String clinic) {
         this._clinic = clinic;
     }
     public void setCompleted(boolean completed) {
         this._completed = completed;
     }
-    public void setMon(WorkHours mon) {
+    public void setMon(WorkingHours mon) {
         this.mon = mon;
     }
-    public void setTues(WorkHours tues) {
+    public void setTues(WorkingHours tues) {
         this.tues = tues;
     }
-    public void setWed(WorkHours wed) {
+    public void setWed(WorkingHours wed) {
         this.wed = wed;
     }
-    public void setThurs(WorkHours thurs) {
+    public void setThurs(WorkingHours thurs) {
         this.thurs = thurs;
     }
-    public void setFri(WorkHours fri) {
+    public void setFri(WorkingHours fri) {
         this.fri = fri;
     }
-    public void setSat(WorkHours sat) {
+    public void setSat(WorkingHours sat) {
         this.sat = sat;
     }
-    public void setSun(WorkHours sun) {
+    public void setSun(WorkingHours sun) {
         this.sun = sun;
     }
 
-    //    public void setWorkHours(WorkHours[] workHours) {
-//        for (int i=0 ; i<7 ; i++) {
-//            this.set_workHours(workHours[i]);
-//        }
-//    }
-//    public void set_workHours(WorkHours workHours) {
-//        int i=0;
-//        while(i<7) {
-//            if (_workHours[i]==null) {this._workHours[i]=workHours;}
-//            else {i++;}
-//        }
-//    }
-//    public void set_dayHours(String day, WorkHours workHours) {
-//        int i=0;
-//        while (_workHours[i].getDay()!=day) {
-//            i++;
-//        }
-//        _workHours[i]=workHours;
-//    }
+    public String toString(){
+        return _username+" "+_clinic+" "+mon.toString()+" "+tues.toString()+" "+wed.toString()+" "
+                +thurs.toString()+" "+fri.toString()+" "+sat.toString()+" "+sun.toString();
+    }
+
     public String stringInfo() {
         if (_clinic==null && _completed) {
             return _username+" ; none";

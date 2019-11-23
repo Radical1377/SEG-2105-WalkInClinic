@@ -37,6 +37,9 @@ public class WelcomeEmployee extends AppCompatActivity {
         loggedInUser = LoginActivity.getLoggedInUser();
         loggedInEmployee = LoginActivity.getLoggedInEmployee();
 
+        //Toast.makeText(getApplicationContext(), loggedInEmployee.getUsername(), Toast.LENGTH_SHORT).show();
+
+
         databaseEmployees = FirebaseDatabase.getInstance().getReference("employees");
 
         String welcomeMsg;
@@ -65,38 +68,13 @@ public class WelcomeEmployee extends AppCompatActivity {
                                 //loggedInEmployee.setCompleted(true);
                                 Employee product = postSnap.getValue(Employee.class);
 
-                                //Toast.makeText(getApplicationContext(),product.getClinic(), Toast.LENGTH_SHORT).show();
-                                //Pattern p = Pattern.compile("\\clinic= .*?\\,");
-                               // Matcher m = p.matcher(postSnap.getValue().toString());
-                                //if (m.find())
-                                //    Toast.makeText(getApplicationContext(), m.toString(), Toast.LENGTH_SHORT).show();
-                                //int s = postSnap.getValue().toString().lastIndexOf("clinic= ");
-                                //Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
-                                //String clinic = postSnap.getValue().toString().substring(8,28);
-                                //s = StringUtils.substringBetween(s, "(", ")");
-                                //loggedInEmployee.setClinic(product.getClinic());
-                                //loggedInEmployee.setWorkHours(product.getWorkHours());
+                                product.set_username(loggedInUser.getUsername());
                                 loggedInEmployee = product;
                                 LoginActivity.setLoggedInEmployee(product);
-                                //Toast.makeText(getApplicationContext(),clinic, Toast.LENGTH_SHORT).show();
-
-                                //WorkHours[] hours = product.getWorkHours();
-//                                for (int i=0;i<7;i++) {
-//                                    Toast.makeText(getApplicationContext(), hours[i].getHours(), Toast.LENGTH_SHORT).show();
-//                                }
+                                //Toast.makeText(getApplicationContext(),product.getUsername(), Toast.LENGTH_SHORT).show();
 
                                 break;
-                                //loggedInEmployee.set
                             }
-                            //Employee emp = new Employee();
-                            //emp.setClinic(postSnap.getValue().toString());
-//                            Employee product = postSnap.getValue(Employee.class);
-//                            Toast.makeText(getApplicationContext(),product.toString(), Toast.LENGTH_SHORT).show();
-//                            Toast.makeText(getApplicationContext(),postSnap.getValue().toString(), Toast.LENGTH_SHORT).show();
-//                    } catch (Exception e){
-//                        Toast.makeText(getApplicationContext(),postSnap.getValue().toString(), Toast.LENGTH_SHORT).show();
-//                    }
-
                     }
 
                 }
@@ -137,7 +115,7 @@ public class WelcomeEmployee extends AppCompatActivity {
     }
     public void employeeHours(View view){
         if (LoginActivity.getLoggedInEmployee().isCompleted()) {
-            Intent intent = new Intent(this, EmployeeListHours.class);
+            Intent intent = new Intent(this, EmployeeHours.class);
             startActivity(intent);
         }else {
             Toast.makeText(getApplicationContext(),"Need to complete profile.", Toast.LENGTH_SHORT).show();
