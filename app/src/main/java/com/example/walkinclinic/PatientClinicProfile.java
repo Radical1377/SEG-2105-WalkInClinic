@@ -46,6 +46,13 @@ public class PatientClinicProfile extends AppCompatActivity {
         clinicId = selectedClinic.getId();
 
         //want to access walkinclinic tab in database
+
+        PatientFilteredClinics.setSelectedClinic(null);
+        PatientAllClinics.setSelectedClinic(null);
+        PatientSearchService.setClinics(null);
+        PatientSearch.setClinics(null);
+        PatientSearchService.setSelectedService(null);
+
         databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
 
 
@@ -139,4 +146,23 @@ public class PatientClinicProfile extends AppCompatActivity {
     public static void setSelectedClinic(WalkInClinic something) {
         selectedClinic = something;
     }
+
+    public void bookBtn(View view) {
+        Context thisContext = this;
+        Intent thisIntent = new Intent(thisContext, PatientBooking.class);
+        startActivity(thisIntent);
+    }
+
+    public void ratingBtn(View view) {
+        Context thisContext = this;
+        Intent thisIntent = new Intent(thisContext, PatientClinicRating.class);
+        startActivity(thisIntent);
+    }
+
+    public void reviewsBtn(View view) {
+        Context thisContext = this;
+        Intent thisIntent = new Intent(thisContext, PatientClinicReviews.class);
+        startActivity(thisIntent);
+    }
+
 }

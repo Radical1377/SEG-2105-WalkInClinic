@@ -3,16 +3,12 @@ package com.example.walkinclinic;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -28,11 +24,8 @@ import java.lang.String;
 
 public class PatientSearch extends AppCompatActivity {
 
-    WalkInClinic selectedClinic = null;
-    Service selectedService = null;
-    ListView listViewServices;
-    DatabaseReference databaseServices;
-    List<Service> servicesAdmin;
+    DatabaseReference databaseClinics;
+
 
     private static List<WalkInClinic> clinics = null;
 
@@ -40,27 +33,22 @@ public class PatientSearch extends AppCompatActivity {
     private static Intent thisIntent = null;
 
 
+    //Search criteria
+
+    private static String name = null;
+    private static String address = null;
+    private static int intTime = -1;
+    private static WalkInClinic product = null;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_search);
 
-        //clinics.clear();
-
-        listViewServices = (ListView) findViewById(R.id.listServicesClinic);
-
-        databaseServices = FirebaseDatabase.getInstance().getReference("services");
-
-        servicesAdmin = new ArrayList<>();
-
-        Button service = (Button) findViewById(R.id.selectService);
-
-        service.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addService();
-            }
-        });
+        databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
+        clinics = new ArrayList<>();
 
 
         final EditText searchName = (EditText) findViewById(R.id.name);
@@ -72,14 +60,12 @@ public class PatientSearch extends AppCompatActivity {
         final Button searchButton = (Button) findViewById(R.id.submitBtn);
 
         searchButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
-                String name = null;
-                String address = null;
-                String serviceId = null;
-                String stringTime = null;
-                String day = null;
+                boolean valid = true;                   //checking if searchtime is a number
+
 
                 if (searchName != null) {
                     name = searchName.getText().toString().trim();
@@ -87,27 +73,70 @@ public class PatientSearch extends AppCompatActivity {
                 if (searchAddress != null ) {
                     address = searchAddress.getText().toString().trim();
                 }
-                if (selectedService != null ) {
-                    serviceId = selectedService.getId();
+                if (searchTime != null && !searchTime.getText().toString().equals("")) {
+
+                    try {
+                        intTime = Integer.parseInt(searchTime.getText().toString());
+                    } catch (Exception s) {
+                        Toast.makeText(getApplicationContext(), "Hours must be a number.", Toast.LENGTH_LONG).show();
+                        valid = false;                  //didn't enter a number for the hours
+                    }
                 }
-                if (searchTime != null ) {
-                    stringTime = searchAddress.getText().toString().trim();
+                if (searchTime!=null && !searchTime.getText().toString().equals("") && !searchWeekDay.isChecked() && !searchWeekEnd.isChecked()) {
+                    Toast.makeText(getApplicationContext(), "Choose a day of the week (for the specified hours).", Toast.LENGTH_LONG).show();
+                    valid = false;
                 }
-                if (searchWeekDay != null) {
-                    day = "weekday";
+                if (searchWeekDay.isChecked() && !searchWeekEnd.isChecked() && searchTime.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Choose a time (for the specified week day).", Toast.LENGTH_LONG).show();
+                    valid = false;
                 }
-                if (searchWeekEnd != null) {
-                    day = "weekend";
+                if (searchWeekEnd.isChecked() && !searchWeekDay.isChecked() && searchTime.getText().toString().equals("")) {
+                    Toast.makeText(getApplicationContext(), "Choose a time (for the specified week day).", Toast.LENGTH_LONG).show();
+                    valid = false;
                 }
 
+                //Getting all of the clinics from the db
+                if (valid) {                                                                    //entered a number for hours
+                    databaseClinics.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            clinics.clear();
 
-                Toast.makeText(getApplicationContext(), name+" "+address+" "+serviceId+" "+day+" "+stringTime, Toast.LENGTH_LONG).show();
+                            for (DataSnapshot postSnap : dataSnapshot.getChildren()) {
+                                product = postSnap.getValue(WalkInClinic.class);
+
+                                //Address of the clinic
+                                if (!searchAddress.getText().toString().equals("") && searchAddress!= null && product.get_address().equals(address) && !clinics.contains(product)) {
+                                    clinics.add(product);
+                                }
+                                //Name of the clinic
+                                else if (!searchName.getText().toString().equals("") && searchName!= null && product.get_name().equals(name) && !clinics.contains(product)) {
+                                    clinics.add(product);
+                                }
+                                //Weekday in the interval
+                                else if (!searchWeekDay.isChecked() && product.get_openingHourWeekDay() <= intTime && intTime <= product.get_closingHourWeekDay() && !clinics.contains(product)) {
+                                    clinics.add(product);
+                                }
+                                //Weekend in the interval
+                                else if (!searchWeekEnd.isChecked() && product.get_openingHourWeekEnd() <= intTime && intTime <= product.get_closingHourWeekEnd() && !clinics.contains(product)) {
+                                    clinics.add(product);
+                                }
 
 
-                //clinics = null ; the set of clinics after you filter
+                            }
 
-                thisIntent = new Intent(thisContext, PatientFilteredClinics.class);
-                startActivity(thisIntent);
+                            thisIntent = new Intent(thisContext, PatientFilteredClinics.class);
+                            startActivity(thisIntent);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
 
             }
         });
@@ -118,62 +147,10 @@ public class PatientSearch extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        databaseServices.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               servicesAdmin.clear();
-
-               for (DataSnapshot postSnap : dataSnapshot.getChildren()){
-                    Service service = postSnap.getValue(Service.class);
-
-                    servicesAdmin.add(service);
-               }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
-    public void addService(){
-
-        final Button serviceBtn = (Button) findViewById(R.id.selectService);
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.activity_patient_search_service, null);
-        dialogBuilder.setView(dialogView);
-
-        final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancel);
-        final ListView listServices = (ListView) dialogView.findViewById(R.id.listServicesClinic);
-
-        ServiceList productsAdapter = new ServiceList(PatientSearch.this, servicesAdmin);
-
-        listServices.setAdapter(productsAdapter);
-
-        final AlertDialog b = dialogBuilder.create();
-        b.show();
-
-        listServices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Service service = servicesAdmin.get(position);
-                serviceBtn.setText(service.getName());
-                selectedService = service;
-                b.dismiss();
-            }
-        });
-
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                b.dismiss();
-            }
-        });
-
+    public static void setClinics(List<WalkInClinic> them) {
+        clinics = them;
     }
 
     public void backBtn(View view) {

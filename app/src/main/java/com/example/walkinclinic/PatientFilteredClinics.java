@@ -11,14 +11,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class PatientFilteredClinics extends AppCompatActivity {
 
-    private static User loggedInPatient = null;
-
     ListView listViewClinics;
-    List<WalkInClinic> clinics;
+
+    private static List<WalkInClinic> clinics;
 
     private static WalkInClinic selectedClinic = null;
 
@@ -26,19 +33,28 @@ public class PatientFilteredClinics extends AppCompatActivity {
     private Context thisContext = this;
     private static Intent thisIntent = null;
 
+    DatabaseReference databaseServicesClinics = FirebaseDatabase.getInstance().getReference("servicesClinic");
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_filtered_clinics);
 
-        loggedInPatient = LoginActivity.getLoggedInUser();
-
         listViewClinics = (ListView) findViewById(R.id.listClinics);
 
-        clinics = PatientSearch.getClinics();
+        // IF CLINICS COME SEARCH BY VALUES
+        if (PatientSearch.getClinics() != null ) {
+            clinics = PatientSearch.getClinics();
+        }
+        //IF CLINICS COMES FROM SEARCH BY SERVICE
+        else if (PatientSearchService.getClinics() != null) {
+            clinics = PatientSearchService.getClinics();
+        }
 
-        if (clinics == null) {
+
+        if (clinics.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Could not find such clinics. Consider another search.", Toast.LENGTH_LONG).show();
         } else {
 

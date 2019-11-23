@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".PatientProfile"></activity>
+        <activity android:name=".PatientClinicReviews"></activity>
+        <activity android:name=".PatientProfile" />
         <activity android:name=".EmployeeHours" />
         <activity android:name=".PatientBooking" />
         <activity android:name=".PatientClinicRating" />

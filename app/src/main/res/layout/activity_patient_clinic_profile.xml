@@ -114,6 +114,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:onClick="reviewsBtn"
             android:text="View Reviews" />
 
 
@@ -122,6 +123,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:onClick="ratingBtn"
             android:text="Rate this Clinic" />
 
 
@@ -131,6 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
+            android:onClick="bookBtn"
             android:text="Book an Appointement" />
 
         <Button

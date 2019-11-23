@@ -111,13 +111,6 @@
                 android:text="Weekend" />
         </RadioGroup>
 
-        <Button
-            android:id="@+id/selectService"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select a Service (optional)"
-            android:textStyle="italic" />
-
 
         <Button
             android:id="@+id/submitBtn"
