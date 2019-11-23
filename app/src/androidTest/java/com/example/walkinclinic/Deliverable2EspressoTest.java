@@ -13,7 +13,7 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 
-public class MainActivityTest2 { //Espresso UI Test
+public class Deliverable2EspressoTest { //Espresso UI Test regarding deliverable 2 functionalities
 
     private Random rand = new Random();
     private int num = rand.nextInt(999);
