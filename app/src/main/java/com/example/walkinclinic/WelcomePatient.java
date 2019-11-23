@@ -25,11 +25,19 @@ public class WelcomePatient extends AppCompatActivity {
         //manipulating welcome text
         welcomeMsg = "Welcome " + loggedInPatient.getFirst_name() + "!\n You're logged in as an patient.";
 
+        PatientClinicProfile.setSelectedClinic(null);
+        PatientFilteredClinics.setSelectedClinic(null);
+        PatientAllClinics.setSelectedClinic(null);
 
         eWelcome.setText(welcomeMsg);
     }
 
-    public void searchButton(View view) {
+    public void profileButton(View view) {
+        Intent intent = new Intent(this, PatientProfile.class);
+        startActivity(intent);
+    }
+
+    public void welcomeSearchButton(View view) {
         Intent intent = new Intent(this, PatientSearch.class);
         startActivity(intent);
     }

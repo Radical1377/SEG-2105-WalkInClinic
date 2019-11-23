@@ -6,4 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".PatientSearchService">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/services"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Select a Service:"
+            android:textAlignment="center" />
+
+        <ListView
+            android:id="@+id/listServicesClinic"
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

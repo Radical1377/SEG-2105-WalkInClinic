@@ -93,4 +93,7 @@ public class PatientAllClinics extends AppCompatActivity {
         return selectedClinic;
     }
 
+    public static void setSelectedClinic(WalkInClinic something) {
+        selectedClinic = something;
+    }
 }

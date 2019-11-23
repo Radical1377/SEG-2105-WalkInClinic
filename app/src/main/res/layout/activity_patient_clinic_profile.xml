@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".PatientClinicProfile">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,15 +26,14 @@
             android:gravity="center"
             android:text="Clinic"
             android:textColor="#2E7DBB"
-            android:textSize="25dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/clinicName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="monospace"
             android:gravity="center"
             android:text="Name :"
@@ -40,7 +44,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
             android:fontFamily="monospace"
             android:gravity="center"
             android:text="Clinic hours :"
@@ -51,7 +54,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
             android:fontFamily="monospace"
             android:gravity="center"
             android:text="Address :"
@@ -62,7 +64,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
             android:fontFamily="monospace"
             android:gravity="center"
             android:text="Phone number :"
@@ -73,7 +74,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="25dp"
             android:fontFamily="monospace"
             android:gravity="center"
             android:text="Approximate Wait Time :"
@@ -84,7 +84,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
             android:fontFamily="monospace"
             android:gravity="center"
             android:text="Payment methods accepted :"
@@ -95,11 +94,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="25dp"
             android:fontFamily="monospace"
             android:gravity="center"
             android:text="Insurance Accepted :"
             android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="monospace"
+            android:gravity="center"
+            android:text="Ratings"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/comments"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="View Reviews" />
 
 
         <Button
@@ -115,7 +130,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:text="Book an Appointement" />
 
         <Button
@@ -123,9 +138,10 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
             android:onClick="backBtn"
             android:text="Back" />
     </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

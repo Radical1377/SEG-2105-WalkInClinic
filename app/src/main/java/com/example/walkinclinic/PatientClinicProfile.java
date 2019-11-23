@@ -37,12 +37,13 @@ public class PatientClinicProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_clinic_profile);
 
-        selectedClinic = PatientAllClinics.getSelectedClinic();
-
-        /////////////                   NEED AN IF STATEMENT IF ONE IS NULL  /////////////////////////////
-
+        if (PatientAllClinics.getSelectedClinic()!=null ) {
+            selectedClinic = PatientAllClinics.getSelectedClinic();
+        }
+        else if (PatientFilteredClinics.getSelectedClinic()!=null ) {
+            selectedClinic = PatientFilteredClinics.getSelectedClinic();
+        }
         clinicId = selectedClinic.getId();
-
 
         //want to access walkinclinic tab in database
         databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
@@ -135,4 +136,7 @@ public class PatientClinicProfile extends AppCompatActivity {
         startActivity(thisIntent);
     }
 
+    public static void setSelectedClinic(WalkInClinic something) {
+        selectedClinic = something;
+    }
 }
