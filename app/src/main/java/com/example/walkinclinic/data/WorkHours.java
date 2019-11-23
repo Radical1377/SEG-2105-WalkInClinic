@@ -1,4 +1,4 @@
-package com.example.walkinclinic;
+package com.example.walkinclinic.data;
 
 public class WorkHours {
     private String day; //what day is the hour for?
@@ -34,10 +34,6 @@ public class WorkHours {
 
     public void setDay(String day) {
         this.day = day;
-    }
-
-    public String getHours(){
-        return day+" "+_startingHour+" "+_endingHour;
     }
 
     public double totalHours(){ //total time worked in the day

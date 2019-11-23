@@ -199,7 +199,7 @@ public class ServicesEmployee extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // VALIDATE IF DATA IN IT
-                if (addRate.getText().toString().equals("")) {
+                if (addRate.getText().toString().replaceAll(" ","").equals("")) {
                     Toast.makeText(getApplicationContext(), "Please fill a rate", Toast.LENGTH_LONG).show();
                 } else {
                     try {

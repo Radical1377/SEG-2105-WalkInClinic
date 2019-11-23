@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         valid = true;
 
         //First/Last Name field check
-        if( eFirstName.getText().toString().equals("") || eLastName.getText().toString().equals("")){
+        if( eFirstName.getText().toString().replaceAll(" ","").equals("") || eLastName.getText().toString().replaceAll(" ","").equals("")){
             Toast.makeText(getApplicationContext(), "Please fill out your First and/or Last Name.", Toast.LENGTH_SHORT).show();
             valid = false;
         }
@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         //Email field check
-        if(eEmail.getText().toString().equals("")){
+        if(eEmail.getText().toString().replaceAll(" ","").equals("")){
             Toast.makeText(getApplicationContext(), "Please fill out your Email address.", Toast.LENGTH_SHORT).show();
             valid = false;
         }
@@ -75,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         //Username field check
-        if(eUsername.getText().toString().equals("")){
+        if(eUsername.getText().toString().replaceAll(" ","").equals("")){
             Toast.makeText(getApplicationContext(), "Please fill out your Username.", Toast.LENGTH_SHORT).show();
             valid = false;
         }
@@ -87,13 +87,13 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         //Password field check
-        if(ePassword.getText().toString().equals("")){
+        if(ePassword.getText().toString().replaceAll(" ","").equals("")){
             Toast.makeText(getApplicationContext(), "Please fill out your Password.", Toast.LENGTH_SHORT).show();
             valid = false;
         }
 
         //Password validation check
-        if(ePassConfirm.getText().toString().equals("")){
+        if(ePassConfirm.getText().toString().replaceAll(" ","").equals("")){
             Toast.makeText(getApplicationContext(), "Please fill out your Password validation.", Toast.LENGTH_SHORT).show();
             valid = false;
         }
