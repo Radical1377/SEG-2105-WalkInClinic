@@ -56,7 +56,6 @@ public class PatientClinicProfile extends AppCompatActivity {
         databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
 
 
-
     }
     protected void onStart() {
         super.onStart();
@@ -145,6 +144,10 @@ public class PatientClinicProfile extends AppCompatActivity {
 
     public static void setSelectedClinic(WalkInClinic something) {
         selectedClinic = something;
+    }
+
+    public static WalkInClinic getSelectedClinic(){
+        return selectedClinic;
     }
 
     public void bookBtn(View view) {

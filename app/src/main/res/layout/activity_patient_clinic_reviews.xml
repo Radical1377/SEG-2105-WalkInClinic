@@ -6,4 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".PatientClinicReviews">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/reviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Past Reviews:"
+            android:textAlignment="center" />
+
+        <ListView
+            android:id="@+id/listReviews"
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+        </ListView>
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:onClick="backBtn"
+            android:text="Back" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
