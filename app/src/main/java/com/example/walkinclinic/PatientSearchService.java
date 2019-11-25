@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,13 +26,14 @@ public class PatientSearchService extends AppCompatActivity {
 
     DatabaseReference databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
     DatabaseReference databaseServices = FirebaseDatabase.getInstance().getReference("services");
+    DatabaseReference databaseServicesClinics = FirebaseDatabase.getInstance().getReference("servicesClinic");
 
 
     private ListView listViewServices;
     private static List<Service> services;
 
     private static List<WalkInClinic> clinics;
-
+    private static List<ServicesClinic> serviceClinic;
 
     private Context thisContext = this;
     private static Intent thisIntent = null;
@@ -46,10 +48,36 @@ public class PatientSearchService extends AppCompatActivity {
 
         services = new ArrayList<>();
         clinics = new ArrayList<>();
+        serviceClinic = new ArrayList<>();
 
         listViewServices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedService = services.get(position);
+
+//                databaseServicesClinics.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        serviceClinic.clear();
+//                        for (DataSnapshot postSnap : dataSnapshot.getChildren()) {
+//                            //Toast.makeText(getApplicationContext(), "Here", Toast.LENGTH_SHORT).show();
+//
+//                            ServicesClinic product = postSnap.getValue(ServicesClinic.class);
+//                            if (selectedService.getId().equals(product.getService().getId())) {
+//                                serviceClinic.add(product);
+//                                Toast.makeText(getApplicationContext(), product.stringInfo(), Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                    }
+//                });
+//                startActivity(getIntent());
+//                thisIntent = new Intent(thisContext, PatientFilteredClinics.class);
+//                startActivity(thisIntent);
 
                 //GET ALL OF THE CLINICS IN THE DB
                 databaseClinics.addValueEventListener(new ValueEventListener() {

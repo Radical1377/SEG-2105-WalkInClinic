@@ -28,12 +28,14 @@ public class PatientFilteredClinics extends AppCompatActivity {
     private static List<WalkInClinic> clinics;
 
     private static WalkInClinic selectedClinic = null;
+    private static Service selectedService;
 
 
     private Context thisContext = this;
     private static Intent thisIntent = null;
 
     DatabaseReference databaseServicesClinics = FirebaseDatabase.getInstance().getReference("servicesClinic");
+    DatabaseReference databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
 
 
     @Override
@@ -43,15 +45,16 @@ public class PatientFilteredClinics extends AppCompatActivity {
         setContentView(R.layout.activity_patient_filtered_clinics);
 
         listViewClinics = (ListView) findViewById(R.id.listClinics);
+        selectedService = PatientSearchService.getSelectedService();
 
         // IF CLINICS COME SEARCH BY VALUES
         if (PatientSearch.getClinics() != null ) {
             clinics = PatientSearch.getClinics();
         }
         //IF CLINICS COMES FROM SEARCH BY SERVICE
-        else if (PatientSearchService.getClinics() != null) {
-            clinics = PatientSearchService.getClinics();
-        }
+//        else if (PatientSearchService.getClinics() != null) {
+//            clinics = PatientSearchService.getClinics();
+//        }
 
 
         if (clinics.isEmpty()) {
@@ -80,6 +83,27 @@ public class PatientFilteredClinics extends AppCompatActivity {
         if (clinics != null ) {
             ClinicList productsAdapter = new ClinicList(PatientFilteredClinics.this, clinics);
             listViewClinics.setAdapter(productsAdapter);
+        } else if (!selectedService.equals(null)){
+            databaseClinics.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    clinics.clear();
+                    for (DataSnapshot postSnap : dataSnapshot.getChildren()) {
+//                        if (selectedService.get){
+//
+//                        }
+                        WalkInClinic product = postSnap.getValue(WalkInClinic.class);
+                        clinics.add(product);
+                    }
+
+                    startActivity(getIntent());
+                    thisIntent = new Intent(thisContext, PatientFilteredClinics.class);
+                    startActivity(thisIntent);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) { }
+                });
         }
 
     }
