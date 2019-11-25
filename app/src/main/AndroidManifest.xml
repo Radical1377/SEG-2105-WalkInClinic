@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".PatientClinicReviews"></activity>
+        <activity android:name=".PatientFilteredClinicByService"></activity>
+        <activity android:name=".PatientSelectService" />
+        <activity android:name=".PatientSearchByService" />
+        <activity android:name=".PatientClinicReviews" />
         <activity android:name=".PatientProfile" />
         <activity android:name=".EmployeeHours" />
         <activity android:name=".PatientBooking" />
@@ -19,7 +22,6 @@
         <activity android:name=".PatientClinicProfile" />
         <activity android:name=".PatientAllClinics" />
         <activity android:name=".PatientFilteredClinics" />
-        <activity android:name=".PatientSearchService" />
         <activity android:name=".PatientSearch" />
         <activity android:name=".EmployeeSelectClinic" />
         <activity android:name=".WelcomePatient" />

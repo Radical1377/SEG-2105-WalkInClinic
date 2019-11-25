@@ -40,8 +40,8 @@ public class PatientClinicProfile extends AppCompatActivity {
         if (PatientAllClinics.getSelectedClinic()!=null ) {
             selectedClinic = PatientAllClinics.getSelectedClinic();
         }
-        else if (PatientFilteredClinics.getSelectedClinic()!=null ) {
-            selectedClinic = PatientFilteredClinics.getSelectedClinic();
+        else if (PatientFilteredClinicByService.getSelectedClinic()!=null ) {
+            selectedClinic = PatientFilteredClinicByService.getSelectedClinic();
         }
         clinicId = selectedClinic.getId();
 
@@ -49,9 +49,12 @@ public class PatientClinicProfile extends AppCompatActivity {
 
         PatientFilteredClinics.setSelectedClinic(null);
         PatientAllClinics.setSelectedClinic(null);
-        PatientSearchService.setClinics(null);
+
         PatientSearch.setClinics(null);
-        PatientSearchService.setSelectedService(null);
+
+        PatientFilteredClinicByService.resetSelectedClinic();
+        PatientFilteredClinicByService.resetSelectedService();
+
 
         databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
 
@@ -62,6 +65,7 @@ public class PatientClinicProfile extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(), clinicId, Toast.LENGTH_LONG).show();
         //Toast.makeText(getApplicationContext(), loggedInEmployee.getUsername(), Toast.LENGTH_LONG).show();
 
+        Toast.makeText(getApplicationContext(), selectedClinic.stringInfo(), Toast.LENGTH_LONG).show();
 
         databaseClinics.addValueEventListener(new ValueEventListener() {
 

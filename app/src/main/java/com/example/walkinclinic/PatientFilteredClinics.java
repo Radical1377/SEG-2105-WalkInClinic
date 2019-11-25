@@ -45,16 +45,11 @@ public class PatientFilteredClinics extends AppCompatActivity {
         setContentView(R.layout.activity_patient_filtered_clinics);
 
         listViewClinics = (ListView) findViewById(R.id.listClinics);
-        selectedService = PatientSearchService.getSelectedService();
 
         // IF CLINICS COME SEARCH BY VALUES
         if (PatientSearch.getClinics() != null ) {
             clinics = PatientSearch.getClinics();
         }
-        //IF CLINICS COMES FROM SEARCH BY SERVICE
-//        else if (PatientSearchService.getClinics() != null) {
-//            clinics = PatientSearchService.getClinics();
-//        }
 
 
         if (clinics.isEmpty()) {

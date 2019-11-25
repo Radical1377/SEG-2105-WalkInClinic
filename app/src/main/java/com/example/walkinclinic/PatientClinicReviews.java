@@ -30,6 +30,7 @@ public class PatientClinicReviews extends AppCompatActivity {
 
     WalkInClinic selectedClinic = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -28,8 +28,8 @@ public class WelcomePatient extends AppCompatActivity {
         PatientClinicProfile.setSelectedClinic(null);
         PatientFilteredClinics.setSelectedClinic(null);
         PatientAllClinics.setSelectedClinic(null);
-        PatientSearchService.setClinics(null);
-        PatientSearchService.setSelectedService(null);
+        PatientFilteredClinicByService.resetSelectedClinic();
+        PatientFilteredClinicByService.resetSelectedService();
 
         eWelcome.setText(welcomeMsg);
     }
@@ -50,7 +50,7 @@ public class WelcomePatient extends AppCompatActivity {
     }
 
     public void searchByService(View view) {
-        Intent intent = new Intent(this, PatientSearchService.class);
+        Intent intent = new Intent(this, PatientSearchByService.class);
         startActivity(intent);
     }
 

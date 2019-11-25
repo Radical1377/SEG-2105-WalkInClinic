@@ -56,34 +56,36 @@ public class WelcomeEmployee extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        //Toast.makeText(getApplicationContext(), loggedInEmployee.toString(), Toast.LENGTH_LONG).show();
+
         databaseEmployees.addValueEventListener(new ValueEventListener() {
 
-                                                    @Override
-                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                                        for (DataSnapshot postSnap : dataSnapshot.getChildren()) {
+                for (DataSnapshot postSnap : dataSnapshot.getChildren()) {
 //                        try {
-                                                            if (postSnap.getValue().toString().contains(loggedInUser.getUsername())){
-                                                                //Toast.makeText(getApplicationContext(),"GOT IT", Toast.LENGTH_SHORT).show();
-                                                                //loggedInEmployee.setCompleted(true);
-                                                                Employee product = postSnap.getValue(Employee.class);
+                    if (postSnap.getValue().toString().contains(loggedInUser.getUsername())){
+                        //Toast.makeText(getApplicationContext(),"GOT IT", Toast.LENGTH_SHORT).show();
+                        //loggedInEmployee.setCompleted(true);
+                        Employee product = postSnap.getValue(Employee.class);
 
-                                                                product.set_username(loggedInUser.getUsername());
-                                                                loggedInEmployee = product;
-                                                                LoginActivity.setLoggedInEmployee(product);
-                                                                //Toast.makeText(getApplicationContext(),product.getUsername(), Toast.LENGTH_SHORT).show();
+                        product.set_username(loggedInUser.getUsername());
+                        loggedInEmployee = product;
+                        LoginActivity.setLoggedInEmployee(product);
+                        //Toast.makeText(getApplicationContext(),product.getUsername(), Toast.LENGTH_SHORT).show();
 
-                                                                break;
-                                                            }
-                                                        }
+                        break;
+                    }
+                }
 
-                                                    }
+            }
 
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                                    }
-                                                }
+            }
+        }
         );
 
     }

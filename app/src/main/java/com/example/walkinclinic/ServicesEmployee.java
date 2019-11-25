@@ -34,16 +34,20 @@ public class ServicesEmployee extends AppCompatActivity {
     //List<Service> services;
     List<ServicesClinic> servicesClinics;
 
-    private static User loggedInUser = LoginActivity.getLoggedInUser();
-    private static Employee loggedInEmployee = LoginActivity.getLoggedInEmployee();
+    private static User loggedInUser = null;
+    private static Employee loggedInEmployee = null;
 
-    private static String clinicId = loggedInEmployee.getClinic();
+    private static String clinicId = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services_employee);
+
+        loggedInUser = LoginActivity.getLoggedInUser();
+        loggedInEmployee = LoginActivity.getLoggedInEmployee();
+        clinicId = loggedInEmployee.getClinic();
 
         listViewServices = (ListView) findViewById(R.id.listServicesClinic);
         buttonAddService = (Button) findViewById(R.id.addService);
@@ -84,6 +88,8 @@ public class ServicesEmployee extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        //Toast.makeText(getApplicationContext(), loggedInEmployee.toString(), Toast.LENGTH_LONG).show();
 
         databaseServicesClinic.addValueEventListener(new ValueEventListener() {
             @Override

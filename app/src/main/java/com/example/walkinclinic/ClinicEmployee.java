@@ -54,6 +54,7 @@ public class ClinicEmployee extends AppCompatActivity {
         });
 
     }
+    @Override
     protected void onStart() {
         super.onStart();
         //Toast.makeText(getApplicationContext(), clinicId, Toast.LENGTH_LONG).show();
