@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,12 +30,17 @@ public class PatientBooking extends AppCompatActivity {
     WalkInClinic selectedClinic = null;
 
     Button buttonAddService;
+    Button submitButton;
     ListView listViewServices;
     List<Service> servicesAdmin;
 
     DatabaseReference databaseServices;
 
     Service selectedService = null;
+
+    int intStartTime = -1;
+    int intEndTime = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,7 @@ public class PatientBooking extends AppCompatActivity {
         loggedInPatient = LoginActivity.getLoggedInUser();
         selectedClinic = PatientClinicProfile.getSelectedClinic();
         servicesAdmin = new ArrayList<>();
+        submitButton = (Button) findViewById(R.id.submitBtn);
         buttonAddService = (Button) findViewById(R.id.serviceSelection);
         databaseServices = FirebaseDatabase.getInstance().getReference("services");
 
@@ -54,11 +61,6 @@ public class PatientBooking extends AppCompatActivity {
         TextView usernameText = (TextView) findViewById(R.id.username);
         String userName = "Username : " + loggedInPatient.getUsername();
         usernameText.setText(userName);
-
-        final EditText startTime = (EditText) findViewById(R.id.startTime);
-        final EditText endTime  = (EditText) findViewById(R.id.endTime);
-        final RadioButton searchWeekDay = (RadioButton) findViewById(R.id.weekday);
-        final RadioButton searchWeekEnd = (RadioButton) findViewById(R.id.weekend);
 
 
         buttonAddService.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +90,44 @@ public class PatientBooking extends AppCompatActivity {
         }
         );
 
+        final EditText startTime = (EditText) findViewById(R.id.startTime);
+        final EditText endTime  = (EditText) findViewById(R.id.endTime);
+        final RadioButton monday = (RadioButton) findViewById(R.id.monday);
+        final RadioButton tuesday = (RadioButton) findViewById(R.id.tuesday);
+        final RadioButton wednesday = (RadioButton) findViewById(R.id.wednesday);
+        final RadioButton thursday = (RadioButton) findViewById(R.id.thursday);
+        final RadioButton friday = (RadioButton) findViewById(R.id.friday);
+        final RadioButton saturday = (RadioButton) findViewById(R.id.saturday);
+        final RadioButton sunday = (RadioButton) findViewById(R.id.sunday);
 
+
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                boolean valid = true;
+
+                if (startTime != null && !startTime.getText().toString().equals("")) {
+                    try {
+                        intStartTime = Integer.parseInt(startTime.getText().toString());
+                    } catch (Exception s) {
+                        Toast.makeText(getApplicationContext(), "Hours must be a number.", Toast.LENGTH_LONG).show();
+                        valid = false;                  //didn't enter a number for the hours
+                    }
+                }
+                if (endTime != null && !endTime.getText().toString().equals("")) {
+                    try {
+                        intEndTime = Integer.parseInt(endTime.getText().toString());
+                    } catch (Exception s) {
+                        Toast.makeText(getApplicationContext(), "Hours must be a number.", Toast.LENGTH_LONG).show();
+                        valid = false;                  //didn't enter a number for the hours
+                    }
+                }
+
+            }
+        });
     }
 
     public void addService(){
