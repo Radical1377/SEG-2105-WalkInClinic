@@ -67,13 +67,15 @@ public class WelcomeEmployee extends AppCompatActivity {
                                 //Toast.makeText(getApplicationContext(),"GOT IT", Toast.LENGTH_SHORT).show();
                                 //loggedInEmployee.setCompleted(true);
                                 Employee product = postSnap.getValue(Employee.class);
+                                if (loggedInUser.getUsername().equals(product.getUsername())) {
 
-                                product.set_username(loggedInUser.getUsername());
-                                loggedInEmployee = product;
-                                LoginActivity.setLoggedInEmployee(product);
-                                //Toast.makeText(getApplicationContext(),product.getUsername(), Toast.LENGTH_SHORT).show();
+                                    product.set_username(loggedInUser.getUsername());
+                                    loggedInEmployee = product;
+                                    LoginActivity.setLoggedInEmployee(product);
+                                    //Toast.makeText(getApplicationContext(),product.getUsername(), Toast.LENGTH_SHORT).show();
 
-                                break;
+                                    break;
+                                }
                             }
                     }
 

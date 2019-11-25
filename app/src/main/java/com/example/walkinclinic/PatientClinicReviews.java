@@ -56,12 +56,15 @@ public class PatientClinicReviews extends AppCompatActivity {
                 reviews.clear();
 
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()){
-                    Review product = postSnap.getValue(Review.class);
-                    Toast.makeText(getApplicationContext(), product.toString(), Toast.LENGTH_SHORT).show();
 
-                    //if(selectedClinic.getId().equals(product.getClinicId())) {
-                    //    reviews.add(product);
-                    //}
+                    String id = postSnap.getValue().toString().substring(10,30);
+
+                    //Toast.makeText(getApplicationContext(), id, Toast.LENGTH_SHORT).show();
+
+                    if(selectedClinic.getId().equals(id)) {
+                        //Review product = postSnap.getValue(Review.class);
+                        //reviews.add(product);
+                    }
                 }
 
                 ReviewList productsAdapter = new ReviewList(PatientClinicReviews.this, reviews);
