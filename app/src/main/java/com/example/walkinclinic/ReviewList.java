@@ -29,7 +29,7 @@ public class ReviewList  extends ArrayAdapter<Review> {
         TextView textViewAll = (TextView) listViewItem.findViewById(R.id.textViewAll);
 
         Review review = reviews.get(position);
-        String rate = "Rating: "+review.getRating()+"  ";
+        String rate = "Rating: "+review.getRating()+"  \n";
         String comment =  "Comment: "+review.getComment();
 
         String all = rate+comment;

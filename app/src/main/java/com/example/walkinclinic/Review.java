@@ -3,21 +3,32 @@ package com.example.walkinclinic;
 import androidx.annotation.NonNull;
 
 public class Review {
-    private String id;
-    private String username;
     private String clinicId;
-    private int rating;
     private String comment;
+    private String id;
+    private int rating;
+    private String username;
 
-    public Review(String u, String c, int r, String co) {
-        username = u;
-        clinicId = c;
-        rating = r;
-        comment = co;
+    public Review(){
     }
 
-    public Review(String tid, String u, String c, int r, String co) {
-        id = tid;
+    public Review(Review r){
+        clinicId = r.getClinicId();
+        comment = r.getComment();
+        id = r.getId();
+        rating = r.getRating();
+        username = r.getUsername();
+    }
+
+    public Review(String c, String co, String i, int r, String u) {
+        clinicId = c;
+        comment = co;
+        id = i;
+        rating = r;
+        username = u;
+    }
+
+    public Review(String u, String c, int r, String co) {
         username = u;
         clinicId = c;
         rating = r;
@@ -43,6 +54,10 @@ public class Review {
     @Override
     public String toString() {
         return super.toString();
+    }
+
+    public String stringInfo() {
+        return clinicId+" "+comment+" "+id+" "+rating+" "+username;
     }
 
     public String getId() {
