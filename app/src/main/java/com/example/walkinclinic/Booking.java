@@ -2,35 +2,48 @@ package com.example.walkinclinic;
 
 public class Booking {
 
-    String clinicId;
-    String username;
-    String id;
-    String serviceId;
-    int startTime;
-    int endTime;
-    String day;                     // "weekday", "weekend"
+    private String clinicId;
+    private String username;
+    private String id;
+    private String serviceId;
+    private int startTimeHour;
+    private int endTimeHour;
+    private int startTimeMinute;
+    private int endTimeMinute;
+    private int day;
+    private int month;
+    private int year;
 
     public Booking() {
 
     }
 
-    public Booking (String c, String u, String i, String s, int sT, int eT, String d) {
+    public Booking (String c, String u, String i, String s, int sTh, int sTM, int eTh, int eTM, int d, int m, int y) {
         clinicId = c;
         username = u;
         id = i;
         serviceId = s;
-        startTime = sT;
-        endTime = eT;
+        startTimeHour = sTh;
+        startTimeMinute =  sTM;
+        endTimeHour = eTh;
+        endTimeMinute = eTM;
         day = d;
+        month = m;
+        year = y;
+
     }
     public Booking (Booking b) {
-        clinicId = b.getClinicId();
-        username = b.getUsername();
-        id = b.getId();
-        serviceId = b.getServiceId();
-        startTime = b.getStartTime();
-        endTime = b.getEndTime();
-        day = b.getDay();
+        clinicId = b.clinicId;
+        username = b.username;
+        id = b.id;
+        serviceId = b.serviceId;
+        startTimeHour = b.startTimeHour;
+        startTimeMinute = b.startTimeMinute;
+        endTimeHour = b.endTimeHour;
+        endTimeMinute = b.endTimeMinute;
+        day = b.day;
+        month = b.month;
+        year = b.year;
     }
 
     public String getId() {
@@ -43,18 +56,6 @@ public class Booking {
 
     public String getUsername() {
         return username;
-    }
-
-    public int getEndTime() {
-        return endTime;
-    }
-
-    public int getStartTime() {
-        return startTime;
-    }
-
-    public String getDay() {
-        return day;
     }
 
     public String getServiceId() {
