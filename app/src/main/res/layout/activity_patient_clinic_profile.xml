@@ -110,7 +110,7 @@
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/comments"
+            android:id="@+id/reviewsBtn"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

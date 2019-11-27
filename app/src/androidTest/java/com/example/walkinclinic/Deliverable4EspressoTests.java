@@ -31,11 +31,11 @@ import static org.hamcrest.Matchers.containsString;
  * 3-Search by Working hours weekday(passed)
  * 4-Search by hours weekend (passed)
  * 5-Search for Service (passed)
- * 6-Search by clinic from service search page (not passed)
- * 7-Rate a clinic (TO_DO)
- * 8-Comment a clinic (TO_DO)
- * 9-Book an appointment (TO_DO, needs booking to be implemented)
- *10-View waiting time (PASSED)
+ * 6-View clinic reviews (passed)
+ * 7-Rate a clinic (passed)
+ * 8-Comment a clinic (passed))
+ * 9-Book an appointment (passed)
+ *10-View waiting time (passed)
  */
 public class Deliverable4EspressoTests {
     private Random rand = new Random();
@@ -113,34 +113,72 @@ public class Deliverable4EspressoTests {
         //OPTION: assert equal to Rainbow clinic? from listView
     }
     @Test
-    public void searchClinicByService() { //search a clinic from the service search page
+    public void viewClinicReviews() { //search a clinic from the service search page
         onView(withId(R.id.logButton)).perform(click());
         onView(withId(R.id.username)).perform(typeText("jdoe099"), closeSoftKeyboard());
         onView(withId(R.id.password)).perform(typeText("test"), closeSoftKeyboard());
         onView(withId(R.id.register)).perform(click());
-        //click to search for services, goes to PatientSearchByService.class
-        onView(withId(R.id.searchServices)).perform(click());
-        onView(withId(R.id.search)).perform(click()); //click select a service
-        //goes to PatientFilteredClinicByService.class
-        //choose first clinic from list and select
-        onData(anything()).inAdapterView(withId(R.id.listClinics)).atPosition(0).perform(click()); //PROBLEM
-        //PROBLEM: can't find listClinics in hierarchy (are we going to this page?)
-        //goes to PatientClinicProfile.class
-        //onView(withId(R.id.clinicName)).check(matches((withText(containsString("Name")))));
-        //check if name exists
+        onView(withId(R.id.allclinicsbtn)).perform(click()); //go to list of all clinics
+        //click first element in clinic listView (Rainbow)
+        onData(anything()).inAdapterView(withId(R.id.listClinics)).atPosition(0).perform(click());
+        onView(withId(R.id.reviewsBtn)).perform(click());
+        //goes to patientClinicReviews.java
         //OPTION: assert equal to Rainbow clinic? from listView
     }
     @Test
     public void rateClinic() {//user can give a rating at clinic
-        //TO_DO
+        onView(withId(R.id.logButton)).perform(click());
+        onView(withId(R.id.username)).perform(typeText("jdoe099"), closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(typeText("test"), closeSoftKeyboard());
+        onView(withId(R.id.register)).perform(click());
+        onView(withId(R.id.allclinicsbtn)).perform(click()); //go to list of all clinics
+        //click first element in clinic listView (Rainbow)
+        onData(anything()).inAdapterView(withId(R.id.listClinics)).atPosition(0).perform(click());
+        onView(withId(R.id.ratingBtn)).perform(click()); //go to rating page
+        //choose a rating from 1-5, check rating 3 and submit
+        onView(withId(R.id.three)).perform(click());
+        onView(withId(R.id.submitBtn)).perform(click());
     }
     @Test
     public void commentClinic() {
-        //TO_DO
+        onView(withId(R.id.logButton)).perform(click());
+        onView(withId(R.id.username)).perform(typeText("jdoe099"), closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(typeText("test"), closeSoftKeyboard());
+        onView(withId(R.id.register)).perform(click());
+        onView(withId(R.id.allclinicsbtn)).perform(click()); //go to list of all clinics
+        //click first element in clinic listView (Rainbow)
+        onData(anything()).inAdapterView(withId(R.id.listClinics)).atPosition(0).perform(click());
+        onView(withId(R.id.ratingBtn)).perform(click()); //go to rating page
+        //enter a comment in EditText box and submit for clinic
+        onView(withId(R.id.comment)).perform(typeText("test comment"), closeSoftKeyboard());
+        onView(withId(R.id.submitBtn)).perform(click());
     }
     @Test
     public void bookAppointment() {//user booking appointment at a clinic
-        //TO_DO (after booking implementation)
+        onView(withId(R.id.logButton)).perform(click());
+        onView(withId(R.id.username)).perform(typeText("jdoe099"), closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(typeText("test"), closeSoftKeyboard());
+        onView(withId(R.id.register)).perform(click());
+        onView(withId(R.id.allclinicsbtn)).perform(click()); //go to list of all clinics
+        //click first element in clinic listView (Rainbow)
+        onData(anything()).inAdapterView(withId(R.id.listClinics)).atPosition(0).perform(click());
+        //bookingBtn to go to PatientBooking.class
+        onView(withId(R.id.bookingBtn)).perform(click());
+        //enter in valid info and service requested
+        //booking from 10:30-11:30 on December 06, 2019
+        onView(withId(R.id.startTimeHours)).perform(typeText("10"),closeSoftKeyboard());
+        onView(withId(R.id.startTimeMinutes)).perform(typeText("30"),closeSoftKeyboard());
+        onView(withId(R.id.endTimeHours)).perform(typeText("11"),closeSoftKeyboard());
+        onView(withId(R.id.endTimeHours)).perform(typeText("30"),closeSoftKeyboard());
+        onView(withId(R.id.dateDay)).perform(typeText("06"),closeSoftKeyboard());
+        onView(withId(R.id.dateMonth)).perform(typeText("12"),closeSoftKeyboard());
+        onView(withId(R.id.dateYear)).perform(typeText("2019"),closeSoftKeyboard());
+        onView(withId(R.id.serviceSelection)).perform(click()); //selecting a service from list
+        //goes to activity_add_service.xml / serivcesEmployee.java
+        //select the first service
+        onData(anything()).inAdapterView(withId(R.id.listServicesClinic)).atPosition(0).perform(click());
+        //should be back to PatientBooking.java
+        onView(withId(R.id.submitBtn)).perform(click()); //submit booking, everything checked and success
     }
     @Test
     public void viewWaitTime() {//user should be able to select clinic and see wait time (PASSED)
