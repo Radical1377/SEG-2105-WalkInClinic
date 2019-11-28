@@ -95,10 +95,6 @@ public class PatientClinicProfile extends AppCompatActivity {
                 String phone = "Phone Number : " + selectedClinic.getPhoneNumber();
                 phoneText.setText(phone);
 
-                TextView waitTime = (TextView) findViewById(R.id.waitTime);
-                String wait = "Approximate Wait Time : " + selectedClinic.get_waitingTime() + " minutes";
-                waitTime.setText(wait);
-
                 //try {
                 TextView paymentText = (TextView) findViewById(R.id.payment);
                 ArrayList<String> paymentList = selectedClinic.getPaymentMethod();
