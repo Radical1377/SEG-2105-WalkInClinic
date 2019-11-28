@@ -12,13 +12,6 @@ public class Review {
     public Review(){
     }
 
-    public Review(Review r){
-        clinicId = r.getClinicId();
-        comment = r.getComment();
-        id = r.getId();
-        rating = r.getRating();
-        username = r.getUsername();
-    }
 
     public Review(String c, String co, String i, int r, String u) {
         clinicId = c;
@@ -28,12 +21,6 @@ public class Review {
         username = u;
     }
 
-    public Review(String u, String c, int r, String co) {
-        username = u;
-        clinicId = c;
-        rating = r;
-        comment = co;
-    }
 
     public int getRating() {
         return rating;
