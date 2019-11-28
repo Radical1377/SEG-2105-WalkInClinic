@@ -13,12 +13,12 @@ end
 class Admin < User
 end
 
-class Employee 
+class Employee < User
 attributes
 	complete : Boolean
 	EmpUsername : String
 	clinic : String
-	workingHours : WorkHours
+	workingHours : WorkingHours
 end
 
 class Patient < User
@@ -38,10 +38,9 @@ attributes
   closeHours : String
   Insurance: String
   Payment : String
-  rating : String
 end
 
-class WorkHours
+class WorkingHours
 attributes
 	startingHour : Real
 	endingHour : Real
@@ -52,11 +51,6 @@ end
 association canCompleteProfile between 
 	Employee [*]
 	WalkInClinic [1]
-end
-
-association assignedTo between
-	WalkInClinic [1] 
-	Service [0..*]
 end
 
 association canChange1 between
@@ -74,49 +68,36 @@ association canDelete between
 	User [*]
 end
 
-association canSeeAndChange between
+association employeeHours between
 	Employee [1]
-	WorkHours [0..*]
+	WorkingHours [0..*]
 end
 
-association CanAddOrDelete between 
-	Employee[1]
-	Service[*]
+associationclass Review between
+	Patient [1] role patient
+	WalkInClinic [1] role clinic
+attributes 
+	rating : Integer
 end
 
-association canBookCheckInViewWaitingTime between 
-	Patient [1..*]
-	WalkInClinic [1]
-end
-association canRateandComment between
-	Patient [1..*] 
-	ClinicRating [1]
-end
-association canSearch between
-	Patient [1..*]
-	ClinicSearch[1]
-end
-association searchForClinic between
-	ClinicSearch[1]
-	WalkInClinic[1]
-end
-association hasRating between
-	ClinicRating [0..*]
-	WalkInClinic [1]
+associationclass Booking between
+	Patient [1] role pat
+	WalkInClinic [1] role cli
+attributes 
+	time : Integer
+	date : String
+	service : Service
+	clinic : WalkInClinic
 end
 
-class ClinicRating
-attributes
-	rating: Integer
-	Comments: String
+associationclass ServiceClinic between
+	Service [1] 
+	WalkInClinic [1] 
+attributes 
+	clinicId : String
+	serviceId : String
 end
-class ClinicSearch
-attributes
-	address:String
-	Services: Service
-	workingHours: Integer
 
-end
 
 
 
