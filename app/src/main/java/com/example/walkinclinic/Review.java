@@ -12,18 +12,32 @@ public class Review {
     public Review(){
     }
 
-    public Review(String clinic, String comm, String i, int r, String u) {
-        clinicId = clinic;
-        comment = comm;
+    public Review(Review r){
+        clinicId = r.getClinicId();
+        comment = r.getComment();
+        id = r.getId();
+        rating = r.getRating();
+        username = r.getUsername();
+    }
+
+    public Review(String c, String co, String i, int r, String u) {
+        clinicId = c;
+        comment = co;
         id = i;
         rating = r;
         username = u;
     }
 
+    public Review(String u, String c, int r, String co) {
+        username = u;
+        clinicId = c;
+        rating = r;
+        comment = co;
+    }
+
     public int getRating() {
         return rating;
     }
-
     public String getUsername() {
         return username;
     }
@@ -43,7 +57,7 @@ public class Review {
     }
 
     public String stringInfo() {
-        return "clinicid:"+clinicId+" comment:"+comment+" id:"+id+" rating:"+rating+" username:"+username;
+        return clinicId+" "+comment+" "+id+" "+rating+" "+username;
     }
 
     public String getId() {
