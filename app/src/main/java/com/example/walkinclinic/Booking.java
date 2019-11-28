@@ -9,6 +9,7 @@ public class Booking {
     private String startTime;
     private String date;
     private WalkInClinic clinic;
+    private Service service;
 
     public Booking() {
 
@@ -23,7 +24,7 @@ public class Booking {
         date = d;
 
     }
-    public Booking (String c, String u, String i, String s, String st, String d, WalkInClinic cl) {
+    public Booking (String c, String u, String i, String s, String st, String d, WalkInClinic cl, Service serv) {
         clinicId = c;
         username = u;
         id = i;
@@ -31,7 +32,7 @@ public class Booking {
         startTime = st;
         date = d;
         clinic = cl;
-
+        service = serv;
     }
     public Booking (Booking b) {
         clinicId = b.clinicId;
@@ -48,6 +49,10 @@ public class Booking {
 
     public WalkInClinic getClinic() {
         return clinic;
+    }
+
+    public Service getService() {
+        return service;
     }
 
     public String getClinicId() {

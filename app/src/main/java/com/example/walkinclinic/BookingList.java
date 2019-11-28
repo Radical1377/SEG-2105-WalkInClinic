@@ -26,7 +26,8 @@ public class BookingList  extends ArrayAdapter<Booking> {
 
     DatabaseReference databaseClinics = FirebaseDatabase.getInstance().getReference("walkinclinic");
     Booking book = null;
-    String clinicName = "hello";
+    String clinicName = "clinic";
+    String serviceName = "service";
 
     public BookingList(Activity cont, List<Booking> books) {
         super(cont, R.layout.layout_bookings_list, books);
@@ -43,32 +44,16 @@ public class BookingList  extends ArrayAdapter<Booking> {
         final TextView textViewAll = (TextView) listViewItem.findViewById(R.id.textViewAll);
 
         book = bookings.get(position);
-        final String date = "Date: "+book.getDate()+"  \n";
-        clinicName = book.getClinic().get_name();
+        //final String date = "Date: "+book.getDate()+"  \n";
+        clinicName = ", Clinic : "+book.getClinic().get_name();
+        serviceName = "Service : "+book.getService().getName();
 
 
-//        databaseClinics.addValueEventListener(new ValueEventListener() {
-//
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                for (DataSnapshot postSnap : dataSnapshot.getChildren()){
-//                    WalkInClinic product = postSnap.getValue(WalkInClinic.class);
-//
-//                    if (product.getId().equals(book.getClinicId())) {
-//                        clinicName = "Clinic: "+product.get_name();
-//                    }
-//                }
-//
-                String all = date+clinicName;
-//
-                textViewName.setText(book.getStartTime());
-                textViewAll.setText(all);
-//
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) { }
-//        });
+        String all = serviceName+clinicName;
+
+        textViewName.setText(book.getDate()+" - "+book.getStartTime());
+        textViewAll.setText(all);
+
 
         return listViewItem;
 
