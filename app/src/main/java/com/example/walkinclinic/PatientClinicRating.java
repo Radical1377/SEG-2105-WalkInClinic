@@ -83,8 +83,8 @@ public class PatientClinicRating extends AppCompatActivity {
                     }
 
                     String id = databaseReviews.push().getKey();
-                    Review myAdd = new Review(id,loggedInPatient.getUsername(), selectedClinic.getId(), rating, com);
-                    databaseReviews.child(myAdd.getId()).setValue(myAdd);
+                    Review myAdd = new Review(selectedClinic.getId(), com, id, rating, loggedInPatient.getUsername());
+                    databaseReviews.child(id).setValue(myAdd);
 
                     thisIntent = new Intent(thisContext, PatientClinicProfile.class);
                     startActivity(thisIntent);
