@@ -61,4 +61,8 @@ public class WelcomePatient extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void bookingsBtn(View view) {
+        Intent intent = new Intent(this, PatientMyBooks.class);
+        startActivity(intent);    }
+
 }

@@ -96,10 +96,10 @@ public class PatientBooking extends AppCompatActivity {
                 servicesAdmin.clear();
 
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()){
-                    Service product = postSnap.getValue(ServicesClinic.class).getService();
+                    ServicesClinic product = postSnap.getValue(ServicesClinic.class);
 
-                    if (!servicesAdmin.contains((product))) {
-                        servicesAdmin.add(product);
+                    if (product.getClinicId().equals(selectedClinic.getId())) {
+                        servicesAdmin.add(product.getService());
                     }
                 }
             }

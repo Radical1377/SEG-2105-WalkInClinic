@@ -30,11 +30,11 @@ public class ReviewList  extends ArrayAdapter<Review> {
 
         Review review = reviews.get(position);
         String rate = "Rating: "+review.getRating()+"  \n";
-        String comment =  "Comment: "+review.getComment();
+        String comment =  "Username: "+review.getUsername();
 
         String all = rate+comment;
 
-        textViewName.setText(review.getUsername());
+        textViewName.setText(review.getComment());
         textViewAll.setText(all);
 
         return listViewItem;

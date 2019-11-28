@@ -34,15 +34,24 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:onClick="profileButton"
             android:text="My Profile" />
+
+        <Button
+            android:id="@+id/myBookings"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="bookingsBtn"
+            android:text="My Appointments" />
 
         <Button
             android:id="@+id/searchBUTTON"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="25dp"
             android:onClick="welcomeSearchButton"
             android:text="Search for Clinic" />
 

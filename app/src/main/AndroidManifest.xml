@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".PatientFilteredClinicByService"></activity>
+        <activity android:name=".PatientMyBooks"></activity>
+        <activity android:name=".PatientFilteredClinicByService" />
         <activity android:name=".PatientSelectService" />
         <activity android:name=".PatientSearchByService" />
         <activity android:name=".PatientClinicReviews" />
