@@ -164,8 +164,8 @@ public class Deliverable4EspressoTests {
         onData(anything()).inAdapterView(withId(R.id.listClinics)).atPosition(0).perform(click());
         //bookingBtn to go to PatientBooking.class
         onView(withId(R.id.bookingBtn)).perform(click());
-        //enter in valid info and service requested
-        //booking from 10:30-11:30 on December 06, 2019
+        //app gives you next available slot for booking
+        /*
         onView(withId(R.id.startTimeHours)).perform(typeText("10"),closeSoftKeyboard());
         onView(withId(R.id.startTimeMinutes)).perform(typeText("30"),closeSoftKeyboard());
         onView(withId(R.id.endTimeHours)).perform(typeText("11"),closeSoftKeyboard());
@@ -173,12 +173,15 @@ public class Deliverable4EspressoTests {
         onView(withId(R.id.dateDay)).perform(typeText("06"),closeSoftKeyboard());
         onView(withId(R.id.dateMonth)).perform(typeText("12"),closeSoftKeyboard());
         onView(withId(R.id.dateYear)).perform(typeText("2019"),closeSoftKeyboard());
+        */
         onView(withId(R.id.serviceSelection)).perform(click()); //selecting a service from list
         //goes to activity_add_service.xml / serivcesEmployee.java
         //select the first service
         onData(anything()).inAdapterView(withId(R.id.listServicesClinic)).atPosition(0).perform(click());
         //should be back to PatientBooking.java
         onView(withId(R.id.submitBtn)).perform(click()); //submit booking, everything checked and success
+
+
     }
     @Test
     public void viewWaitTime() {//user should be able to select clinic and see wait time (PASSED)
