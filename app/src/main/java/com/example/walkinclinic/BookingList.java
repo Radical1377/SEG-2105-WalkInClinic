@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -43,29 +44,31 @@ public class BookingList  extends ArrayAdapter<Booking> {
 
         book = bookings.get(position);
         final String date = "Date: "+book.getDate()+"  \n";
+        clinicName = book.getClinic().get_name();
 
-        databaseClinics.addValueEventListener(new ValueEventListener() {
 
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot postSnap : dataSnapshot.getChildren()){
-                    WalkInClinic product = postSnap.getValue(WalkInClinic.class);
-
-                    if (product.getId().equals(book.getClinicId())) {
-                        clinicName = "Clinic: "+product.get_name();
-                    }
-                }
-
+//        databaseClinics.addValueEventListener(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                for (DataSnapshot postSnap : dataSnapshot.getChildren()){
+//                    WalkInClinic product = postSnap.getValue(WalkInClinic.class);
+//
+//                    if (product.getId().equals(book.getClinicId())) {
+//                        clinicName = "Clinic: "+product.get_name();
+//                    }
+//                }
+//
                 String all = date+clinicName;
-
+//
                 textViewName.setText(book.getStartTime());
                 textViewAll.setText(all);
-
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
-        });
+//
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) { }
+//        });
 
         return listViewItem;
 

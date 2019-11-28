@@ -89,21 +89,12 @@
             android:text="Insurance Accepted :"
             android:textSize="15dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:fontFamily="monospace"
-            android:gravity="center"
-            android:text="Ratings"
-            android:textSize="20dp" />
-
         <Button
             android:id="@+id/reviewsBtn"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="15dp"
             android:onClick="reviewsBtn"
             android:text="View Reviews" />
 
@@ -122,7 +113,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:onClick="bookBtn"
             android:text="Book an Appointement" />
 

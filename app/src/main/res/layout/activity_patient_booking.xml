@@ -58,22 +58,25 @@
 
         <Button
             android:id="@+id/serviceSelection"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Select a Service" />
 
         <Button
             android:id="@+id/submitBtn"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
+            android:layout_gravity="center"
             android:text="Submit Request" />
 
         <Button
             android:id="@+id/cancel"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:onClick="backBtn"
+            android:layout_gravity="center"
             android:text="Cancel" />
 
     </LinearLayout>

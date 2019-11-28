@@ -194,7 +194,7 @@ public class PatientBooking extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Appointment has been made.", Toast.LENGTH_SHORT).show();
 
                     String id = databaseBookings.push().getKey();
-                    Booking book = new Booking (selectedClinic.getId(), loggedInPatient.getUsername(), id, selectedService.getId(), appointmentStartTime, today);
+                    Booking book = new Booking (selectedClinic.getId(), loggedInPatient.getUsername(), id, selectedService.getId(), appointmentStartTime, today, selectedClinic);
 
                     databaseBookings.child(id).setValue(book);
 
