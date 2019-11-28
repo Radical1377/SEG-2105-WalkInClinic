@@ -25,8 +25,8 @@ import java.util.List;
 public class PatientClinicReviews extends AppCompatActivity {
 
     DatabaseReference databaseReviews;
-    ListView listViewReviews;
-    List<Review> reviews;
+    ListView listViewReviews = null;
+    List<Review> reviews = null;
 
     WalkInClinic selectedClinic = null;
 
@@ -50,11 +50,12 @@ public class PatientClinicReviews extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        reviews.clear();
+
         databaseReviews.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                reviews.clear();
 
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()){
                     Review product = postSnap.getValue(Review.class);
@@ -63,6 +64,7 @@ public class PatientClinicReviews extends AppCompatActivity {
                     if(selectedClinic.getId().equals(product.getClinicId())) {
                         reviews.add(product);
                     }
+                    //reviews.add(product);
                 }
 
                 ReviewList productsAdapter = new ReviewList(PatientClinicReviews.this, reviews);
