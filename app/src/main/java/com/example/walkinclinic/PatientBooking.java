@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
+import java.lang.String;
 
 public class PatientBooking extends AppCompatActivity {
 
@@ -35,21 +36,22 @@ public class PatientBooking extends AppCompatActivity {
     ListView listViewServices;
     List<Service> servicesAdmin;
 
-    DatabaseReference databaseServices;
+    DatabaseReference databaseServicesClinic;
 
     Service selectedService = null;
 
     int currentYear = Calendar.getInstance().get(Calendar.YEAR);
     int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
     int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    int weekDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
 
-    int intStartTimeHours = -1;
-    int intEndTimeHours = -1;
-    int intStartTimeMinutes = -1;
-    int intEndTimeMinutes = -1;
-    int intDay = -1;
-    int intMonth = -1;
-    int intYear = -1;
+    int clinicOpeningHour = -1;
+    int clinicClosingHour = -1;
+    String appointmentStartTime = null;
+    int numberOfAppointments = 0;
+    String today = currentDay+"/"+currentMonth+"/"+currentYear;
+
+    private static List<String> hours =  new ArrayList<>();
 
     DatabaseReference databaseBookings = FirebaseDatabase.getInstance().getReference("bookings");
 
@@ -60,11 +62,13 @@ public class PatientBooking extends AppCompatActivity {
         setContentView(R.layout.activity_patient_booking);
 
         loggedInPatient = LoginActivity.getLoggedInUser();
+
         selectedClinic = PatientClinicProfile.getSelectedClinic();
         servicesAdmin = new ArrayList<>();
+
         submitButton = (Button) findViewById(R.id.submitBtn);
         buttonAddService = (Button) findViewById(R.id.serviceSelection);
-        databaseServices = FirebaseDatabase.getInstance().getReference("services");
+        databaseServicesClinic = FirebaseDatabase.getInstance().getReference("servicesClinic");
 
         TextView nameText = (TextView) findViewById(R.id.clinicName);
         String name = "Clinic : " + selectedClinic.get_name();
@@ -74,6 +78,9 @@ public class PatientBooking extends AppCompatActivity {
         String userName = "Username : " + loggedInPatient.getUsername();
         usernameText.setText(userName);
 
+        TextView dateText = (TextView) findViewById(R.id.date);
+        dateText.setText("Date: "+today);
+
 
         buttonAddService.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,16 +89,18 @@ public class PatientBooking extends AppCompatActivity {
             }
         });
 
-        databaseServices.addValueEventListener(new ValueEventListener() {
+        databaseServicesClinic.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 servicesAdmin.clear();
 
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()){
-                    Service service = postSnap.getValue(Service.class);
+                    Service product = postSnap.getValue(ServicesClinic.class).getService();
 
-                    servicesAdmin.add(service);
+                    if (!servicesAdmin.contains((product))) {
+                        servicesAdmin.add(product);
+                    }
                 }
             }
 
@@ -102,13 +111,72 @@ public class PatientBooking extends AppCompatActivity {
         }
         );
 
-        final EditText startTimeHours = (EditText) findViewById(R.id.startTimeHours);
-        final EditText startTimeMinutes  = (EditText) findViewById(R.id.startTimeMinutes);
-        final EditText endTimeHours = (EditText) findViewById(R.id.endTimeHours);
-        final EditText endTimeMinutes = (EditText) findViewById(R.id.endTimeMinutes);
-        final EditText dateDay = (EditText) findViewById(R.id.dateDay);
-        final EditText dateMonth = (EditText) findViewById(R.id.dateMonth);
-        final EditText dateYear = (EditText) findViewById(R.id.dateYear);
+        ////////FIGURING OUT WHEN THE NEXT OPEN APPOINTMENT WOULD BE ////////////////////////////////////////////////////////
+
+        final TextView textViewStartTime = (TextView) findViewById(R.id.startTime);
+        final TextView textViewWaitTime = (TextView) findViewById(R.id.waitTime);
+
+        if (weekDay==1 || weekDay==7) {                 //today is a weekend
+            clinicOpeningHour = selectedClinic.get_openingHourWeekEnd();
+            clinicClosingHour = selectedClinic.get_closingHourWeekEnd();
+        }
+        else {                                          //today is a weekday
+            clinicOpeningHour = selectedClinic.get_openingHourWeekDay();
+            clinicClosingHour = selectedClinic.get_closingHourWeekDay();
+        }
+
+        //Toast.makeText(getApplicationContext(),"Opening hour: "+ clinicOpeningHour, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Closing hour: "+clinicClosingHour, Toast.LENGTH_SHORT).show();
+
+        databaseBookings.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                hours.clear();
+                for (DataSnapshot postSnap : dataSnapshot.getChildren()){
+                    Booking product = postSnap.getValue(Booking.class);
+
+                    if (product.getClinicId().equals(selectedClinic.getId()) && product.getDate().equals(today)) {
+                        hours.add(product.getStartTime());
+                    }
+                }
+
+                if (hours.isEmpty()) {
+                    numberOfAppointments = 0;
+                    appointmentStartTime = clinicOpeningHour+":00";
+                }
+                else {
+                    numberOfAppointments = hours.size();
+
+                    //need to find time of next appointement - add 15 * numberOfAppointments to the clinicStartTime
+                    int timeFromStart = numberOfAppointments * 15;
+                    //Toast.makeText(getApplicationContext(),"Previous appointements: " +numberOfAppointments, Toast.LENGTH_SHORT).show();
+                    int additionalHours = timeFromStart / 60;
+                    int additionalMinutes = timeFromStart % 60;
+                    appointmentStartTime = (clinicOpeningHour+additionalHours) + ":" + additionalMinutes;
+                    if (additionalMinutes==0) {
+                        appointmentStartTime = (clinicOpeningHour+additionalHours) + ":00";
+                    }
+                    //check its not the end of the day yet
+                    if (numberOfAppointments == (clinicClosingHour-clinicOpeningHour)*4 ) {
+                        Toast.makeText(getApplicationContext(), "No more appointments available for today.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
+                }
+
+                int waitTime = numberOfAppointments * 15;
+
+                textViewStartTime.setText("Anticipated Appointment Start Time : "+appointmentStartTime);
+                textViewWaitTime.setText("Waiting time: " + waitTime +" minutes");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        }
+        );
 
         submitButton.setOnClickListener(new View.OnClickListener() {
 
@@ -117,141 +185,24 @@ public class PatientBooking extends AppCompatActivity {
 
                 boolean valid = true;
 
-                //CHECKING THAT START/END TIME HOURS IS CORRECT ////////////////////////////////////////////////////////////
-                try {
-                    intStartTimeHours = Integer.parseInt(startTimeHours.getText().toString());
-
-                    if (intStartTimeHours <0 || intStartTimeHours >24) {
-                        Toast.makeText(getApplicationContext(), "Please enter a valid start time.", Toast.LENGTH_LONG).show();
-                        valid = false;
-                    }
-
-                } catch (Exception s) {
-                    Toast.makeText(getApplicationContext(), "Please enter a valid start time.", Toast.LENGTH_LONG).show();
-                    valid = false;                  //didn't enter a number for the hours
-                }
-                try {
-                    intEndTimeHours = Integer.parseInt(endTimeHours.getText().toString());
-
-                    if (intEndTimeHours <0 || intEndTimeHours >24) {
-                        Toast.makeText(getApplicationContext(), "Please enter a valid end time.", Toast.LENGTH_LONG).show();
-                        valid = false;
-                    }
-
-                } catch (Exception s) {
-                    Toast.makeText(getApplicationContext(), "Please enter a valid end time.", Toast.LENGTH_LONG).show();
-                    valid = false;                  //didn't enter a number for the hours
-                }
-                //CHECKING THAT START/END TIME MINUTES IS CORRECT ////////////////////////////////////////////////////////////
-                try {
-                    intStartTimeMinutes = Integer.parseInt(startTimeMinutes.getText().toString());
-
-                    if (intStartTimeMinutes <0 || intStartTimeMinutes >59) {
-                        Toast.makeText(getApplicationContext(), "Please enter a valid start time.", Toast.LENGTH_LONG).show();
-                        valid = false;
-                    }
-
-                } catch (Exception s) {
-                    Toast.makeText(getApplicationContext(), "Please enter a valid start time.", Toast.LENGTH_LONG).show();
-                    valid = false;                  //didn't enter a number for the hours
-                }
-                try {
-                    intEndTimeMinutes = Integer.parseInt(endTimeMinutes.getText().toString());
-
-                    if (intEndTimeMinutes <0 || intEndTimeMinutes >59) {
-                        Toast.makeText(getApplicationContext(), "Please enter a valid start time.", Toast.LENGTH_LONG).show();
-                        valid = false;
-                    }
-
-                } catch (Exception s) {
-                    Toast.makeText(getApplicationContext(), "Please enter a valid end time.", Toast.LENGTH_LONG).show();
-                    valid = false;                  //didn't enter a number for the hours
-                }
-                //CHECKING THAT START TIME IS AFTER END TIME IS CORRECT ////////////////////////////////////////////////////////////
-                if (intEndTimeHours < intStartTimeHours) {
-                    Toast.makeText(getApplicationContext(), "Start time must be before end time.", Toast.LENGTH_LONG).show();
+                if (selectedService==null) {
                     valid = false;
+                    Toast.makeText(getApplicationContext(),"Must select a service.", Toast.LENGTH_SHORT).show();
                 }
-                else if (intEndTimeHours == intStartTimeHours && intStartTimeMinutes > intEndTimeMinutes) {
-                    Toast.makeText(getApplicationContext(), "Start time must be before end time.", Toast.LENGTH_LONG).show();
-                    valid = false;
-                }
-                //CHECKING THAT THAT DATE IS CORRECT && EXISTS ////////////////////////////////////////////////////////////
-                try {
-                    intMonth = Integer.parseInt(dateMonth.getText().toString());
-
-                    if (intMonth <0 || intMonth >12) {
-                        Toast.makeText(getApplicationContext(), "Please enter a valid month.", Toast.LENGTH_LONG).show();
-                        valid = false;
-                    }
-                    if (intEndTimeHours - intStartTimeHours > 3) {
-                        Toast.makeText(getApplicationContext(), "You may only book for up to 4 hours.", Toast.LENGTH_LONG).show();
-                        valid = false;
-                    }
-
-                } catch (Exception s) {
-                    Toast.makeText(getApplicationContext(), "Please enter a valid month.", Toast.LENGTH_LONG).show();
-                    valid = false;                  //didn't enter a number for the hours
-                }
-                try {
-                    intYear = Integer.parseInt(dateYear.getText().toString());
-
-                    if (intYear < currentYear) {
-                        Toast.makeText(getApplicationContext(), "Please enter a valid year.", Toast.LENGTH_LONG).show();
-                        valid = false;
-                    }
-
-                } catch (Exception s) {
-                    Toast.makeText(getApplicationContext(), "Please enter a valid year.", Toast.LENGTH_LONG).show();
-                    valid = false;                  //didn't enter a number for the hours
-                }
-                try {
-                    intDay = Integer.parseInt(dateDay.getText().toString());
-
-                    if (intDay < 0) {
-                        Toast.makeText(getApplicationContext(), "Please enter a valid day.", Toast.LENGTH_LONG).show();
-                        valid = false;
-                    }
-                    else if ((intMonth==1 || intMonth==3 || intMonth==5 || intMonth==7 || intMonth==8 || intMonth==10 || intMonth==12 )
-                                                && intDay >31) {
-                        Toast.makeText(getApplicationContext(), "Please enter a valid day.", Toast.LENGTH_LONG).show();
-                        valid = false;
-                    }
-                    else if ((intMonth==4 || intMonth==6 || intMonth==9 || intMonth==11)
-                            && intDay >30) {
-                        Toast.makeText(getApplicationContext(), "Please enter a valid day.", Toast.LENGTH_LONG).show();
-                        valid = false;
-                    }
-                    else if ((intMonth==2 ) && intDay >28) {
-                        Toast.makeText(getApplicationContext(), "Please enter a valid day.", Toast.LENGTH_LONG).show();
-                        valid = false;
-                    }
-
-                } catch (Exception s) {
-                    Toast.makeText(getApplicationContext(), "Please enter a valid day.", Toast.LENGTH_LONG).show();
-                    valid = false;                  //didn't enter a number for the hours
-                }
-                //NEED TO SELECT A SERVICE ////////////////////////////////////////////////////////////
-                if (selectedService == null) {
-                    Toast.makeText(getApplicationContext(), "Select a service.", Toast.LENGTH_LONG).show();
-                    valid = false;
-                }
-                //DAY IS AFTER TODAY ////////////////////////////////////////////////////////////
-                if (intYear==currentYear && currentMonth==intMonth && currentDay>intDay) {
-                    Toast.makeText(getApplicationContext(), "Can only book for days starting tomorrow.", Toast.LENGTH_LONG).show();
-                    valid = false;
-                }
-
-                //ALL THE VALIDATIONS ARE DONE - CAN ADD TO A NEW BOOKING ////////////////////////////////////////////////////////////
 
                 if (valid) {
+                    Toast.makeText(getApplicationContext(), "Appointment has been made.", Toast.LENGTH_SHORT).show();
+
                     String id = databaseBookings.push().getKey();
-                    Booking newBook = new Booking (selectedClinic.getId(), loggedInPatient.getUsername(), id, selectedService.getId(),
-                            intStartTimeHours,intStartTimeMinutes,intEndTimeHours, intEndTimeMinutes,intDay,intMonth,intYear);
+                    Booking book = new Booking (selectedClinic.getId(), loggedInPatient.getUsername(), id, selectedService.getId(), appointmentStartTime, today);
 
-                    databaseBookings.child(id).setValue(newBook);
+                    databaseBookings.child(id).setValue(book);
 
+                    finish();
                 }
+
+
+
             }
         });
     }

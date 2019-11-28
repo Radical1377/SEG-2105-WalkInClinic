@@ -34,127 +34,26 @@
             android:layout_gravity="center"
             android:text="Username: " />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:text="Date: " />
 
-            <TextView
-                android:id="@+id/introStartTime"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Start Time: " />
-
-            <EditText
-                android:id="@+id/startTimeHours"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:hint="HH"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/colonStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text=":" />
-
-            <EditText
-                android:id="@+id/startTimeMinutes"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:hint="MM"
-                android:textSize="15dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/waitTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:text="Estimated Wait Time: " />
 
-            <TextView
-                android:id="@+id/introEndTime"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="End Time: " />
-
-            <EditText
-                android:id="@+id/endTimeHours"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:hint="HH"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/colonEnd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text=":" />
-
-            <EditText
-                android:id="@+id/endTimeMinutes"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:hint="MM"
-                android:textSize="15dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/startTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/introDate"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Date: " />
-
-            <EditText
-                android:id="@+id/dateDay"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:hint="DD"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/slash1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="/" />
-
-            <EditText
-                android:id="@+id/dateMonth"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:hint="MM"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/slash2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="/" />
-
-            <EditText
-                android:id="@+id/dateYear"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:hint="YYYY"
-                android:textSize="15dp" />
-
-        </LinearLayout>
+            android:text="Anticipated Appointement Start Time: " />
 
 
         <Button

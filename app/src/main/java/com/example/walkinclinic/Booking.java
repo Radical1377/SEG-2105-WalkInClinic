@@ -6,30 +6,20 @@ public class Booking {
     private String username;
     private String id;
     private String serviceId;
-    private int startTimeHour;
-    private int endTimeHour;
-    private int startTimeMinute;
-    private int endTimeMinute;
-    private int day;
-    private int month;
-    private int year;
+    private String startTime;
+    private String date;
 
     public Booking() {
 
     }
 
-    public Booking (String c, String u, String i, String s, int sTh, int sTM, int eTh, int eTM, int d, int m, int y) {
+    public Booking (String c, String u, String i, String s, String st, String d) {
         clinicId = c;
         username = u;
         id = i;
         serviceId = s;
-        startTimeHour = sTh;
-        startTimeMinute =  sTM;
-        endTimeHour = eTh;
-        endTimeMinute = eTM;
-        day = d;
-        month = m;
-        year = y;
+        startTime = st;
+        date = d;
 
     }
     public Booking (Booking b) {
@@ -37,13 +27,8 @@ public class Booking {
         username = b.username;
         id = b.id;
         serviceId = b.serviceId;
-        startTimeHour = b.startTimeHour;
-        startTimeMinute = b.startTimeMinute;
-        endTimeHour = b.endTimeHour;
-        endTimeMinute = b.endTimeMinute;
-        day = b.day;
-        month = b.month;
-        year = b.year;
+        startTime = b.startTime;
+        date = b.date;
     }
 
     public String getId() {
@@ -60,5 +45,13 @@ public class Booking {
 
     public String getServiceId() {
         return serviceId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getStartTime() {
+        return startTime;
     }
 }
