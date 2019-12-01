@@ -17,13 +17,13 @@ Build Status[![BuildStatus](https://circleci.com/gh/Radical1377/SEG-2105-WalkInC
 
 Testing users :
 Admin : 
-username : admin
-password : 5T5ptQ
+- username : admin
+- password : 5T5ptQ
 
 Employee :
-username : sdion020
-password : s
+- username : sdion020
+- password : s
 
 Patient :
-username : asklo016
-password : s
+- username : asklo016
+- password : s
