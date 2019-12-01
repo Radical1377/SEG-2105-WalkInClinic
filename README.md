@@ -12,18 +12,18 @@ https://github.com/Radical1377/SEG-2105-WalkInClinic
 
 Build Status[![BuildStatus](https://circleci.com/gh/Radical1377/SEG-2105-WalkInClinic.png?branch=master)](https://circleci.com/gh/Radical1377/SEG-2105-WalkInClinic)
 
-![UML Diagram](https://github.com/Radical1377/SEG-2105-WalkInClinic/raw/master/UMLDeliv2.JPG)
+![UML Diagram](https://github.com/Radical1377/SEG-2105-WalkInClinic/raw/master/UMLdeliverable4.png)
 
 
 Testing users :
 Admin : 
-- admin
-- 5T5ptQ
+username : admin
+password : 5T5ptQ
 
 Employee :
-- sdion020
-- s
+username : sdion020
+password : s
 
 Patient :
-- asklo016
-- s
+username : asklo016
+password : s
