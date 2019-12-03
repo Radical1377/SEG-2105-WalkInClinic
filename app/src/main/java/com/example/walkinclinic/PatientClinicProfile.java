@@ -43,6 +43,9 @@ public class PatientClinicProfile extends AppCompatActivity {
         else if (PatientFilteredClinicByService.getSelectedClinic()!=null ) {
             selectedClinic = PatientFilteredClinicByService.getSelectedClinic();
         }
+        else if (PatientFilteredClinics.getSelectedClinic()!=null ) {
+            selectedClinic = PatientFilteredClinics.getSelectedClinic();
+        }
         clinicId = selectedClinic.getId();
 
         //want to access walkinclinic tab in database
