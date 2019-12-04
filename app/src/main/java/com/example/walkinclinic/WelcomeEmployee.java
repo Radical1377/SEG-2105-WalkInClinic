@@ -65,17 +65,19 @@ public class WelcomeEmployee extends AppCompatActivity {
 
                 for (DataSnapshot postSnap : dataSnapshot.getChildren()) {
 //                        try {
-                    if (postSnap.getValue().toString().contains(loggedInUser.getUsername())){
+                    if (postSnap.getValue().toString().contains("username: "+loggedInUser.getUsername())){
                         //Toast.makeText(getApplicationContext(),"GOT IT", Toast.LENGTH_SHORT).show();
                         //loggedInEmployee.setCompleted(true);
                         Employee product = postSnap.getValue(Employee.class);
+                        //if (product.getUsername().equals(loggedInUser.getUsername())) {
 
-                        product.set_username(loggedInUser.getUsername());
-                        loggedInEmployee = product;
-                        LoginActivity.setLoggedInEmployee(product);
-                        //Toast.makeText(getApplicationContext(),product.getUsername(), Toast.LENGTH_SHORT).show();
+                            product.set_username(loggedInUser.getUsername());
+                            loggedInEmployee = product;
+                            LoginActivity.setLoggedInEmployee(product);
+                            //Toast.makeText(getApplicationContext(),product.getUsername(), Toast.LENGTH_SHORT).show();
 
-                        break;
+                            break;
+                        //}
                     }
                 }
 
